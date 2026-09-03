@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="background">
+
+    <aside class="sidebar">
+
+        <!-- Window buttons -->
+        <div class="window-controls">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+        </div>
+
+        <!-- Profile -->
+        <div class="profile">
+            <div class="avatar">👨🏻</div>
+
+            <div>
+                <p class="role">PRODUCT DESIGNER</p>
+                <h3>Initial SIDE BAR</h3>
+            </div>
+        </div>
+
+        <p class="section-title">MAIN</p>
+
+        <!-- DASHBOARD ACCORDION -->
+        <div class="accordion">
+
+            <button class="nav-item dashboard-button" onclick="toggleDashboard()">
+                <span class="icon">▦</span>
+                <span>Dashboard</span>
+                <span class="arrow" id="arrow">⌃</span>
+            </button>
+
+            <div class="submenu" id="submenu">
+
+                <a href="activity.html">
+                    Activity
+                </a>
+
+                <a href="traffic.html">
+                    Traffic
+                </a>
+
+                <a href="statistic.html">
+                    Statistic
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- OTHER NAVIGATION -->
+
+        <a href="invoices.html" class="nav-item">
+            <span class="icon">▤</span>
+            <span>Invoices</span>
+        </a>
+
+        <a href="wallet.html" class="nav-item">
+            <span class="icon">▱</span>
+            <span>Wallet</span>
+        </a>
+
+        <a href="notification.html" class="nav-item">
+            <span class="icon">♧</span>
+            <span>Notification</span>
+        </a>
+
+
+        <!-- Messages -->
+
+        <div class="messages-header">
+            <p class="section-title">MESSAGES</p>
+            <span>+</span>
+        </div>
+
+        <div class="message">
+            <div class="small-avatar">👩🏻</div>
+            <span>Erik Gunsel</span>
+        </div>
+
+        <div class="message">
+            <div class="small-avatar">👨🏻</div>
+            <span>Emily Smith</span>
+        </div>
+
+        <div class="message">
+            <div class="small-avatar">👩🏻</div>
+            <span>Arthur AdelK</span>
+        </div>
+
+
+        <!-- Bottom card -->
+
+        <div class="bottom-card">
+
+            <h3>Let's start!</h3>
+
+            <p>
+                Creating or adding new<br>
+                tasks couldn't be easier
+            </p>
+
+            <button onclick="newTask()">
+                ＋ Add New Task
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="content">
+
+        <h1>Dashboard</h1>
+
+        <p>
+            Welcome to your dashboard.
+        </p>
+
+        <div class="dashboard-card">
+            <h2>Dashboard Overview</h2>
+
+            <p>
+                Select an option from the sidebar.
+            </p>
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+function toggleDashboard() {
+
+    const submenu = document.getElementById("submenu");
+    const arrow = document.getElementById("arrow");
+
+    submenu.classList.toggle("open");
+
+    if (submenu.classList.contains("open")) {
+        arrow.textContent = "⌃";
+    } else {
+        arrow.textContent = "⌄";
+    }
+}
+
+
+function newTask() {
+
+    alert("New task button clicked!");
+
+}
+
+</script>
+
+</body>
+</html>
