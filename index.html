@@ -4,25 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hybrid Design</title>
-  <!-- Tailwind CSS CDN Engine -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-white antialiased">
 
-  <!-- Fixed Apple-Style Blur Header -->
   <header class="fixed top-0 w-full backdrop-blur-md bg-black/60 border-b border-white/10 z-50 px-6 py-4 flex justify-between items-center">
     <div class="font-bold text-white tracking-wide">College of computer engineering</div>
+    
     <nav class="hidden md:flex gap-6 text-sm text-neutral-400">
       <a href="#" class="hover:text-white transition-colors">Features</a>
       <a href="#" class="hover:text-white transition-colors">Projects</a>
       <a href="#" class="hover:text-white transition-colors">Contact</a>
     </nav>
+
+    <button id="menu-btn" class="md:hidden text-neutral-400 hover:text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
   </header>
 
-  <!-- Main Wrapper -->
+  <div id="mobile-drawer" class="fixed inset-0 bg-black/80 backdrop-blur-lg z-40 flex flex-col p-6 pt-20 transition-all duration-300 transform -translate-x-full md:hidden">
+    <ul class="space-y-4 text-lg font-medium">
+      <li class="px-4 py-3 rounded-lg bg-white/10 text-white">Overview</li>
+      <li class="px-4 py-3 rounded-lg hover:bg-white/5 text-neutral-400 hover:text-white">Projects</li>
+      <li class="px-4 py-3 rounded-lg hover:bg-white/5 text-neutral-400 hover:text-white">Settings</li>
+    </ul>
+  </div>
+
   <div class="flex pt-16 bg-[#000] text-neutral-200 min-h-screen">
     
-    <!-- Linear-Style Sidebar (Desktop Visible, Mobile Hidden) -->
     <aside class="w-64 border-r border-white/10 p-6 hidden md:block shrink-0">
       <ul class="space-y-2 text-sm font-medium">
         <li class="px-3 py-2 rounded-md bg-white/10 text-white cursor-pointer">Overview</li>
@@ -31,20 +42,17 @@
       </ul>
     </aside>
 
-    <!-- Content Area -->
-    <main class="flex-1 p-8 md:p-12 max-w-5xl">
-      <!-- Stripe-Style Hero Gradient Header -->
+    <main class="flex-1 p-6 md:p-12 max-w-5xl">
       <section class="mb-12">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-purple-500 mb-4">
-         Inital Layout pacheck ako mei.
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-purple-500 mb-4">
+          Inital Layout pacheck ako mei.
         </h1>
-        <p class="text-neutral-400 text-lg max-w-xl">
+        <p class="text-neutral-400 text-base md:text-lg max-w-xl">
           pinagcombine ko Apple minimalism design and efficient user interaction , Linear , Stripe , and Vercel dark mode with a blue hue.
-        nag try ako mag search ng mga website na user interactive at ung mga madali inavigate 
+          nag try ako mag search ng mga website na user interactive at ung mga madali inavigate 
         </p>
       </section>
 
-      <!-- Vercel-Style Bordered Grid Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="p-6 rounded-xl border border-white/10 bg-[#0a0a0a] hover:border-white/30 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
           <h3 class="text-white font-semibold mb-2">Clean Component</h3>
@@ -57,6 +65,15 @@
       </div>
     </main>
   </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const drawer = document.getElementById('mobile-drawer');
+
+    menuBtn.addEventListener('click', () => {
+      drawer.classList.toggle('-translate-x-full');
+    });
+  </script>
 
 </body>
 </html>
