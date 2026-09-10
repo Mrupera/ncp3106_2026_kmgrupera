@@ -16,7 +16,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Translucent Darker Warm Gray Navbar */
 .navbar {
     position: fixed;
     top: -90px;
@@ -27,7 +26,7 @@ body {
     backdrop-filter: blur(12px) saturate(130%);
     -webkit-backdrop-filter: blur(12px) saturate(130%);
     border-bottom: 1px solid rgba(70, 74, 69, 0.4);
-    z-index: 1000;
+    z-index: 1100;
     transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -44,7 +43,7 @@ body {
     left: 0;
     width: 100%;
     height: 45px;
-    z-index: 1100;
+    z-index: 999;
 }
 
 .navbar-inner {
@@ -125,7 +124,6 @@ body {
     border-radius: 20px 20px 0 0;
 }
 
-/* Base Title Style & Smooth Re-appearing Transition */
 .site-heading h1 {
     display: block;
     margin: 0;
@@ -148,7 +146,6 @@ body {
                 filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Smooth Soft Vanishing Effect when Navbar Shows Up */
 body.nav-active .site-heading h1,
 .navbar.show ~ .page-container .site-heading h1,
 .navbar:hover ~ .page-container .site-heading h1 {
@@ -405,6 +402,134 @@ body.nav-active .site-heading h1,
     bottom: -2px;
 }
 
+.info-page-wrapper {
+    padding: 40px 30px;
+    background: #efece4;
+    min-height: calc(100vh - 220px);
+}
+
+.info-card {
+    background: #ffffff;
+    padding: 45px 50px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.info-card h2 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 18px;
+}
+
+.info-subtitle {
+    font-size: 1.1rem;
+    color: #222222;
+    margin-bottom: 25px;
+}
+
+.topic-grid-card {
+    background: #fcfbf8;
+    border: 1px solid rgba(3, 43, 91, 0.12);
+    border-radius: 18px;
+    padding: 28px 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.topic-grid-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(3, 43, 91, 0.1);
+    border-color: #032b5b;
+}
+
+.topic-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(3, 43, 91, 0.08);
+    color: #032b5b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.topic-grid-card:hover .topic-icon-wrapper {
+    background: #032b5b;
+    color: #ffffff;
+}
+
+.topic-grid-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #032b5b;
+    margin-bottom: 12px;
+}
+
+.topic-grid-card p {
+    font-size: 0.92rem;
+    color: #444444;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.btn-custom-outline {
+    border: 1.5px solid #032b5b;
+    color: #032b5b;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    border-radius: 20px;
+    background: transparent;
+    transition: all 0.25s ease;
+    align-self: flex-start;
+}
+
+.btn-custom-outline:hover {
+    background: #032b5b;
+    color: #ffffff;
+}
+
+.modal-header-custom {
+    background: #032b5b;
+    color: #ffffff;
+    border-bottom: none;
+    border-radius: 18px 18px 0 0;
+    padding: 20px 28px;
+}
+
+.modal-header-custom .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-content-custom {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal-body-custom {
+    padding: 30px;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #222222;
+}
+
+.modal-body-custom ul {
+    margin-top: 12px;
+    padding-left: 20px;
+}
+
+.modal-body-custom li {
+    margin-bottom: 8px;
+}
+
 @media (max-width: 900px) {
     .site-heading h1 {
         font-size: clamp(2.8rem, 7vw, 4.8rem);
@@ -423,6 +548,10 @@ body.nav-active .site-heading h1,
 
     .announcement-container {
         max-width: 310px;
+    }
+
+    .info-card {
+        padding: 30px 25px;
     }
 }
 

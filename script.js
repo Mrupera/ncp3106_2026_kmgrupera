@@ -2,30 +2,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const navbar = document.querySelector(".navbar");
     const navTriggerZone = document.querySelector(".nav-trigger-zone");
+    let hideTimeout;
 
     if (navbar && navTriggerZone) {
         function showNavbar() {
+            clearTimeout(hideTimeout);
             navbar.classList.add("show");
             document.body.classList.add("nav-active");
         }
 
         function hideNavbar() {
-            navbar.classList.remove("show");
-            document.body.classList.remove("nav-active");
+            hideTimeout = setTimeout(() => {
+                if (!navbar.matches(":hover") && !navTriggerZone.matches(":hover")) {
+                    navbar.classList.remove("show");
+                    document.body.classList.remove("nav-active");
+                }
+            }, 150);
         }
 
         navTriggerZone.addEventListener("mouseenter", showNavbar);
         navbar.addEventListener("mouseenter", showNavbar);
 
-        navTriggerZone.addEventListener("mouseleave", () => {
-            if (!navbar.matches(":hover")) {
-                hideNavbar();
-            }
-        });
-
+        navTriggerZone.addEventListener("mouseleave", hideNavbar);
         navbar.addEventListener("mouseleave", hideNavbar);
     }
-
 
     function setupDraggableCarousel({ windowEl, trackEl, slides, dots, intervalTime }) {
         if (!windowEl || !trackEl || !slides.length) return;
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function dragStart(e) {
-            if (e.type === "mousedown" && e.target.tagName !== "A") {
+            if (e.type === "mousedown" && !e.target.closest("a")) {
                 e.preventDefault();
             }
             isDragging = true;
@@ -119,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
         startAutoplay();
     }
 
-
     setupDraggableCarousel({
         windowEl: document.querySelector(".text-carousel-window"),
         trackEl: document.querySelector(".text-track"),
@@ -127,7 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
         dots: document.querySelectorAll(".text-dots .dot"),
         intervalTime: 5000
     });
-
 
     setupDraggableCarousel({
         windowEl: document.querySelector(".announcement-window"),
