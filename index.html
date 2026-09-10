@@ -1,79 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hybrid Design</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Engineering | UE Manila</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 </head>
-<body class="bg-black text-white antialiased">
+<body>
 
-  <header class="fixed top-0 w-full backdrop-blur-md bg-black/60 border-b border-white/10 z-50 px-6 py-4 flex justify-between items-center">
-    <div class="font-bold text-white tracking-wide">College of computer engineering</div>
-    
-    <nav class="hidden md:flex gap-6 text-sm text-neutral-400">
-      <a href="#" class="hover:text-white transition-colors">Features</a>
-      <a href="#" class="hover:text-white transition-colors">Projects</a>
-      <a href="#" class="hover:text-white transition-colors">Contact</a>
-    </nav>
+    <header class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="Assets/logo.png" alt="UE Computer Engineering logo" class="nav-logo-icon">
+            </a>
 
-    <button id="menu-btn" class="md:hidden text-neutral-400 hover:text-white focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-  </header>
-
-  <div id="mobile-drawer" class="fixed inset-0 bg-black/80 backdrop-blur-lg z-40 flex flex-col p-6 pt-20 transition-all duration-300 transform -translate-x-full md:hidden">
-    <ul class="space-y-4 text-lg font-medium">
-      <li class="px-4 py-3 rounded-lg bg-white/10 text-white">Overview</li>
-      <li class="px-4 py-3 rounded-lg hover:bg-white/5 text-neutral-400 hover:text-white">Projects</li>
-      <li class="px-4 py-3 rounded-lg hover:bg-white/5 text-neutral-400 hover:text-white">Settings</li>
-    </ul>
-  </div>
-
-  <div class="flex pt-16 bg-[#000] text-neutral-200 min-h-screen">
-    
-    <aside class="w-64 border-r border-white/10 p-6 hidden md:block shrink-0">
-      <ul class="space-y-2 text-sm font-medium">
-        <li class="px-3 py-2 rounded-md bg-white/10 text-white cursor-pointer">Overview</li>
-        <li class="px-3 py-2 rounded-md hover:bg-white/5 text-neutral-400 hover:text-white transition-all cursor-pointer">Projects</li>
-        <li class="px-3 py-2 rounded-md hover:bg-white/5 text-neutral-400 hover:text-white transition-all cursor-pointer">Settings</li>
-      </ul>
-    </aside>
-
-    <main class="flex-1 p-6 md:p-12 max-w-5xl">
-      <section class="mb-12">
-        <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-purple-500 mb-4">
-          Inital Layout pacheck ako mei.
-        </h1>
-        <p class="text-neutral-400 text-base md:text-lg max-w-xl">
-          pinagcombine ko Apple minimalism design and efficient user interaction , Linear , Stripe , and Vercel dark mode with a blue hue.
-          nag try ako mag search ng mga website na user interactive at ung mga madali inavigate 
-        </p>
-      </section>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 rounded-xl border border-white/10 bg-[#0a0a0a] hover:border-white/30 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
-          <h3 class="text-white font-semibold mb-2">Clean Component</h3>
-          <p class="text-neutral-400 text-sm">Subtle micro-animations and restrained borders.</p>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link active">HOME</a>
+                <a href="#" class="nav-link">ABOUT</a>
+                <a href="#" class="nav-link">SPECIALIZATION</a>
+                <a href="#" class="nav-link">OPPORTUNITIES</a>
+                <a href="#" class="nav-link">FACULTY</a>
+                <a href="#" class="nav-link">CONTACT</a>
+            </nav>
         </div>
-        <div class="p-6 rounded-xl border border-white/10 bg-[#0a0a0a] hover:border-white/30 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
-          <h3 class="text-white font-semibold mb-2">Responsive Flow</h3>
-          <p class="text-neutral-400 text-sm">Layout shifts automatically from mobile drawers to desktop sidebars.</p>
+    </header>
+
+    <div class="nav-trigger-zone"></div>
+
+    <main class="page-container">
+        <section class="site-heading">
+            <h1>COMPUTER ENGINEERING</h1>
+        </section>
+
+        <div class="information-bar">
+            <div class="information-track">
+                <div class="information-content">
+                    <span>UE RECTO MANILA</span>
+                    <span>BACHELOR OF SCIENCE IN COMPUTER ENGINEERING</span>
+                    <span>FOLLOW UE SCPES PAGE IN FACEBOOK</span>
+                </div>
+                <div class="information-content" aria-hidden="true">
+                    <span>UE RECTO MANILA</span>
+                    <span>BACHELOR OF SCIENCE IN COMPUTER ENGINEERING</span>
+                    <span>FOLLOW UE SCPES PAGE IN FACEBOOK</span>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <section class="main-section">
+            <div class="text-carousel-container">
+                <div class="text-carousel-window">
+                    <div class="text-track">
+                        <article class="text-slide active">
+                            <a href="what-is-computer-engineering.html" class="text-slide-title-link">
+                                <h2>All about Computer Engineering</h2>
+                            </a>
+                            <p>Computer engineering is a multidisciplinary field that applies engineering principles to analyze, design, and manage hardware and software systems, as well as their integration. The Computer Engineering (CpE) program bridges electrical engineering and computer science, training students to work across the hardware-software interface ranging from circuit design to operating systems to prepare them for modern industries such as gaming.</p>
+                        </article>
+
+                        <article class="text-slide">
+                            <h2>UE Computer Engineering</h2>
+                            <p>UE CpE emphasizes practical application of theoretical knowledge through semester and year-long projects, allowing students increasing creative control and expert feedback. By the final stages, students are well-versed in software and hardware design, covering topics such as networks, embedded systems, VHDL, digital signal processing, state machine design, VLSI, control systems, communications, and artificial intelligence. They can select from various pattern electives in advanced software and hardware design.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="carousel-dots text-dots">
+                    <button class="dot active" aria-label="Text slide 1"></button>
+                    <button class="dot" aria-label="Text slide 2"></button>
+                </div>
+            </div>
+
+            <div class="announcement-container">
+                <div class="announcement-title">ANNOUNCEMENT!</div>
+
+                <div class="announcement-carousel">
+                    <div class="announcement-window">
+                        <div class="announcement-track">
+                            <img src="Assets/SCPE/admissions.jpg" class="announcement-image active" alt="Admissions announcement" draggable="false">
+                            <img src="Assets/SCPE/BSCPE.jpg" class="announcement-image" alt="Bachelor of Science in Computer Engineering announcement" draggable="false">
+                            <img src="Assets/SCPE/Scholarships.jpg" class="announcement-image" alt="Scholarships announcement" draggable="false">
+                        </div>
+                    </div>
+
+                    <div class="carousel-dots announcement-dots">
+                        <button class="dot active" aria-label="Announcement 1"></button>
+                        <button class="dot" aria-label="Announcement 2"></button>
+                        <button class="dot" aria-label="Announcement 3"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-  </div>
 
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const drawer = document.getElementById('mobile-drawer');
-
-    menuBtn.addEventListener('click', () => {
-      drawer.classList.toggle('-translate-x-full');
-    });
-  </script>
+    <script src="script.js"></script>
 
 </body>
-</html>
+</html> 
