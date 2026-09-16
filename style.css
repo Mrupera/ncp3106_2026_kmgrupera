@@ -1,3 +1,6 @@
+/* ==========================================
+   GLOBAL RESETS & PAPER BASE CANVAS
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -9,23 +12,27 @@ html {
 }
 
 body {
-    background: #eae7de;
+    background: url('bp1.png') repeat center center;
+    background-size: cover;
     color: #1a1a1a;
     font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
+/* ==========================================
+   NAVIGATION BAR
+   ========================================== */
 .navbar {
     position: fixed;
     top: -90px;
     left: 0;
     width: 100%;
     height: 64px;
-    background: rgba(85, 89, 83, 0.45);
+    background: rgba(43, 38, 35, 0.75);
     backdrop-filter: blur(12px) saturate(130%);
     -webkit-backdrop-filter: blur(12px) saturate(130%);
-    border-bottom: 1px solid rgba(70, 74, 69, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1100;
     transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -34,7 +41,7 @@ body {
 .navbar.show,
 .navbar:hover {
     top: 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .nav-trigger-zone {
@@ -105,12 +112,15 @@ body {
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 }
 
+/* ==========================================
+   CONTAINERS & HEADER
+   ========================================== */
 .page-container {
     width: min(1200px, 94%);
     margin: 0 auto;
-    background: #efece4;
+    background: url('bp1.png') repeat center center;
     min-height: 100vh;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
 }
 
 .white-container {
@@ -123,10 +133,10 @@ body {
     margin: 0;
     padding: 40px 20px 30px;
     text-align: center;
-    background: #ffffff;
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('scrunchp.png');
+    background-size: cover;
     border: none;
-    border-radius: 0;
-    box-shadow: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .site-heading h1 {
@@ -158,6 +168,9 @@ body.nav-active .site-heading h1,
     pointer-events: none;
 }
 
+/* ==========================================
+   TICKERS & MARQUEES
+   ========================================== */
 .information-bar {
     width: 100%;
     background: #0b2b5a;
@@ -186,10 +199,6 @@ body.nav-active .site-heading h1,
     white-space: nowrap;
 }
 
-.information-content span {
-    display: inline-block;
-}
-
 .information-content span::after {
     content: "\2022";
     margin-left: 12px;
@@ -202,14 +211,13 @@ body.nav-active .site-heading h1,
 }
 
 @keyframes marqueeScroll {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
+/* ==========================================
+   MAIN DUAL CAROUSEL SECTION
+   ========================================== */
 .main-section {
     position: relative;
     width: 100%;
@@ -218,7 +226,7 @@ body.nav-active .site-heading h1,
     grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.95fr);
     align-items: center;
     gap: 45px;
-    background: #efece4;
+    background: url('bp1.png') repeat center center;
 }
 
 .text-carousel-container {
@@ -234,13 +242,20 @@ body.nav-active .site-heading h1,
     width: 100%;
     min-height: 290px;
     overflow: hidden;
-    border-radius: 24px;
-    background: #ffffff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('scrunchp.png');
+    background-size: cover;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    transform: rotate(-0.8deg);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
     cursor: grab;
     user-select: none;
-    -webkit-user-select: none;
     touch-action: pan-y;
+}
+
+.text-carousel-window:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.22);
 }
 
 .text-carousel-window:active {
@@ -286,7 +301,7 @@ body.nav-active .site-heading h1,
 }
 
 .text-slide p {
-    color: #4a4a4a;
+    color: #2b2623;
     font-size: 0.96rem;
     line-height: 1.6;
     text-align: left;
@@ -308,7 +323,7 @@ body.nav-active .site-heading h1,
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) rotate(1deg);
     width: auto;
     min-width: 210px;
     height: 38px;
@@ -318,14 +333,14 @@ body.nav-active .site-heading h1,
     justify-content: center;
     background: #0b2b5a;
     color: #ffffff;
-    border-radius: 30px;
+    border-radius: 4px;
     font-family: "Playfair Display", Georgia, serif;
     font-size: 0.98rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     white-space: nowrap;
     z-index: 10;
-    box-shadow: 0 4px 12px rgba(11, 43, 90, 0.25);
+    box-shadow: 0 6px 14px rgba(11, 43, 90, 0.3);
 }
 
 .announcement-carousel {
@@ -333,9 +348,16 @@ body.nav-active .site-heading h1,
     width: 100%;
     padding: 24px 18px 18px 18px;
     margin-top: 0;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('scrunchp.png');
+    background-size: cover;
+    border-radius: 6px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    transform: rotate(1.2deg);
+    transition: transform 0.3s ease;
+}
+
+.announcement-carousel:hover {
+    transform: rotate(0deg) translateY(-4px);
 }
 
 .announcement-window {
@@ -343,10 +365,9 @@ body.nav-active .site-heading h1,
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    border-radius: 16px;
+    border-radius: 4px;
     cursor: grab;
     user-select: none;
-    -webkit-user-select: none;
     touch-action: pan-y;
 }
 
@@ -370,23 +391,16 @@ body.nav-active .site-heading h1,
     -webkit-user-drag: none;
 }
 
+/* ==========================================
+   CAROUSEL DOTS & TORN DIVIDERS
+   ========================================== */
 .carousel-dots {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    left: auto;
-    transform: none;
     margin-top: 20px;
-}
-
-.text-dots {
-    bottom: auto;
-}
-
-.announcement-dots {
-    bottom: auto;
 }
 
 .dot {
@@ -395,7 +409,7 @@ body.nav-active .site-heading h1,
     padding: 0;
     border: none;
     border-radius: 50%;
-    background: #aab0b7;
+    background: #8b857a;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -406,11 +420,23 @@ body.nav-active .site-heading h1,
     background: #0b2b5a;
 }
 
+.torn-divider {
+    width: 100%;
+    height: 32px;
+    background: url('Assets/torn.png') repeat-x center;
+    background-size: contain;
+    filter: drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.2));
+    position: relative;
+    z-index: 15;
+}
+
+/* ==========================================
+   ABOUT SLIDER SECTION
+   ========================================== */
 .about-slider-section {
     position: relative;
     width: 100%;
-    background: #efece4;
-    border-top: 1px solid rgba(143, 146, 140, 0.25);
+    background: url('bp1.png') repeat center center;
     padding-bottom: 35px;
 }
 
@@ -419,7 +445,6 @@ body.nav-active .site-heading h1,
     overflow: hidden;
     cursor: grab;
     user-select: none;
-    -webkit-user-select: none;
     touch-action: pan-y;
 }
 
@@ -455,21 +480,23 @@ body.nav-active .site-heading h1,
 }
 
 .about-slide.grid-left .about-text-column {
-    border-right: 3px solid #000000;
+    border-right: 3px dashed rgba(0, 0, 0, 0.25);
 }
 
 .about-slide.grid-right .about-text-column {
-    border-left: 3px solid #000000;
+    border-left: 3px dashed rgba(0, 0, 0, 0.25);
 }
 
 .about-header-box {
-    background: #efece4;
+    background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('scrunchp.png');
+    background-size: cover;
     padding: 35px 40px 25px 40px;
     display: flex;
     flex-direction: column;
     line-height: 1.1;
     font-family: "Playfair Display", Georgia, serif;
     color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .about-header-box.center-align {
@@ -477,17 +504,8 @@ body.nav-active .site-heading h1,
     align-items: center;
 }
 
-.title-all {
-    font-size: 2.3rem;
-    letter-spacing: 0.02em;
-}
-
-.title-about {
-    font-size: 2.3rem;
-    margin-left: 42px;
-    letter-spacing: 0.02em;
-}
-
+.title-all { font-size: 2.3rem; letter-spacing: 0.02em; }
+.title-about { font-size: 2.3rem; margin-left: 42px; letter-spacing: 0.02em; }
 .title-cpe {
     font-family: "DM Sans", sans-serif;
     font-size: 2.1rem;
@@ -496,35 +514,6 @@ body.nav-active .site-heading h1,
     margin-top: 6px;
     margin-left: 42px;
     white-space: nowrap;
-    letter-spacing: -0.01em;
-}
-
-.title-connection {
-    font-size: 1.8rem;
-    letter-spacing: 0.04em;
-    font-weight: 400;
-}
-
-.title-hw-sw {
-    font-family: "DM Sans", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #0b2b5a;
-    margin-top: 8px;
-    line-height: 1.1;
-}
-
-.plus-symbol {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 1.6rem;
-    color: #1a1a1a;
-    font-weight: 400;
-}
-
-.title-why {
-    font-size: 2rem;
-    letter-spacing: 0.02em;
-    font-weight: 400;
 }
 
 .about-description {
@@ -534,27 +523,18 @@ body.nav-active .site-heading h1,
 .about-description p {
     font-size: 0.93rem;
     line-height: 1.55;
-    color: #1a1a1a;
+    color: #2a2521;
     margin-bottom: 20px;
     text-align: justify;
 }
 
-.feature-group {
-    margin-bottom: 15px !important;
-}
-
-.feature-group strong {
-    font-size: 1rem;
-    color: #000000;
-}
-
 .about-image-column, 
-.about-placeholder-column {
+.about-placeholder-column,
+.about-quote-column {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: #efece4;
+    padding: 30px;
 }
 
 .cpe-3d-image {
@@ -562,14 +542,7 @@ body.nav-active .site-heading h1,
     max-width: 100%;
     height: auto;
     object-fit: contain;
-}
-
-.about-quote-column {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 50px;
-    background: #efece4;
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.25));
 }
 
 .quote-text {
@@ -579,36 +552,30 @@ body.nav-active .site-heading h1,
     line-height: 1.35;
     color: #0b2b5a;
     text-align: center;
-    letter-spacing: 0.01em;
 }
 
-.about-dots {
-    bottom: 12px;
-}
-
+/* ==========================================
+   FLIP CARD SECTION
+   ========================================== */
 .flip-section-wrapper {
-    background: #efece4;
+    background: url('bp1.png') repeat center center;
     padding: 0 0 6rem 0;
-    border-top: 1px solid rgba(143, 146, 140, 0.25);
     width: 100%;
 }
 
 .flip-title-banner {
     width: 100%;
-    background: #ffffff;
+    background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('scrunchp.png');
+    background-size: cover;
     padding: 40px 20px 30px;
     text-align: center;
-    border-bottom: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .flip-section-title {
     font-family: "Playfair Display", Georgia, serif;
     font-size: clamp(2.2rem, 5vw, 4.2rem);
-    letter-spacing: 1px;
     color: #0b2b5a;
-    text-align: center;
-    margin: 0;
     font-weight: 500;
 }
 
@@ -618,32 +585,22 @@ body.nav-active .site-heading h1,
     font-family: "DM Sans", sans-serif;
     font-weight: 700;
     font-size: 0.95rem;
-    letter-spacing: 0.04em;
     white-space: nowrap;
     overflow: hidden;
     padding: 0.6rem 0;
     margin-bottom: 4.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .flip-ticker-track {
     display: flex;
     width: max-content;
-    white-space: nowrap;
     animation: flipTickerScroll 10s linear infinite;
 }
 
-.flip-ticker-track span {
-    display: inline-block;
-}
-
 @keyframes flipTickerScroll {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
 }
 
 .flip-cards-container {
@@ -654,16 +611,11 @@ body.nav-active .site-heading h1,
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
-    align-items: flex-start;
 }
 
 .flip-card-col {
     flex: 1 1 310px;
     max-width: 360px;
-}
-
-.stagger-top {
-    align-self: flex-start;
 }
 
 .stagger-bottom {
@@ -684,8 +636,8 @@ body.nav-active .site-heading h1,
     height: 100%;
     transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
     transform-style: preserve-3d;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
 }
 
 .cpe-flip-card:hover .cpe-flip-card-inner,
@@ -702,13 +654,14 @@ body.nav-active .site-heading h1,
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background-color: #ffffff;
+    background: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url('scrunchp.png');
+    background-size: cover;
     padding: 2.2rem 1.8rem;
-    border-radius: 16px;
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border: 1px solid rgba(11, 43, 90, 0.08);
+    border: 1px solid rgba(11, 43, 90, 0.12);
 }
 
 .cpe-flip-card-back {
@@ -723,21 +676,18 @@ body.nav-active .site-heading h1,
     text-align: center;
     color: #1a1a1a;
     margin-bottom: 1.2rem;
-    line-height: 1.25;
 }
 
 .cpe-flip-card-front p, 
 .cpe-flip-card-back p {
     font-size: 0.94rem;
     line-height: 1.6;
-    color: #333333;
+    color: #2b2521;
     text-align: justify;
-    margin: 0;
 }
 
 .flip-list {
     padding-left: 1.2rem;
-    margin: 0;
 }
 
 .flip-list li {
@@ -746,17 +696,21 @@ body.nav-active .site-heading h1,
     color: #222222;
 }
 
+/* ==========================================
+   INFO & TOPIC CARDS
+   ========================================== */
 .info-page-wrapper {
     padding: 40px 30px;
-    background: #efece4;
+    background: url('bp1.png') repeat center center;
     min-height: calc(100vh - 220px);
 }
 
 .info-card {
-    background: #ffffff;
+    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('scrunchp.png');
+    background-size: cover;
     padding: 45px 50px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .info-card h2 {
@@ -766,34 +720,28 @@ body.nav-active .site-heading h1,
     margin-bottom: 18px;
 }
 
-.info-subtitle {
-    font-size: 1.1rem;
-    color: #222222;
-    margin-bottom: 25px;
-}
-
 .topic-grid-card {
-    background: #ffffff;
-    border: 1px solid rgba(11, 43, 90, 0.12);
-    border-radius: 18px;
+    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('scrunchp.png');
+    background-size: cover;
+    border: 1px solid rgba(11, 43, 90, 0.15);
+    border-radius: 6px;
     padding: 28px 24px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .topic-grid-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(11, 43, 90, 0.1);
-    border-color: #0b2b5a;
+    transform: rotate(-1deg) translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
 }
 
 .topic-icon-wrapper {
     width: 52px;
     height: 52px;
-    border-radius: 14px;
+    border-radius: 8px;
     background: rgba(11, 43, 90, 0.08);
     color: #0b2b5a;
     display: flex;
@@ -801,26 +749,11 @@ body.nav-active .site-heading h1,
     justify-content: center;
     font-size: 1.5rem;
     margin-bottom: 18px;
-    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .topic-grid-card:hover .topic-icon-wrapper {
     background: #0b2b5a;
     color: #ffffff;
-}
-
-.topic-grid-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #0b2b5a;
-    margin-bottom: 12px;
-}
-
-.topic-grid-card p {
-    font-size: 0.92rem;
-    color: #444444;
-    line-height: 1.5;
-    margin-bottom: 20px;
 }
 
 .btn-custom-outline {
@@ -840,51 +773,14 @@ body.nav-active .site-heading h1,
     color: #ffffff;
 }
 
-.modal-header-custom {
-    background: #0b2b5a;
-    color: #ffffff;
-    border-bottom: none;
-    border-radius: 18px 18px 0 0;
-    padding: 20px 28px;
-}
-
-.modal-header-custom .btn-close {
-    filter: brightness(0) invert(1);
-}
-
-.modal-content-custom {
-    border-radius: 18px;
-    border: none;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.modal-body-custom {
-    padding: 30px;
-    font-size: 1rem;
-    line-height: 1.65;
-    color: #222222;
-}
-
-.modal-body-custom ul {
-    margin-top: 12px;
-    padding-left: 20px;
-}
-
-.modal-body-custom li {
-    margin-bottom: 8px;
-}
-
 /* ==========================================
-   DISCIPLINES SECTION (MANY SIDES OF CPE)
+   DISCIPLINES DRAWER & SIDEBAR
    ========================================== */
-
 .disciplines-section {
     position: relative;
     width: 100%;
-    background: #efece4;
-    border-top: 1px solid rgba(143, 146, 140, 0.25);
+    background: url('bp1.png') repeat center center;
     overflow: hidden;
-    padding-bottom: 0;
 }
 
 .disciplines-trigger-zone {
@@ -906,7 +802,7 @@ body.nav-active .site-heading h1,
     background: #0b2b5a;
     z-index: 20;
     padding: 40px 0;
-    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.3);
     transition: left 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
@@ -924,7 +820,6 @@ body.nav-active .site-heading h1,
     padding: 0 20px;
 }
 
-/* NEW BACK BUTTON STYLES ADDED HERE */
 .back-to-overview-btn {
     margin-bottom: 20px;
     padding-bottom: 15px;
@@ -937,7 +832,7 @@ body.nav-active .site-heading h1,
 
 .back-to-overview-btn:hover {
     color: #ffffff;
-    transform: translateX(-5px); 
+    transform: translateX(-5px);
     background: transparent;
 }
 
@@ -950,8 +845,7 @@ body.nav-active .site-heading h1,
     font-family: "DM Sans", sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -959,12 +853,13 @@ body.nav-active .site-heading h1,
 .disc-link:hover, 
 .disc-link.active {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     transform: translateX(5px);
 }
 
 .disciplines-container {
-    background: #ffffff;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('scrunchp.png');
+    background-size: cover;
     min-height: 550px;
 }
 
@@ -977,21 +872,23 @@ body.nav-active .site-heading h1,
 .discipline-view {
     display: none;
     opacity: 0;
-    animation: fadeInView 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .discipline-view.active {
     display: block;
+    animation: paperUnfold 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes fadeInView {
-    from { 
-        opacity: 0; 
-        transform: translateY(10px); 
+@keyframes paperUnfold {
+    0% {
+        opacity: 0;
+        transform: perspective(600px) rotateX(-90deg);
+        transform-origin: top center;
     }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
+    100% {
+        opacity: 1;
+        transform: perspective(600px) rotateX(0deg);
+        transform-origin: top center;
     }
 }
 
@@ -1001,18 +898,6 @@ body.nav-active .site-heading h1,
     font-weight: 500;
     color: #1a1a1a;
     margin-bottom: 25px;
-    line-height: 1.1;
-}
-
-.uppercase-title {
-    font-family: "DM Sans", sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    letter-spacing: -0.02em;
-}
-
-.cpe-blue {
-    color: #0b2b5a;
 }
 
 .discipline-subtitle {
@@ -1026,20 +911,8 @@ body.nav-active .site-heading h1,
 .discipline-text p {
     font-size: 1rem;
     line-height: 1.7;
-    color: #333333;
+    color: #2a2521;
     max-width: 750px;
-}
-
-.discipline-text strong {
-    color: #000000;
-}
-
-.explore-hint {
-    font-family: "DM Sans", sans-serif;
-    font-weight: 700;
-    color: #0b2b5a;
-    letter-spacing: 0.08em;
-    font-size: 0.85rem !important;
 }
 
 .discipline-images-grid {
@@ -1053,8 +926,8 @@ body.nav-active .site-heading h1,
     width: 100%;
     aspect-ratio: 4 / 3;
     background: rgba(11, 43, 90, 0.04);
-    border: 2px dashed rgba(11, 43, 90, 0.2);
-    border-radius: 16px;
+    border: 2px dashed rgba(11, 43, 90, 0.25);
+    border-radius: 6px;
     transition: background 0.3s ease;
 }
 
@@ -1062,184 +935,473 @@ body.nav-active .site-heading h1,
     background: rgba(11, 43, 90, 0.08);
 }
 
+/* ==========================================
+   PAPER WIGGLE KEYFRAMES
+   ========================================== */
+@keyframes paperWiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    50% { transform: rotate(2deg); }
+    75% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.paper-wiggle {
+    animation: paperWiggle 0.25s ease-in-out;
+}
+
+/* ==========================================
+   MEDIA QUERIES
+   ========================================== */
 @media (max-width: 900px) {
-    .site-heading h1 {
-        font-size: clamp(2.8rem, 7vw, 4.8rem);
-    }
-
-    .main-section {
-        grid-template-columns: 1fr;
-        gap: 45px;
-        padding: 40px 30px 65px;
-    }
-
-    .text-carousel-container {
-        max-width: 720px;
-        margin: auto;
-    }
-
-    .text-slide {
-        padding: 30px 25px;
-    }
-
-    .announcement-container {
-        max-width: 340px;
-    }
-
-    .info-card {
-        padding: 30px 25px;
-    }
-
-    .about-slide.grid-left,
-    .about-slide.grid-right {
-        grid-template-columns: 1fr;
-    }
-
-    .about-slide.grid-left .about-text-column,
-    .about-slide.grid-right .about-text-column {
-        border-right: none;
-        border-left: none;
-        border-bottom: 3px solid #000000;
-    }
-    
-    .about-header-box {
-        padding: 25px;
-    }
-
-    .about-description {
-        padding: 25px;
-    }
-
-    .title-all, 
-    .title-about, 
-    .title-cpe {
-        margin-left: 0;
-        white-space: normal;
-    }
-
-    .quote-text {
-        font-size: 1.6rem;
-    }
-
-    .stagger-bottom {
-        margin-top: 0;
-    }
-
-    .cpe-flip-card {
-        height: 350px;
-    }
-
-    .disciplines-content-area {
-        padding: 50px 30px 50px 60px;
-    }
-    
-    .discipline-images-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .main-section { grid-template-columns: 1fr; gap: 45px; padding: 40px 30px 65px; }
+    .about-slide.grid-left, .about-slide.grid-right { grid-template-columns: 1fr; }
+    .about-slide.grid-left .about-text-column, .about-slide.grid-right .about-text-column { border: none; border-bottom: 3px dashed rgba(0,0,0,0.25); }
+    .stagger-bottom { margin-top: 0; }
+    .disciplines-content-area { padding: 50px 30px 50px 60px; }
+    .discipline-images-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 700px) {
-    .navbar {
-        height: auto;
-    }
-
-    .navbar-inner {
-        flex-direction: column;
-        padding: 8px 0;
-        gap: 6px;
-    }
-
-    .nav-links {
-        width: 100%;
-        overflow-x: auto;
-        justify-content: center;
-        gap: 15px;
-        padding: 6px 12px;
-        scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-link {
-        flex-shrink: 0;
-        font-size: 0.7rem;
-    }
-
-    .page-container {
-        width: 100%;
-    }
-
-    .site-heading {
-        padding: 32px 12px 18px;
-    }
-
-    .site-heading h1 {
-        font-size: clamp(2.3rem, 9vw, 3.8rem);
-        white-space: normal;
-        line-height: 0.95;
-    }
-
-    .information-content {
-        font-size: 0.72rem;
-        gap: 10px;
-    }
-
-    .main-section {
-        padding: 35px 20px 60px;
-        gap: 50px;
-    }
-
-    .text-carousel-window {
-        min-height: 330px;
-    }
-
-    .announcement-container {
-        max-width: 300px;
-    }
-
-    .flip-section-wrapper {
-        padding-bottom: 4rem;
-    }
-
-    .flip-title-banner {
-        padding: 32px 12px 20px;
-    }
-
-    .flip-ticker-bar {
-        font-size: 0.82rem;
-        margin-bottom: 3rem;
-    }
+    .navbar { height: auto; }
+    .navbar-inner { flex-direction: column; padding: 8px 0; gap: 6px; }
+    .nav-links { width: 100%; overflow-x: auto; justify-content: center; gap: 15px; padding: 6px 12px; }
+    .site-heading h1 { font-size: clamp(2.3rem, 9vw, 3.8rem); white-space: normal; }
 }
 
 @media (max-width: 600px) {
-    .disciplines-content-area {
-        padding: 40px 20px 40px 45px;
-    }
-    
-    .discipline-images-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .disciplines-sidebar {
-        width: 260px;
-        left: -260px;
-    }
+    .disciplines-content-area { padding: 40px 20px 40px 45px; }
+    .discipline-images-grid { grid-template-columns: 1fr; }
+    .disciplines-sidebar { width: 260px; left: -260px; }
 }
 
-@media (max-width: 430px) {
-    .site-heading h1 {
-        font-size: 2.3rem;
-    }
-
-    .main-section {
-        padding: 30px 16px 55px;
-    }
-}
-
-button:focus-visible,
-a:focus-visible {
+button:focus-visible, a:focus-visible {
     outline: 3px solid #0b2b5a;
     outline-offset: 3px;
+}
+/* Background Scrunched Overlay */
+.scrunched-paper-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.paper-texture-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.15; /* Adjust contrast */
+    z-index: 1;
+}
+.texture-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Torn Banner Accent */
+.torn-paper-banner {
+    position: relative;
+}
+.torn-paper-edge-img {
+    width: 100%;
+    max-height: 40px;
+    object-fit: cover;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Parchment Card Backs */
+.paper-textured-card {
+    position: relative;
+    overflow: hidden;
+}
+.card-paper-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    z-index: 1;
+}
+.card-content-overlay {
+    position: relative;
+    z-index: 2;
+    color: #1a1a1a; /* Dark text for contrast against parchment */
+}
+/* ========================================== */
+/* UNIFIED NEWSPAPER & PAPER TEXTURE SYSTEM   */
+/* ========================================== */
+
+/* Global Page Scrunched Paper Overlay */
+body.newspaper-theme {
+    background-color: #f4f1ea;
+    background-image: url('Assets/scrunchp.png');
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #1a1a1a;
+}
+
+/* Global Container Paper Base */
+.paper-container {
+    background-color: rgba(253, 251, 247, 0.92) !important;
+    background-image: url('Assets/scrunchp.png');
+    background-blend-mode: overlay;
+    background-size: cover;
+    border: 1px solid #d4ceb8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+/* Individual Card & Box Paper Textures */
+.paper-card {
+    background-color: #fdfbf7;
+    background-image: url('Assets/bp.png');
+    background-size: cover;
+    border: 1px solid #e2dcce;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.paper-card.textured-bp {
+    background-image: url('Assets/bp.png');
+}
+
+.paper-card.textured-bp2 {
+    background-image: url('Assets/bp2.png');
+}
+
+/* Clean CSS Torn Paper Header Dividers (Fixes broken img tags) */
+.torn-header {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.torn-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: url('Assets/torn.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    opacity: 0.85;
+}
+
+/* Newspaper Column Dashed Dividers */
+.newspaper-col {
+    border-right: 1px dashed #c0b9a0;
+    padding-right: 25px;
+}
+
+@media (max-width: 768px) {
+    .newspaper-col {
+        border-right: none;
+        border-bottom: 1px dashed #c0b9a0;
+        padding-right: 0;
+        padding-bottom: 25px;
+    }
+}
+/* ========================================================== */
+/* 1. GLOBAL BODY & PAPER BACKGROUND FOR ALL PAGES           */
+/* ========================================================== */
+
+/* Applied to <body> on every HTML page */
+body, body.newspaper-theme {
+    background-color: #f4f1ea;
+    background-image: url('Assets/scrunchp.png');
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base paper background for ALL content containers */
+.white-container, 
+.paper-container, 
+.subpage-content {
+    background-color: rgba(253, 251, 247, 0.94) !important;
+    background-image: url('Assets/scrunchp.png');
+    background-blend-mode: overlay;
+    background-size: cover;
+    border: 1px solid #d4ceb8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+/* Card textures across all pages */
+.paper-card, 
+.cpe-flip-card-front, 
+.cpe-flip-card-back {
+    background-color: #fdfbf7;
+    background-image: url('Assets/bp.png');
+    background-size: cover;
+    border: 1px solid #e2dcce;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ========================================================== */
+/* 2. AUTOMATIC TORN PAPER EDGES (FOR ALL HEADERS & CARDS)    */
+/* ========================================================== */
+
+/* Applies torn edge underneath ANY main section title or page header */
+.site-heading,
+.subpage-header,
+.torn-header,
+.discipline-title,
+.flip-title-banner {
+    position: relative;
+    padding-bottom: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.site-heading::after,
+.subpage-header::after,
+.torn-header::after,
+.discipline-title::after,
+.flip-title-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: url('Assets/torn.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    opacity: 0.9;
+    z-index: 5;
+}
+
+/* Reusable Torn Edge Utility Classes (For top or bottom of ANY div) */
+.torn-bottom {
+    position: relative;
+    padding-bottom: 20px;
+}
+.torn-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: url('Assets/torn.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    z-index: 5;
+}
+
+.torn-top {
+    position: relative;
+    padding-top: 20px;
+}
+.torn-top::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: url('Assets/torn.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    z-index: 5;
+}
+
+
+/* ========================================================== */
+/* 3. NEWSPAPER COLUMN DIVIDERS                               */
+/* ========================================================== */
+
+.newspaper-col, 
+.about-text-column {
+    border-right: 1px dashed #c0b9a0;
+    padding-right: 25px;
+}
+
+@media (max-width: 768px) {
+    .newspaper-col, 
+    .about-text-column {
+        border-right: none;
+        border-bottom: 1px dashed #c0b9a0;
+        padding-right: 0;
+        padding-bottom: 25px;
+    }
+}
+.info-card,
+.white-container,
+.info-page-wrapper {
+    background-color: transparent !important;
+    background-image: url('Assets/scrunchp.png') !important;
+    background-repeat: repeat;
+    background-size: cover;
+    border: 1px solid #d4ceb8;
+}
+
+/* Remove Bootstrap's default white background behind the card columns */
+.topic-grid-card,
+.info-page-wrapper .col,
+.modal-content-custom {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Apply scrunchp.png texture directly to the cards */
+.paper-card {
+    background-color: #f7f3e9 !important; /* Soft fallback color while loading */
+    background-image: url('Assets/scrunchp.png') !important;
+    background-size: cover;
+    background-repeat: repeat;
+    border: 1px dashed #c0b9a0 !important;
+}
+/* ========================================================== */
+/* COMPLETELY STATIC PAPER STACK (ALL ANIMATIONS REMOVED)    */
+/* ========================================================== */
+
+/* 1. LAYER 1: OUTERMOST PAGE BACKGROUND -> STATIC scrunchp.png */
+body,
+body.newspaper-theme {
+    background-color: #e8e2d2 !important;
+    background-image: url('Assets/scrunchp.png') !important;
+    background-repeat: repeat !important;
+    background-size: 100% 100% !important;
+    animation: none !important;
+}
+
+/* 2. LAYER 2: MAIN CONTAINER ("2. What is CpE?") -> STATIC bp2.png */
+.info-card,
+.white-container,
+.paper-container {
+    background-color: #d6be92 !important;
+    background-image: url('Assets/bp2.png') !important;
+    background-repeat: repeat !important;
+    background-size: 100% 100% !important;
+    background-position: center !important;
+    border: 1px solid #a89474 !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14) !important;
+    border-radius: 0px !important;
+    
+    /* Completely static - no CSS or JS movement */
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+}
+
+/* 3. LAYER 3: 6 INNER CARDS -> STATIC bp2.png */
+.topic-grid-card,
+.paper-card {
+    background-color: #f7f3e9 !important;
+    background-image: url('Assets/bp2.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center !important;
+    background-repeat: repeat !important;
+    border: 1px dashed #8c826b !important;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1) !important;
+    
+    animation: none !important;
+}
+
+/* 4. TRANSPARENCY FIXES */
+.info-page-wrapper .col,
+.info-card .title-box,
+.paper-container .header-wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+/* ========================================================== */
+/* FIX: REMOVE WHITE BACKGROUND FROM SLIDE TITLE BOX          */
+/* ========================================================== */
+
+/* Force all title boxes and nested wrappers inside the about slide to be transparent */
+#aboutSliderTrack .slide > div,
+#aboutSliderTrack .card > div,
+#aboutSliderTrack [class*="title"],
+#aboutSliderTrack [class*="header"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* ========================================================== */
+/* HERO CARD FIXES (added per request)                        */
+/* Text carousel + Announcement carousel: strip the stray     */
+/* container background/border that was bleeding through      */
+/* below the white surface, and point each card's actual      */
+/* window at the texture requested for it.                    */
+/* ========================================================== */
+
+/* Text carousel ("All about Computer Engineering") -> bp2.png */
+.text-carousel-container.paper-card {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.text-carousel-window {
+    background: url('Assets/bp2.png') !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+}
+
+.text-carousel-container .carousel-dots {
+    margin-top: 10px;
+}
+
+/* Announcement carousel -> bp.png */
+.announcement-container.paper-card {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.announcement-carousel {
+    background: url('Assets/bp.png') !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+}
+
+.announcement-container .carousel-dots {
+    margin-top: 10px;
+}
+/* ========================================================== */
+/* ROUGH TORN EDGES — disciplines card                        */
+/* Replaces the thin torn.png strip with an actual jagged cut */
+/* into the card's silhouette, so the paper itself looks torn */
+/* instead of decorated with a strip on top of a clean box.   */
+/* ========================================================== */
+
+.disciplines-container.torn-top.torn-bottom {
+    clip-path: polygon(
+        0% 8px, 4% 22px, 9% 2px, 14% 26px, 19% 10px, 24% 24px, 29% 4px,
+        34% 20px, 39% 8px, 44% 27px, 49% 12px, 54% 22px, 59% 3px,
+        64% 25px, 69% 9px, 74% 19px, 79% 5px, 84% 24px, 89% 12px,
+        94% 20px, 100% 6px,
+        100% calc(100% - 6px), 94% calc(100% - 20px), 89% calc(100% - 12px),
+        84% calc(100% - 24px), 79% calc(100% - 5px), 74% calc(100% - 19px),
+        69% calc(100% - 9px), 64% calc(100% - 25px), 59% calc(100% - 3px),
+        54% calc(100% - 22px), 49% calc(100% - 12px), 44% calc(100% - 27px),
+        39% calc(100% - 8px), 34% calc(100% - 20px), 29% calc(100% - 4px),
+        24% calc(100% - 24px), 19% calc(100% - 10px), 14% calc(100% - 26px),
+        9% calc(100% - 2px), 4% calc(100% - 22px), 0% calc(100% - 8px)
+    );
+    padding-top: 34px;
+    padding-bottom: 34px;
+    box-shadow: none !important;
+    filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.22));
+    transform: rotate(-0.3deg);
+}
+
+/* Turn off the old thin-strip pseudo-elements just for this card —
+   they'd otherwise render redundantly on top of the new jagged cut */
+.disciplines-container.torn-top::before,
+.disciplines-container.torn-bottom::after {
+    content: none;
 }

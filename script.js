@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // --- CAROUSEL ENGINE ---
     function setupDraggableCarousel(windowId, trackId, dotsContainerId) {
         const windowEl = document.getElementById(windowId);
         const trackEl = document.getElementById(trackId);
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupDraggableCarousel("announcementWindow", "announcementTrack", "announcementDots");
     setupDraggableCarousel("aboutSliderWindow", "aboutSliderTrack", "aboutDots");
 
+    // --- NAVBAR TRIGGER HOVER ---
     const navbar = document.getElementById("navbar");
     const triggerZone = document.querySelector(".nav-trigger-zone");
 
@@ -110,9 +112,61 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================
-    // DISCIPLINES SIDEBAR & BACK BUTTON LOGIC
-    // ==========================================
+    // --- DYNAMIC DISCIPLINES MAPPING DATA ---
+    const disciplineData = {
+        embedded: {
+            title: "Embedded Systems",
+            subtitle: "Computers hidden inside everyday devices.",
+            desc: "Specialized systems combining microcontrollers, firmware, and custom circuits to control appliances, medical equipment, and automotive electronics."
+        },
+        iot: {
+            title: "Internet of Things",
+            subtitle: "Connecting physical objects to global digital networks.",
+            desc: "Networks of smart sensors, hardware nodes, and software tools that gather, exchange, and act on real-time environmental data."
+        },
+        networks: {
+            title: "Computer Networks",
+            subtitle: "The digital infrastructure powering global communication.",
+            desc: "Designing protocols, routing architectures, and hardware connections that enable fast, reliable, and secure data transmission."
+        },
+        cybersecurity: {
+            title: "Cybersecurity",
+            subtitle: "Defending hardware, software, and network infrastructure.",
+            desc: "Protecting digital assets against vulnerabilities, breaches, and cyber threats through encryption, firewalls, and secure hardware architecture."
+        },
+        software: {
+            title: "Software Development",
+            subtitle: "Building applications, tools, and system platforms.",
+            desc: "Writing, testing, and optimizing code ranging from low-level drivers and operating systems to full-stack desktop and web applications."
+        },
+        ai: {
+            title: "Artificial Intelligence",
+            subtitle: "Giving hardware the ability to learn, reason, and adapt.",
+            desc: "Implementing machine learning algorithms, computer vision, and neural networks directly on processing hardware for smart decision-making."
+        },
+        datascience: {
+            title: "Data Science",
+            subtitle: "Extracting actionable insights from complex datasets.",
+            desc: "Processing massive streams of raw hardware and system data to discover patterns, optimize efficiency, and train predictive models."
+        },
+        robotics: {
+            title: "Robotics & Automation",
+            subtitle: "Systems engineered to interact with the physical world.",
+            desc: "Integrating mechanical design, sensors, microcontrollers, and control software to create autonomous machines and industrial tools."
+        },
+        hardware: {
+            title: "Computer Hardware",
+            subtitle: "Designing the physical foundations of computing technology.",
+            desc: "Developing microprocessors, circuit boards, logic gates, and memory architectures that drive high-performance processing equipment."
+        },
+        cloud: {
+            title: "Cloud & Edge Computing",
+            subtitle: "Distributed processing from local sensors to distant servers.",
+            desc: "Managing computational workloads between edge-side hardware devices and remote server clusters to reduce latency and enhance scaling."
+        }
+    };
+
+    // --- DISCIPLINES NAVIGATION LOGIC ---
     const allDiscLinks = document.querySelectorAll('.disc-link');
     const disciplineDefault = document.getElementById('disciplineDefault');
     const disciplineDynamic = document.getElementById('disciplineDynamic');
@@ -122,32 +176,83 @@ document.addEventListener("DOMContentLoaded", () => {
             link.addEventListener('click', (e) => {
                 const clickedLink = e.currentTarget;
 
-                // 1. Handle "BACK TO OVERVIEW" Button Click
+                // Paper tactile click trigger
+                clickedLink.classList.add('paper-wiggle');
+                setTimeout(() => clickedLink.classList.remove('paper-wiggle'), 250);
+
                 if (clickedLink.id === 'backToOverviewBtn') {
-                    // Hide dynamic view, show default overview
                     if (disciplineDynamic) disciplineDynamic.classList.remove('active');
                     if (disciplineDefault) disciplineDefault.classList.add('active');
-                    
-                    // Remove active highlight from all links
                     allDiscLinks.forEach(l => l.classList.remove('active'));
-                    return; // Stop further execution
+                    return; 
                 }
 
-                // 2. Handle standard Discipline Link Click
-                // Remove active class from all links
                 allDiscLinks.forEach(l => l.classList.remove('active'));
-                
-                // Add active class to the clicked link
                 clickedLink.classList.add('active');
 
-                // Hide default overview, show dynamic content
                 if (disciplineDefault) disciplineDefault.classList.remove('active');
                 if (disciplineDynamic) disciplineDynamic.classList.add('active');
 
-                // Update title dynamically based on the clicked link text
+                const targetKey = clickedLink.getAttribute('data-target');
+                const content = disciplineData[targetKey];
+
                 const dynTitle = document.getElementById('dynTitle');
-                if (dynTitle) dynTitle.textContent = clickedLink.textContent;
+                const dynSubtitle = document.getElementById('dynSubtitle');
+                const dynDesc = document.getElementById('dynDesc');
+
+                if (content) {
+                    if (dynTitle) dynTitle.textContent = content.title;
+                    if (dynSubtitle) dynSubtitle.textContent = content.subtitle;
+                    if (dynDesc) dynDesc.textContent = content.desc;
+                }
             });
         });
     }
+
+    // --- ORGANIC JS PAPER BENDING ENGINE ---
+    function initPaperBendingEngine() {
+        const paperContainers = document.querySelectorAll('.info-card, .paper-container, .white-container');
+        if (!paperContainers.length) return;
+
+        let startTime = null;
+        const duration = 2000; // 2-second cycle
+
+        function renderFrame(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = (elapsed % duration) / duration; // Normalize to 0 -> 1
+
+            // Mathematical sine wave math for continuous organic flexing
+            const wave = Math.sin(progress * Math.PI * 2);
+            const cosWave = Math.cos(progress * Math.PI * 2);
+
+            // 3D paper tilt & bend calculations
+            const rotateX = wave * 4.5;       // Tilts top/bottom forward & back
+            const rotateY = cosWave * -3.5;    // Tilts left/right
+            const translateY = wave * -4;      // Elevates center off the table
+
+            // Soft paper corner curling (fakes pliability)
+            const trCorner = 12 + wave * 10;   // Top-right corner flexes
+            const blCorner = 10 + cosWave * 8; // Bottom-left corner flexes
+
+            // Dynamic light wash & shadow offsets
+            const shadowX = rotateY * 2.5;
+            const shadowY = 14 + Math.abs(wave) * 6;
+            const brightness = 1 + wave * 0.035;
+
+            paperContainers.forEach(container => {
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${translateY}px)`;
+                container.style.borderRadius = `0px ${trCorner}px 0px ${blCorner}px`;
+                container.style.boxShadow = `${shadowX}px ${shadowY}px 28px rgba(0, 0, 0, 0.15)`;
+                container.style.filter = `brightness(${brightness})`;
+            });
+
+            requestAnimationFrame(renderFrame);
+        }
+
+        requestAnimationFrame(renderFrame);
+    }
+
+    // Initialize JS paper bending engine
+    initPaperBendingEngine();
 });

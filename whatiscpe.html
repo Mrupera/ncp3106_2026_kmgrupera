@@ -11,9 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="newspaper-theme">
 
-    <!-- ADDED id="navbar" HERE -->
     <header class="navbar" id="navbar">
         <div class="navbar-inner">
             <div class="nav-logo">
@@ -34,7 +33,8 @@
     <div class="nav-trigger-zone"></div>
 
     <main class="page-container">
-        <section class="site-heading">
+        <!-- SITE HEADING WITH TORN PAPER BOTTOM ACCENT -->
+        <section class="site-heading torn-header">
             <h1>COMPUTER ENGINEERING</h1>
         </section>
 
@@ -54,14 +54,15 @@
         </div>
 
         <section class="info-page-wrapper">
-            <div class="info-card">
-                <h2>2. What is Computer Engineering?</h2>
+            <!-- MAIN PAPER CONTAINER -->
+            <div class="info-card paper-container torn-bottom">
+                <h2 class="subpage-title">2. What is Computer Engineering?</h2>
                 <p class="info-subtitle">Explain <strong>what Computer Engineering is</strong> and what Computer Engineers do.</p>
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
                     
                     <div class="col">
-                        <div class="topic-grid-card">
+                        <div class="topic-grid-card paper-card">
                             <div>
                                 <div class="topic-icon-wrapper">
                                     <i class="bi bi-cpu"></i>
@@ -74,7 +75,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="topic-grid-card">
+                        <div class="topic-grid-card paper-card textured-bp2">
                             <div>
                                 <div class="topic-icon-wrapper">
                                     <i class="bi bi-diagram-3"></i>
@@ -87,7 +88,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="topic-grid-card">
+                        <div class="topic-grid-card paper-card">
                             <div>
                                 <div class="topic-icon-wrapper">
                                     <i class="bi bi-grid-3x3-gap"></i>
@@ -100,7 +101,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="topic-grid-card">
+                        <div class="topic-grid-card paper-card textured-bp2">
                             <div>
                                 <div class="topic-icon-wrapper">
                                     <i class="bi bi-gear-wide-connected"></i>
@@ -113,7 +114,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="topic-grid-card">
+                        <div class="topic-grid-card paper-card">
                             <div>
                                 <div class="topic-icon-wrapper">
                                     <i class="bi bi-phone-vibrate"></i>
@@ -126,7 +127,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="topic-grid-card">
+                        <div class="topic-grid-card paper-card textured-bp2">
                             <div>
                                 <div class="topic-icon-wrapper">
                                     <i class="bi bi-globe-americas"></i>
@@ -144,11 +145,11 @@
         </section>
     </main>
 
-    <!-- MODALS -->
+    <!-- NEWSPAPER STYLED MODALS -->
     <div class="modal fade" id="modalTopic1" tabindex="-1" aria-labelledby="modalTopic1Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom">
+            <div class="modal-content modal-content-custom paper-card">
+                <div class="modal-header modal-header-custom torn-header">
                     <h5 class="modal-title font-weight-bold" id="modalTopic1Label"><i class="bi bi-cpu me-2"></i>Definition of Computer Engineering</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -161,8 +162,8 @@
 
     <div class="modal fade" id="modalTopic2" tabindex="-1" aria-labelledby="modalTopic2Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom">
+            <div class="modal-content modal-content-custom paper-card">
+                <div class="modal-header modal-header-custom torn-header">
                     <h5 class="modal-title font-weight-bold" id="modalTopic2Label"><i class="bi bi-diagram-3 me-2"></i>Relationship between Hardware and Software</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -175,14 +176,14 @@
 
     <div class="modal fade" id="modalTopic3" tabindex="-1" aria-labelledby="modalTopic3Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom">
+            <div class="modal-content modal-content-custom paper-card">
+                <div class="modal-header modal-header-custom torn-header">
                     <h5 class="modal-title font-weight-bold" id="modalTopic3Label"><i class="bi bi-grid-3x3-gap me-2"></i>Major Areas of Computer Engineering</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-custom">
                     Computer engineering encompasses several specialized sub-fields:
-                    <ul>
+                    <ul class="mt-2">
                         <li><strong>Embedded Systems & IoT:</strong> Designing smart controllers for home devices, automobiles, and medical gear.</li>
                         <li><strong>Computer Architecture & VLSI:</strong> Creating next-generation microprocessors and microchips.</li>
                         <li><strong>Robotics & Automation:</strong> Building autonomous systems and industrial robots.</li>
@@ -195,8 +196,8 @@
 
     <div class="modal fade" id="modalTopic4" tabindex="-1" aria-labelledby="modalTopic4Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom">
+            <div class="modal-content modal-content-custom paper-card">
+                <div class="modal-header modal-header-custom torn-header">
                     <h5 class="modal-title font-weight-bold" id="modalTopic4Label"><i class="bi bi-gear-wide-connected me-2"></i>Role of Computer Engineers in Modern Technology</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -209,14 +210,14 @@
 
     <div class="modal fade" id="modalTopic5" tabindex="-1" aria-labelledby="modalTopic5Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom">
+            <div class="modal-content modal-content-custom paper-card">
+                <div class="modal-header modal-header-custom torn-header">
                     <h5 class="modal-title font-weight-bold" id="modalTopic5Label"><i class="bi bi-phone-vibrate me-2"></i>Applications of Computer Engineering</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-custom">
                     Practical applications span across nearly every sector:
-                    <ul>
+                    <ul class="mt-2">
                         <li><strong>Healthcare:</strong> Advanced MRI scanners, wearable health trackers, robotic surgical assistants.</li>
                         <li><strong>Transportation:</strong> Autonomous driving tech, flight control avionics, smart traffic grids.</li>
                         <li><strong>Consumer Electronics:</strong> High-end smartphones, gaming consoles, smart home systems.</li>
@@ -229,8 +230,8 @@
 
     <div class="modal fade" id="modalTopic6" tabindex="-1" aria-labelledby="modalTopic6Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom">
+            <div class="modal-content modal-content-custom paper-card">
+                <div class="modal-header modal-header-custom torn-header">
                     <h5 class="modal-title font-weight-bold" id="modalTopic6Label"><i class="bi bi-globe-americas me-2"></i>Importance of Computer Engineering in Society</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

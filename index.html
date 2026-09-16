@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="newspaper-theme">
 
     <header class="navbar" id="navbar">
         <div class="navbar-inner">
@@ -22,8 +22,9 @@
                 <a href="whatiscpe.html" class="nav-link">ABOUT</a>
                 <a href="specialization.html" class="nav-link">SPECIALIZATION</a>
                 <a href="#overview" class="nav-link">OVERVIEW</a>
-                <a href="#" class="nav-link">FACULTY</a>
-                <a href="#" class="nav-link">CONTACT</a>
+                <a href="#disciplines" class="nav-link">DISCIPLINES</a>
+                <a href="#faculty" class="nav-link">FACULTY</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
             </nav>
         </div>
     </header>
@@ -50,8 +51,9 @@
             </div>
         </div>
 
+        <!-- HERO / MAIN SECTION -->
         <section class="main-section">
-            <div class="text-carousel-container">
+            <div class="text-carousel-container paper-card">
                 <div class="text-carousel-window" id="textCarouselWindow">
                     <div class="text-track" id="textCarouselTrack">
                         <article class="text-slide">
@@ -63,7 +65,7 @@
 
                         <article class="text-slide active">
                             <h2>UE Computer Engineering</h2>
-                            <p>UE CpE emphasizes practical application of theoretical knowledge through semester and year-long projects, allowing students increasing creative control and expert feedback. By the final stages, students are well-versed in software and hardware design, covering topics such as networks, embedded systems, VHDL, digital signal processing, state machine design, VLSI, control systems, communications, and artificial intelligence. They can select from various pattern electives in advanced software and hardware design.</p>
+                            <p>UE CpE emphasizes practical application of theoretical knowledge through semester and year-long projects, allowing students increasing creative control and expert feedback. By the final stages, students are well-versed in software and hardware design, covering topics such as networks, embedded systems, VHDL, digital signal processing, state machine design, VLSI, control systems, communications, and artificial intelligence.</p>
                         </article>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="announcement-container">
+            <div class="announcement-container paper-card">
                 <div class="announcement-title">ANNOUNCEMENT!</div>
 
                 <div class="announcement-carousel">
@@ -95,13 +97,14 @@
             </div>
         </section>
 
+        <!-- ABOUT SLIDER SECTION -->
         <section class="about-slider-section" id="about">
-            <div class="white-container">
+            <div class="white-container paper-container">
                 <div class="about-slider-window" id="aboutSliderWindow">
                     <div class="about-slider-track" id="aboutSliderTrack">
                         
                         <div class="about-slide grid-left">
-                            <div class="about-text-column">
+                            <div class="about-text-column newspaper-col">
                                 <div class="about-header-box">
                                     <span class="title-all">ALL</span>
                                     <span class="title-about">ABOUT</span>
@@ -119,8 +122,9 @@
 
                         <div class="about-slide grid-right">
                             <div class="about-placeholder-column">
+                                <img src="Assets/hw-sw-diagram.png" alt="Hardware and Software Integration" class="about-diagram-img">
                             </div>
-                            <div class="about-text-column">
+                            <div class="about-text-column newspaper-col">
                                 <div class="about-header-box center-align">
                                     <span class="title-connection">CONNECTION BETWEEN</span>
                                     <h2 class="title-hw-sw">Hardware<br><span class="plus-symbol">+</span><br>Software</h2>
@@ -137,20 +141,17 @@
                                         <strong>Software</strong><br>
                                         Programs • Operating Systems • Firmware • Algorithms
                                     </p>
-                                    
-                                    <p>Computer engineers bring these two sides together to create systems that can process information, communicate, and interact with the world around them.</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="about-slide grid-left">
-                            <div class="about-text-column">
+                            <div class="about-text-column newspaper-col">
                                 <div class="about-header-box">
                                     <h2 class="title-why">WHY DOES IT MATTER?</h2>
                                 </div>
                                 <div class="about-description">
                                     <p>Computer Engineering plays an important role in modern technology. It helps develop the systems behind smartphones, computers, vehicles, robotics, communication devices, and countless other technologies used in everyday life.</p>
-                                    <p>As technology continues to evolve, computer engineers help turn new ideas into practical solutions and contribute to the development of the next generation of digital technology.</p>
                                 </div>
                             </div>
                             <div class="about-quote-column">
@@ -171,9 +172,10 @@
             </div>
         </section>
 
+        <!-- OVERVIEW FLIP CARDS SECTION -->
         <section class="flip-section-wrapper" id="overview">
-            <div class="white-container">
-                <div class="flip-title-banner">
+            <div class="white-container paper-container">
+                <div class="flip-title-banner torn-header">
                     <h2 class="flip-section-title">UE COMPUTER ENGINEERING</h2>
                 </div>
 
@@ -188,19 +190,17 @@
                     <div class="flip-card-col stagger-top">
                         <div class="cpe-flip-card" onclick="this.classList.toggle('flipped')">
                             <div class="cpe-flip-card-inner">
-                                <div class="cpe-flip-card-front">
+                                <div class="cpe-flip-card-front paper-card">
                                     <h3>Building Skills for the Digital World</h3>
-                                    <p>The Bachelor of Science in Computer Engineering (BSCpE) at the University of the East (UE) combines engineering, computer science, electronics, hardware, and software. The program prepares students to understand the connection between physical computer systems and the software that controls them.</p>
+                                    <p>The Bachelor of Science in Computer Engineering (BSCpE) at the University of the East (UE) combines engineering, computer science, electronics, hardware, and software.</p>
                                 </div>
-                                <div class="cpe-flip-card-back">
+                                <div class="cpe-flip-card-back paper-card textured-bp">
                                     <h3>What Students Develop</h3>
                                     <ul class="flip-list">
                                         <li>Programming & Problem Solving</li>
                                         <li>Computer Hardware & Circuits</li>
                                         <li>Software Development</li>
                                         <li>Embedded & Digital Systems</li>
-                                        <li>Mathematics & Engineering</li>
-                                        <li>System Design & Development</li>
                                     </ul>
                                 </div>
                             </div>
@@ -210,13 +210,13 @@
                     <div class="flip-card-col stagger-bottom">
                         <div class="cpe-flip-card" onclick="this.classList.toggle('flipped')">
                             <div class="cpe-flip-card-inner">
-                                <div class="cpe-flip-card-front">
+                                <div class="cpe-flip-card-front paper-card">
                                     <h3>Learn. Build. Innovate.</h3>
-                                    <p>UE's Computer Engineering program emphasizes the practical application of what students learn through semestral and year-long projects. Students gradually gain more creative control over their projects while receiving guidance and feedback from instructors.</p>
+                                    <p>UE's Computer Engineering program emphasizes the practical application of what students learn through semestral and year-long projects.</p>
                                 </div>
-                                <div class="cpe-flip-card-back">
+                                <div class="cpe-flip-card-back paper-card textured-bp2">
                                     <h3>Program Goal</h3>
-                                    <p>UE aims to develop Computer Engineering graduates who are professionally competent, globally competitive, technically capable, and prepared to contribute to society while continuing to learn throughout their careers.</p>
+                                    <p>UE aims to develop Computer Engineering graduates who are professionally competent, globally competitive, and technically capable.</p>
                                 </div>
                             </div>
                         </div>
@@ -225,13 +225,13 @@
                     <div class="flip-card-col stagger-top">
                         <div class="cpe-flip-card" onclick="this.classList.toggle('flipped')">
                             <div class="cpe-flip-card-inner">
-                                <div class="cpe-flip-card-front">
-                                    <h3>Building Skills for the Digital World</h3>
-                                    <p>The Bachelor of Science in Computer Engineering (BSCpE) at the University of the East (UE) combines engineering, computer science, electronics, hardware, and software. The program prepares students to understand the connection between physical computer systems and the software that controls them.</p>
+                                <div class="cpe-flip-card-front paper-card">
+                                    <h3>Hands-On Experience</h3>
+                                    <p>Through state-of-the-art laboratories and hackathons, UE CpE students translate classroom concepts into real-world technological solutions.</p>
                                 </div>
-                                <div class="cpe-flip-card-back">
+                                <div class="cpe-flip-card-back paper-card textured-bp">
                                     <h3>UE CpE Experience</h3>
-                                    <p>Rather than focusing only on theory, the program encourages students to apply their knowledge through projects, experimentation, and system development. This gives students opportunities to transform classroom concepts into working technologies.</p>
+                                    <p>Encouraging students to apply knowledge through projects, experimentation, and active system development.</p>
                                 </div>
                             </div>
                         </div>
@@ -240,69 +240,45 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- MANY SIDES OF CPE                          -->
-        <!-- ========================================== -->
+        <!-- DISCIPLINES SECTION -->
         <section class="disciplines-section" id="disciplines">
-            <!-- Invisible trigger zone on the left for the hover effect -->
             <div class="disciplines-trigger-zone" id="disciplinesTriggerZone"></div>
             
-            <!-- Hidden Sidebar Navigation -->
-            <div class="disciplines-sidebar" id="disciplinesSidebar">
+            <div class="disciplines-sidebar paper-card" id="disciplinesSidebar">
                 <nav class="disciplines-nav">
-                    <!-- NEW BACK BUTTON ADDED HERE -->
                     <button class="disc-link back-to-overview-btn" id="backToOverviewBtn">&larr; BACK TO OVERVIEW</button>
-                    
                     <button class="disc-link active" data-target="embedded">EMBEDDED SYSTEMS</button>
                     <button class="disc-link" data-target="iot">INTERNET OF THINGS</button>
                     <button class="disc-link" data-target="networks">COMPUTER NETWORKS</button>
                     <button class="disc-link" data-target="cybersecurity">CYBERSECURITY</button>
                     <button class="disc-link" data-target="software">SOFTWARE DEVELOPMENT</button>
-                    <button class="disc-link" data-target="ai">ARTIFICIAL INTELLIGENCE</button>
-                    <button class="disc-link" data-target="datascience">DATA SCIENCE</button>
-                    <button class="disc-link" data-target="robotics">ROBOTICS & AUTOMATION</button>
-                    <button class="disc-link" data-target="hardware">COMPUTER HARDWARE</button>
-                    <button class="disc-link" data-target="cloud">CLOUD & EDGE COMPUTING</button>
                 </nav>
             </div>
 
-            <div class="white-container disciplines-container">
+            <div class="white-container disciplines-container paper-container torn-top torn-bottom">
                 <div class="disciplines-content-area">
-                    
-                    <!-- DEFAULT VIEW (Shows on load) -->
                     <div id="disciplineDefault" class="discipline-view active">
-                        <h2 class="discipline-title">THE MANY SIDES OF <span class="cpe-blue">COMPUTER ENGINEERING</span></h2>
+                        <h2 class="discipline-title torn-header">THE MANY SIDES OF <span class="cpe-blue">COMPUTER ENGINEERING</span></h2>
                         <div class="discipline-text">
                             <p>Computer Engineering is more than just computers. It is a field that connects electronics, programming, communication, intelligence, and automation to create the technologies around us.</p>
-                            <br>
-                            <p>From the code running inside a smart device to the hardware powering a computer, every area of CPE focuses on solving a different kind of problem.</p>
                         </div>
                         
                         <h2 class="discipline-subtitle">EXPLORE THE DISCIPLINES</h2>
                         <div class="discipline-text">
-                            <p>There is no single path in <strong>Computer Engineering</strong>. Hover over the navigation to discover the different fields and see where each one can take you.</p>
+                            <p>There is no single path in <strong>Computer Engineering</strong>. Hover over the navigation to discover the different fields.</p>
                             <br>
                             <p class="explore-hint">[ HOVER TO EXPLORE &larr; ]</p>
                         </div>
                     </div>
 
-                    <!-- DYNAMIC VIEW (Shows when nav item is clicked) -->
                     <div id="disciplineDynamic" class="discipline-view">
                         <h2 class="discipline-title uppercase-title" id="dynTitle">EMBEDDED SYSTEMS</h2>
                         <div class="discipline-text">
                             <p><strong id="dynSubtitle">Computers hidden inside the things we use.</strong></p>
                             <br>
-                            <p id="dynDesc">Embedded systems are specialized computers designed to perform specific functions within larger devices. They can be found in cars, appliances, medical equipment, cameras, and smart devices.</p>
-                        </div>
-
-                        <!-- 3 Image Placeholders -->
-                        <div class="discipline-images-grid">
-                            <div class="placeholder-img"></div>
-                            <div class="placeholder-img"></div>
-                            <div class="placeholder-img"></div>
+                            <p id="dynDesc">Embedded systems are specialized computers designed to perform specific functions within larger devices.</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
