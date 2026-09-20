@@ -1,5 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Cards now enter diagonally whenever they first come into view while
+    // navigating down the page, not only after pressing carousel controls.
+    function initSlantedCardEntrances() {
+        const cards = document.querySelectorAll(".announcement-carousel, .about-slider-window, .topic-grid-card, .cpe-flip-card");
+        if (!("IntersectionObserver" in window)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || entry.target.dataset.hasEntered) return;
+                entry.target.dataset.hasEntered = "true";
+                entry.target.animate([
+                    { opacity: 0.12, transform: "translate(70px, 110px) rotate(8deg) scale(0.9)" },
+                    { opacity: 1, transform: "translate(-12px, -16px) rotate(-1.8deg) scale(1.025)", offset: 0.7 },
+                    { opacity: 1, transform: "translate(0, 0) rotate(0deg) scale(1)" }
+                ], {
+                    duration: 1000,
+                    easing: "cubic-bezier(0.16, 1, 0.3, 1)"
+                });
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.18 });
+
+        cards.forEach(card => observer.observe(card));
+    }
+
     // --- CAROUSEL ENGINE ---
     function setupDraggableCarousel(windowId, trackId, dotsContainerId) {
         const windowEl = document.getElementById(windowId);
@@ -35,6 +60,34 @@ document.addEventListener("DOMContentLoaded", () => {
             trackEl.style.transition = "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)";
             setSliderPosition();
             updateDots();
+
+            // The text carousel intentionally only slides horizontally.
+            // Its text must stay still inside the card.
+            if (windowId === "textCarouselWindow") return;
+
+            // Give the other selected cards a tactile, diagonal lift.
+            const activeSlide = trackEl.children[currentIndex];
+            if (activeSlide) {
+                activeSlide.classList.remove("slide-arriving");
+                void activeSlide.offsetWidth; // restart the animation on repeat navigation
+                activeSlide.classList.add("slide-arriving");
+
+                // Web Animations runs directly on the selected slide, so the
+                // motion remains visible even with the older !important paper rules.
+                if (activeSlide.arrivalAnimation) activeSlide.arrivalAnimation.cancel();
+                activeSlide.arrivalAnimation = activeSlide.animate([
+                    { opacity: 0.1, transform: "translate(90px, 115px) rotate(9deg) scale(0.9)" },
+                    { opacity: 1, transform: "translate(-14px, -18px) rotate(-2deg) scale(1.03)", offset: 0.68 },
+                    { opacity: 1, transform: "translate(0, 0) rotate(0deg) scale(1)" }
+                ], {
+                    duration: 1050,
+                    easing: "cubic-bezier(0.16, 1, 0.3, 1)"
+                });
+
+                // Remove the class after the motion ends, keeping the slide's
+                // resting layout clean before the next navigation.
+                window.setTimeout(() => activeSlide.classList.remove("slide-arriving"), 1050);
+            }
         }
 
         function getPositionX(event) {
@@ -95,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupDraggableCarousel("textCarouselWindow", "textCarouselTrack", "textDots");
     setupDraggableCarousel("announcementWindow", "announcementTrack", "announcementDots");
     setupDraggableCarousel("aboutSliderWindow", "aboutSliderTrack", "aboutDots");
+    initSlantedCardEntrances();
 
     // --- NAVBAR TRIGGER HOVER ---
     const navbar = document.getElementById("navbar");
