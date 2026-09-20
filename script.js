@@ -1,312 +1,351 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    // Cards now enter diagonally whenever they first come into view while
-    // navigating down the page, not only after pressing carousel controls.
-    function initSlantedCardEntrances() {
-        const cards = document.querySelectorAll(".announcement-carousel, .about-slider-window, .topic-grid-card, .cpe-flip-card");
-        if (!("IntersectionObserver" in window)) return;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting || entry.target.dataset.hasEntered) return;
-                entry.target.dataset.hasEntered = "true";
-                entry.target.animate([
-                    { opacity: 0.12, transform: "translate(70px, 110px) rotate(8deg) scale(0.9)" },
-                    { opacity: 1, transform: "translate(-12px, -16px) rotate(-1.8deg) scale(1.025)", offset: 0.7 },
-                    { opacity: 1, transform: "translate(0, 0) rotate(0deg) scale(1)" }
-                ], {
-                    duration: 1000,
-                    easing: "cubic-bezier(0.16, 1, 0.3, 1)"
-                });
-                observer.unobserve(entry.target);
-            });
-        }, { threshold: 0.18 });
-
-        cards.forEach(card => observer.observe(card));
-    }
-
-    // --- CAROUSEL ENGINE ---
-    function setupDraggableCarousel(windowId, trackId, dotsContainerId) {
-        const windowEl = document.getElementById(windowId);
-        const trackEl = document.getElementById(trackId);
-        const dotsContainer = document.getElementById(dotsContainerId);
-
-        if (!windowEl || !trackEl) return;
-
-        const dots = dotsContainer ? dotsContainer.querySelectorAll(".dot") : [];
-        const totalSlides = trackEl.children.length;
-
-        let currentIndex = 0;
-        let isDragging = false;
-        let startPosX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationId = 0;
-
-        function setSliderPosition() {
-            trackEl.style.transform = `translateX(${currentTranslate}px)`;
-        }
-
-        function updateDots() {
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle("active", idx === currentIndex);
-            });
-        }
-
-        function goToSlide(index) {
-            currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-            currentTranslate = -currentIndex * windowEl.clientWidth;
-            prevTranslate = currentTranslate;
-            trackEl.style.transition = "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)";
-            setSliderPosition();
-            updateDots();
-
-            // The text carousel intentionally only slides horizontally.
-            // Its text must stay still inside the card.
-            if (windowId === "textCarouselWindow") return;
-
-            // Give the other selected cards a tactile, diagonal lift.
-            const activeSlide = trackEl.children[currentIndex];
-            if (activeSlide) {
-                activeSlide.classList.remove("slide-arriving");
-                void activeSlide.offsetWidth; // restart the animation on repeat navigation
-                activeSlide.classList.add("slide-arriving");
-
-                // Web Animations runs directly on the selected slide, so the
-                // motion remains visible even with the older !important paper rules.
-                if (activeSlide.arrivalAnimation) activeSlide.arrivalAnimation.cancel();
-                activeSlide.arrivalAnimation = activeSlide.animate([
-                    { opacity: 0.1, transform: "translate(90px, 115px) rotate(9deg) scale(0.9)" },
-                    { opacity: 1, transform: "translate(-14px, -18px) rotate(-2deg) scale(1.03)", offset: 0.68 },
-                    { opacity: 1, transform: "translate(0, 0) rotate(0deg) scale(1)" }
-                ], {
-                    duration: 1050,
-                    easing: "cubic-bezier(0.16, 1, 0.3, 1)"
-                });
-
-                // Remove the class after the motion ends, keeping the slide's
-                // resting layout clean before the next navigation.
-                window.setTimeout(() => activeSlide.classList.remove("slide-arriving"), 1050);
-            }
-        }
-
-        function getPositionX(event) {
-            return event.type.includes("mouse") ? event.clientX : event.touches[0].clientX;
-        }
-
-        function animation() {
-            setSliderPosition();
-            if (isDragging) requestAnimationFrame(animation);
-        }
-
-        function touchStart(event) {
-            isDragging = true;
-            startPosX = getPositionX(event);
-            animationId = requestAnimationFrame(animation);
-            trackEl.style.transition = "none";
-        }
-
-        function touchMove(event) {
-            if (!isDragging) return;
-            const currentPosition = getPositionX(event);
-            const diff = currentPosition - startPosX;
-            currentTranslate = prevTranslate + diff;
-        }
-
-        function touchEnd() {
-            if (!isDragging) return;
-            isDragging = false;
-            cancelAnimationFrame(animationId);
-
-            const movedBy = currentTranslate - prevTranslate;
-
-            if (movedBy < -80 && currentIndex < totalSlides - 1) {
-                currentIndex += 1;
-            } else if (movedBy > 80 && currentIndex > 0) {
-                currentIndex -= 1;
-            }
-
-            goToSlide(currentIndex);
-        }
-
-        windowEl.addEventListener("mousedown", touchStart);
-        windowEl.addEventListener("mousemove", touchMove);
-        windowEl.addEventListener("mouseup", touchEnd);
-        windowEl.addEventListener("mouseleave", touchEnd);
-
-        windowEl.addEventListener("touchstart", touchStart);
-        windowEl.addEventListener("touchmove", touchMove);
-        windowEl.addEventListener("touchend", touchEnd);
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener("click", () => goToSlide(index));
-        });
-
-        window.addEventListener("resize", () => goToSlide(currentIndex));
-    }
-
-    setupDraggableCarousel("textCarouselWindow", "textCarouselTrack", "textDots");
-    setupDraggableCarousel("announcementWindow", "announcementTrack", "announcementDots");
-    setupDraggableCarousel("aboutSliderWindow", "aboutSliderTrack", "aboutDots");
-    initSlantedCardEntrances();
-
-    // --- NAVBAR TRIGGER HOVER ---
+    /* ==========================================
+       1. NAVBAR HOVER / TRIGGER ZONE
+       ========================================== */
     const navbar = document.getElementById("navbar");
-    const triggerZone = document.querySelector(".nav-trigger-zone");
 
-    if (triggerZone && navbar) {
-        triggerZone.addEventListener("mouseenter", () => {
+    if (navbar) {
+        navbar.addEventListener("mouseenter", () => {
             navbar.classList.add("show");
-            document.body.classList.add("nav-active");
         });
 
         navbar.addEventListener("mouseleave", () => {
             navbar.classList.remove("show");
-            document.body.classList.remove("nav-active");
+        });
+
+        window.addEventListener("mousemove", (e) => {
+            if (e.clientY <= 60) {
+                navbar.classList.add("show");
+            } else if (!navbar.matches(":hover")) {
+                navbar.classList.remove("show");
+            }
         });
     }
 
-    // --- DYNAMIC DISCIPLINES MAPPING DATA ---
+    /* ==========================================
+       2. CAROUSEL ENGINE (FIXED BUGS & MOBILE SWIPE)
+       ========================================== */
+    function setupCarousel(windowId, trackId, dotsId, autoPlayMs = 5000) {
+        const windowEl = document.getElementById(windowId);
+        const trackEl = document.getElementById(trackId);
+        const dotsContainer = document.getElementById(dotsId);
+
+        if (!windowEl || !trackEl) return;
+
+        const slides = Array.from(trackEl.children);
+        if (slides.length === 0) return;
+
+        let currentIndex = 0;
+        let timer = null;
+
+        // Drag & Touch Variables
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationId = null;
+
+        function updateCarousel(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            currentIndex = index;
+
+            const slideWidth = windowEl.clientWidth;
+            currentTranslate = -currentIndex * slideWidth;
+            prevTranslate = currentTranslate;
+
+            trackEl.style.transition = "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)";
+            trackEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            if (dotsContainer) {
+                const dots = Array.from(dotsContainer.children);
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle("active", idx === currentIndex);
+                });
+            }
+        }
+
+        if (dotsContainer) {
+            const dots = Array.from(dotsContainer.children);
+            dots.forEach((dot, idx) => {
+                dot.addEventListener("click", () => {
+                    updateCarousel(idx);
+                    resetTimer();
+                });
+            });
+        }
+
+        function startTimer() {
+            if (autoPlayMs && !timer) {
+                timer = setInterval(() => updateCarousel(currentIndex + 1), autoPlayMs);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timer = null;
+            startTimer();
+        }
+
+        // --- DRAG / TOUCH EVENTS ---
+        windowEl.style.cursor = "grab";
+
+        windowEl.addEventListener("mousedown", dragStart);
+        windowEl.addEventListener("mouseup", dragEnd);
+        windowEl.addEventListener("mouseleave", dragEnd);
+        windowEl.addEventListener("mousemove", dragAction);
+
+        // Passive: false upang maiwasan ang scrolling issues habang nagso-swipe sa mobile
+        windowEl.addEventListener("touchstart", dragStart, { passive: true });
+        windowEl.addEventListener("touchend", dragEnd);
+        windowEl.addEventListener("touchmove", dragAction, { passive: true });
+
+        function dragStart(e) {
+            isDragging = true;
+            startX = getPositionX(e);
+            windowEl.style.cursor = "grabbing";
+            trackEl.style.transition = "none";
+            clearInterval(timer);
+            timer = null;
+            animationId = requestAnimationFrame(animation);
+        }
+
+        function dragAction(e) {
+            if (!isDragging) return;
+            const currentPosition = getPositionX(e);
+            const diff = currentPosition - startX;
+            currentTranslate = prevTranslate + diff;
+        }
+
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            cancelAnimationFrame(animationId);
+            windowEl.style.cursor = "grab";
+
+            const movedBy = currentTranslate - prevTranslate;
+
+            if (movedBy < -50 && currentIndex < slides.length - 1) {
+                currentIndex += 1;
+            } else if (movedBy > 50 && currentIndex > 0) {
+                currentIndex -= 1;
+            }
+
+            updateCarousel(currentIndex);
+            startTimer();
+        }
+
+        function getPositionX(e) {
+            return e.type.includes("touch") ? (e.touches[0] ? e.touches[0].clientX : 0) : e.clientX;
+        }
+
+        function animation() {
+            if (isDragging) {
+                trackEl.style.transform = `translateX(${currentTranslate}px)`;
+                requestAnimationFrame(animation);
+            }
+        }
+
+        // Prevent layout break on screen resize
+        window.addEventListener("resize", () => updateCarousel(currentIndex));
+
+        // Initialize
+        updateCarousel(0);
+        startTimer();
+    }
+
+    // Attach Carousels
+    setupCarousel("textCarouselWindow", "textCarouselTrack", "textDots", 6000);
+    setupCarousel("announcementWindow", "announcementTrack", "announcementDots", 4000);
+    setupCarousel("aboutSliderWindow", "aboutSliderTrack", "aboutDots", 7000);
+
+    /* ==========================================
+       3. EXCLUSIVE DISCIPLINES SIDEBAR TOGGLE & CONTENT SWITCH
+       ========================================== */
+    const disciplinesSec = document.getElementById("disciplines");
+    const sidebar = document.getElementById("disciplinesSidebar");
+
+    if (disciplinesSec) {
+        let triggerZone = disciplinesSec.querySelector(".disciplines-trigger-zone");
+        if (!triggerZone) {
+            triggerZone = document.createElement("div");
+            triggerZone.className = "disciplines-trigger-zone";
+            disciplinesSec.appendChild(triggerZone);
+        }
+
+        if (triggerZone && sidebar) {
+            triggerZone.addEventListener("mouseenter", () => {
+                sidebar.classList.add("show-sidebar");
+            });
+
+            sidebar.addEventListener("mouseleave", () => {
+                sidebar.classList.remove("show-sidebar");
+            });
+        }
+    }
+
+    // Dynamic Data for Disciplines
     const disciplineData = {
         embedded: {
-            title: "Embedded Systems",
+            title: "EMBEDDED SYSTEMS",
             subtitle: "Computers hidden inside everyday devices.",
-            desc: "Specialized systems combining microcontrollers, firmware, and custom circuits to control appliances, medical equipment, and automotive electronics."
+            desc: "Embedded systems combine hardware processors and microcontrollers with custom software to run specialized real-time operations in automotive, medical, and consumer electronics."
         },
         iot: {
-            title: "Internet of Things",
-            subtitle: "Connecting physical objects to global digital networks.",
-            desc: "Networks of smart sensors, hardware nodes, and software tools that gather, exchange, and act on real-time environmental data."
+            title: "INTERNET OF THINGS (IoT)",
+            subtitle: "Connecting physical objects to the digital world.",
+            desc: "IoT integrates embedded hardware, microcontrollers, wireless sensors, and cloud systems to collect and exchange real-time data across smart networks."
         },
         networks: {
-            title: "Computer Networks",
-            subtitle: "The digital infrastructure powering global communication.",
-            desc: "Designing protocols, routing architectures, and hardware connections that enable fast, reliable, and secure data transmission."
+            title: "COMPUTER NETWORKS",
+            subtitle: "The infrastructure behind global communication.",
+            desc: "Computer networks focus on designing, deploying, and maintaining secure data transmission protocols, router configurations, and enterprise network infrastructure."
         },
         cybersecurity: {
-            title: "Cybersecurity",
-            subtitle: "Defending hardware, software, and network infrastructure.",
-            desc: "Protecting digital assets against vulnerabilities, breaches, and cyber threats through encryption, firewalls, and secure hardware architecture."
+            title: "CYBERSECURITY",
+            subtitle: "Defending systems and networks from digital threats.",
+            desc: "Cybersecurity protects hardware, software, and communication channels against unauthorized access, data breaches, and malicious digital attacks."
         },
         software: {
-            title: "Software Development",
-            subtitle: "Building applications, tools, and system platforms.",
-            desc: "Writing, testing, and optimizing code ranging from low-level drivers and operating systems to full-stack desktop and web applications."
+            title: "SOFTWARE DEVELOPMENT",
+            subtitle: "Crafting applications, logic, and system tools.",
+            desc: "Software development encompasses system software, firmware, algorithms, and application logic that bridge raw hardware capabilities with human interaction."
         },
         ai: {
-            title: "Artificial Intelligence",
-            subtitle: "Giving hardware the ability to learn, reason, and adapt.",
-            desc: "Implementing machine learning algorithms, computer vision, and neural networks directly on processing hardware for smart decision-making."
+            title: "ARTIFICIAL INTELLIGENCE",
+            subtitle: "Empowering machines to learn and reason.",
+            desc: "AI in computer engineering focuses on machine learning, neural networks, computer vision, and hardware accelerators designed to process intelligent algorithms."
         },
         datascience: {
-            title: "Data Science",
-            subtitle: "Extracting actionable insights from complex datasets.",
-            desc: "Processing massive streams of raw hardware and system data to discover patterns, optimize efficiency, and train predictive models."
+            title: "DATA SCIENCE",
+            subtitle: "Extracting insight from massive datasets.",
+            desc: "Data Science leverages computational models, statistical analytics, and distributed computing frameworks to process and interpret massive streams of information."
         },
         robotics: {
-            title: "Robotics & Automation",
-            subtitle: "Systems engineered to interact with the physical world.",
-            desc: "Integrating mechanical design, sensors, microcontrollers, and control software to create autonomous machines and industrial tools."
+            title: "ROBOTICS & AUTOMATION",
+            subtitle: "Merging mechanical design with autonomous code.",
+            desc: "Robotics combines sensor integration, motor control, kinematics, and real-time computation to construct autonomous machines and industrial automation systems."
         },
         hardware: {
-            title: "Computer Hardware",
-            subtitle: "Designing the physical foundations of computing technology.",
-            desc: "Developing microprocessors, circuit boards, logic gates, and memory architectures that drive high-performance processing equipment."
+            title: "COMPUTER HARDWARE",
+            subtitle: "Designing physical circuits, chips, and microprocessors.",
+            desc: "Hardware engineering focuses on VLSI chip design, printed circuit board (PCB) layout, microarchitecture, logic gates, and physical component testing."
         },
         cloud: {
-            title: "Cloud & Edge Computing",
-            subtitle: "Distributed processing from local sensors to distant servers.",
-            desc: "Managing computational workloads between edge-side hardware devices and remote server clusters to reduce latency and enhance scaling."
+            title: "CLOUD & EDGE COMPUTING",
+            subtitle: "Distributing computation across local and global nodes.",
+            desc: "Cloud & Edge Computing pairs high-capacity remote servers with low-latency local processors to deliver efficient, scalable computing resources anywhere."
         }
     };
 
-    // --- DISCIPLINES NAVIGATION LOGIC ---
-    const allDiscLinks = document.querySelectorAll('.disc-link');
-    const disciplineDefault = document.getElementById('disciplineDefault');
-    const disciplineDynamic = document.getElementById('disciplineDynamic');
+    const discLinks = document.querySelectorAll(".disc-link");
+    const defaultView = document.getElementById("disciplineDefault");
+    const dynamicView = document.getElementById("disciplineDynamic");
+    const dynTitle = document.getElementById("dynTitle");
+    const dynSubtitle = document.getElementById("dynSubtitle");
+    const dynDesc = document.getElementById("dynDesc");
+    const backBtn = document.getElementById("backToOverviewBtn");
 
-    if (allDiscLinks.length > 0) {
-        allDiscLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                const clickedLink = e.currentTarget;
+    discLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+            const target = this.getAttribute("data-target");
 
-                // Paper tactile click trigger
-                clickedLink.classList.add('paper-wiggle');
-                setTimeout(() => clickedLink.classList.remove('paper-wiggle'), 250);
+            discLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
 
-                if (clickedLink.id === 'backToOverviewBtn') {
-                    if (disciplineDynamic) disciplineDynamic.classList.remove('active');
-                    if (disciplineDefault) disciplineDefault.classList.add('active');
-                    allDiscLinks.forEach(l => l.classList.remove('active'));
-                    return; 
-                }
+            if (target === "default") {
+                if (dynamicView) dynamicView.classList.remove("active");
+                if (defaultView) defaultView.classList.add("active");
+            } else if (disciplineData[target]) {
+                const info = disciplineData[target];
+                if (dynTitle) dynTitle.textContent = info.title;
+                if (dynSubtitle) dynSubtitle.textContent = info.subtitle;
+                if (dynDesc) dynDesc.textContent = info.desc;
 
-                allDiscLinks.forEach(l => l.classList.remove('active'));
-                clickedLink.classList.add('active');
+                if (defaultView) defaultView.classList.remove("active");
+                if (dynamicView) dynamicView.classList.add("active");
+            }
+        });
+    });
 
-                if (disciplineDefault) disciplineDefault.classList.remove('active');
-                if (disciplineDynamic) disciplineDynamic.classList.add('active');
-
-                const targetKey = clickedLink.getAttribute('data-target');
-                const content = disciplineData[targetKey];
-
-                const dynTitle = document.getElementById('dynTitle');
-                const dynSubtitle = document.getElementById('dynSubtitle');
-                const dynDesc = document.getElementById('dynDesc');
-
-                if (content) {
-                    if (dynTitle) dynTitle.textContent = content.title;
-                    if (dynSubtitle) dynSubtitle.textContent = content.subtitle;
-                    if (dynDesc) dynDesc.textContent = content.desc;
-                }
-            });
+    if (backBtn) {
+        backBtn.addEventListener("click", () => {
+            const defaultBtn = document.querySelector('.disc-link[data-target="default"]');
+            if (defaultBtn) defaultBtn.click();
         });
     }
 
-    // --- ORGANIC JS PAPER BENDING ENGINE ---
-    function initPaperBendingEngine() {
-        const paperContainers = document.querySelectorAll('.info-card, .paper-container, .white-container');
-        if (!paperContainers.length) return;
-
-        let startTime = null;
-        const duration = 2000; // 2-second cycle
-
-        function renderFrame(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const elapsed = timestamp - startTime;
-            const progress = (elapsed % duration) / duration; // Normalize to 0 -> 1
-
-            // Mathematical sine wave math for continuous organic flexing
-            const wave = Math.sin(progress * Math.PI * 2);
-            const cosWave = Math.cos(progress * Math.PI * 2);
-
-            // 3D paper tilt & bend calculations
-            const rotateX = wave * 4.5;       // Tilts top/bottom forward & back
-            const rotateY = cosWave * -3.5;    // Tilts left/right
-            const translateY = wave * -4;      // Elevates center off the table
-
-            // Soft paper corner curling (fakes pliability)
-            const trCorner = 12 + wave * 10;   // Top-right corner flexes
-            const blCorner = 10 + cosWave * 8; // Bottom-left corner flexes
-
-            // Dynamic light wash & shadow offsets
-            const shadowX = rotateY * 2.5;
-            const shadowY = 14 + Math.abs(wave) * 6;
-            const brightness = 1 + wave * 0.035;
-
-            paperContainers.forEach(container => {
-                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${translateY}px)`;
-                container.style.borderRadius = `0px ${trCorner}px 0px ${blCorner}px`;
-                container.style.boxShadow = `${shadowX}px ${shadowY}px 28px rgba(0, 0, 0, 0.15)`;
-                container.style.filter = `brightness(${brightness})`;
-            });
-
-            requestAnimationFrame(renderFrame);
+    /* ==========================================
+       4. INTERACTIVE "ENGINEERED FOR EXCELLENCE" TABS
+       ========================================== */
+    const engData = {
+        software: {
+            title: "SOFTWARE & SYSTEMS",
+            desc: "Software and systems engineering roles focus on designing, building, and integrating complex technological solutions. Software engineers develop applications and operating systems that drive user experiences.",
+            tags: ["#SoftwareDev", "#DevOps", "#SystemsArchitecture", "#Scalability"],
+            img1: "Assets/SH.jpg",
+            img2: "Assets/ue.jpg"
+        },
+        hardware: {
+            title: "HARDWARE & EMBEDDED",
+            desc: "Hardware specialists design microprocessors, circuit boards, and embedded systems powering devices from microcontrollers to industrial automation.",
+            tags: ["#ChipDesign", "#EmbeddedC", "#PCBLayout", "#VHDL"],
+            img1: "Assets/BSCPE.jpg",
+            img2: "Assets/admissions.jpg"
+        },
+        ai: {
+            title: "AI DATA & ROBOTICS",
+            desc: "Engineers in AI and robotics develop intelligent algorithms, autonomous systems, and data pipelines that learn from real-world sensor inputs.",
+            tags: ["#MachineLearning", "#Robotics", "#ComputerVision", "#DataScience"],
+            img1: "Assets/Scholarships.jpg",
+            img2: "Assets/cpetext.png"
+        },
+        networks: {
+            title: "NETWORKS & SECURITY",
+            desc: "Network and security engineers protect critical infrastructure, design high-speed communication channels, and secure cloud ecosystems.",
+            tags: ["#Cybersecurity", "#CloudArch", "#NetworkEng", "#Protocols"],
+            img1: "Assets/hw-sw-diagram.png",
+            img2: "Assets/logo.png"
+        },
+        research: {
+            title: "RESEARCH & INNOVATION",
+            desc: "Research engineers explore emergent computing paradigms, advanced materials, novel quantum hardware, and next-generation system architectures.",
+            tags: ["#RND", "#Innovation", "#QuantumComputing", "#EmergingTech"],
+            img1: "Assets/SH.jpg",
+            img2: "Assets/BSCPE.jpg"
         }
+    };
 
-        requestAnimationFrame(renderFrame);
-    }
+    const engTabs = document.querySelectorAll(".eng-tab-btn");
+    const engTitle = document.getElementById("engTitle");
+    const engDescription = document.getElementById("engDescription");
+    const engTags = document.getElementById("engTags");
+    const engImg1 = document.getElementById("engImg1");
+    const engImg2 = document.getElementById("engImg2");
 
-    // Initialize JS paper bending engine
-    initPaperBendingEngine();
+    engTabs.forEach((tab) => {
+        tab.addEventListener("click", function () {
+            const target = this.getAttribute("data-target");
+
+            engTabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            if (engData[target]) {
+                const info = engData[target];
+                if (engTitle) engTitle.textContent = info.title;
+                if (engDescription) engDescription.textContent = info.desc;
+                if (engImg1) engImg1.src = info.img1;
+                if (engImg2) engImg2.src = info.img2;
+
+                if (engTags) {
+                    engTags.innerHTML = "";
+                    info.tags.forEach((tag) => {
+                        const span = document.createElement("span");
+                        span.textContent = tag;
+                        engTags.appendChild(span);
+                    });
+                }
+            }
+        });
+    });
 });

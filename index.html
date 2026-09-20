@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer Engineering | UE Manila</title>
-    <link rel="stylesheet" href="style.css?v=20260920-2">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body class="newspaper-theme">
 
+    <!-- NAVBAR -->
     <header class="navbar" id="navbar">
         <div class="navbar-inner">
             <div class="nav-logo">
@@ -19,12 +21,10 @@
 
             <nav class="nav-links">
                 <a href="index.html" class="nav-link active">HOME</a>
-                <a href="whatiscpe.html" class="nav-link">ABOUT</a>
-                <a href="specialization.html" class="nav-link">SPECIALIZATION</a>
+                <a href="#about" class="nav-link">ABOUT</a>
                 <a href="#overview" class="nav-link">OVERVIEW</a>
                 <a href="#disciplines" class="nav-link">DISCIPLINES</a>
-                <a href="#faculty" class="nav-link">FACULTY</a>
-                <a href="#contact" class="nav-link">CONTACT</a>
+                <a href="#careers" class="nav-link">CAREERS</a>
             </nav>
         </div>
     </header>
@@ -32,11 +32,14 @@
     <div class="nav-trigger-zone"></div>
 
     <main class="page-container">
+        
+        <!-- SITE TITLE HEADER -->
         <section class="site-heading">
             <h1>COMPUTER ENGINEERING</h1>
             <p class="masthead-dateline">College of Engineering &nbsp;&middot;&nbsp; University of the East, Manila</p>
         </section>
 
+        <!-- TICKER INFORMATION BAR -->
         <div class="information-bar">
             <div class="information-track">
                 <div class="information-content">
@@ -52,28 +55,28 @@
             </div>
         </div>
 
-        <!-- HERO / MAIN SECTION -->
+        <!-- HERO / CAROUSEL SECTION -->
         <section class="main-section">
             <div class="text-carousel-container paper-card">
                 <div class="text-carousel-window" id="textCarouselWindow">
                     <div class="text-track" id="textCarouselTrack">
-                        <article class="text-slide">
+                        <article class="text-slide active">
                             <a href="whatiscpe.html" class="text-slide-title-link">
                                 <h2>All about Computer Engineering</h2>
                             </a>
-                            <p>Computer engineering is a multidisciplinary field that applies engineering principles to analyze, design, and manage hardware and software systems, as well as their integration. The Computer Engineering (CpE) program bridges electrical engineering and computer science, training students to work across the hardware-software interface ranging from circuit design to operating systems to prepare them for modern industries such as gaming.</p>
+                            <p>Computer engineering is a multidisciplinary field that applies engineering principles to analyze, design, and manage hardware and software systems. The Computer Engineering (CpE) program bridges electrical engineering and computer science, training students across circuit design, operating systems, embedded hardware, and AI systems.</p>
                         </article>
 
-                        <article class="text-slide active">
+                        <article class="text-slide">
                             <h2>UE Computer Engineering</h2>
-                            <p>UE CpE emphasizes practical application of theoretical knowledge through semester and year-long projects, allowing students increasing creative control and expert feedback. By the final stages, students are well-versed in software and hardware design, covering topics such as networks, embedded systems, VHDL, digital signal processing, state machine design, VLSI, control systems, communications, and artificial intelligence.</p>
+                            <p>UE CpE emphasizes practical application of theoretical knowledge through semester and year-long projects, allowing students increasing creative control and expert feedback. By the final stages, students are well-versed in software and hardware design, covering networks, embedded systems, VHDL, digital signal processing, VLSI, and artificial intelligence.</p>
                         </article>
                     </div>
                 </div>
 
                 <div class="carousel-dots text-dots" id="textDots">
-                    <button class="dot" aria-label="Text slide 1"></button>
-                    <button class="dot active" aria-label="Text slide 2"></button>
+                    <button class="dot active" aria-label="Text slide 1" data-index="0"></button>
+                    <button class="dot" aria-label="Text slide 2" data-index="1"></button>
                 </div>
             </div>
 
@@ -90,9 +93,9 @@
                     </div>
 
                     <div class="carousel-dots announcement-dots" id="announcementDots">
-                        <button class="dot active" aria-label="Announcement 1"></button>
-                        <button class="dot" aria-label="Announcement 2"></button>
-                        <button class="dot" aria-label="Announcement 3"></button>
+                        <button class="dot active" aria-label="Announcement 1" data-index="0"></button>
+                        <button class="dot" aria-label="Announcement 2" data-index="1"></button>
+                        <button class="dot" aria-label="Announcement 3" data-index="2"></button>
                     </div>
                 </div>
             </div>
@@ -104,7 +107,7 @@
                 <div class="about-slider-window" id="aboutSliderWindow">
                     <div class="about-slider-track" id="aboutSliderTrack">
                         
-                        <div class="about-slide grid-left">
+                        <div class="about-slide grid-left active">
                             <div class="about-text-column newspaper-col">
                                 <div class="about-header-box">
                                     <span class="title-all">ALL</span>
@@ -113,7 +116,7 @@
                                 </div>
                                 <div class="about-description">
                                     <p><strong>Computer Engineering (CPE)</strong> is a branch of engineering that combines computer science, electronics, and electrical engineering to design and develop computer-based systems. It focuses on understanding both the physical components of technology and the software that controls them.</p>
-                                    <p><strong>Computer engineers</strong> work with systems ranging from processors and circuit boards to computers, smart devices, and embedded systems. They design, build, test, and improve technologies to make them more reliable, efficient, and useful.</p>
+                                    <p><strong>Computer engineers</strong> work with systems ranging from processors and circuit boards to computers, smart devices, and embedded systems.</p>
                                 </div>
                             </div>
                             <div class="about-image-column">
@@ -131,17 +134,9 @@
                                     <h2 class="title-hw-sw">Hardware<br><span class="plus-symbol">+</span><br>Software</h2>
                                 </div>
                                 <div class="about-description">
-                                    <p>At the heart of Computer Engineering is the relationship between hardware and software. Hardware provides the physical foundation, while software provides the instructions that allow a system to perform tasks.</p>
-                                    
-                                    <p class="feature-group">
-                                        <strong>Hardware</strong><br>
-                                        Processors • Memory • Circuits • Sensors
-                                    </p>
-                                    
-                                    <p class="feature-group">
-                                        <strong>Software</strong><br>
-                                        Programs • Operating Systems • Firmware • Algorithms
-                                    </p>
+                                    <p>At the heart of Computer Engineering is the relationship between hardware and software. Hardware provides the physical foundation, while software provides instructions that execute tasks.</p>
+                                    <p class="feature-group"><strong>Hardware:</strong> Processors &bull; Memory &bull; Circuits &bull; Sensors</p>
+                                    <p class="feature-group"><strong>Software:</strong> Programs &bull; Operating Systems &bull; Firmware &bull; Algorithms</p>
                                 </div>
                             </div>
                         </div>
@@ -152,12 +147,12 @@
                                     <h2 class="title-why">WHY DOES IT MATTER?</h2>
                                 </div>
                                 <div class="about-description">
-                                    <p>Computer Engineering plays an important role in modern technology. It helps develop the systems behind smartphones, computers, vehicles, robotics, communication devices, and countless other technologies used in everyday life.</p>
+                                    <p>Computer Engineering plays a fundamental role in modern technology. It powers everything from smartphones and vehicles to robotics, communications, and intelligent cloud systems.</p>
                                 </div>
                             </div>
                             <div class="about-quote-column">
                                 <blockquote class="quote-text">
-                                    “COMPUTER ENGINEERING IS WHERE IDEAS BECOME INTELLIGENT SYSTEMS”
+                                    &ldquo;COMPUTER ENGINEERING IS WHERE IDEAS BECOME INTELLIGENT SYSTEMS&rdquo;
                                 </blockquote>
                             </div>
                         </div>
@@ -173,17 +168,23 @@
             </div>
         </section>
 
-        <!-- OVERVIEW FLIP CARDS SECTION -->
+        <!-- OVERVIEW FLIP CARDS SECTION WITH EXCLUSIVE TICKER BAR -->
         <section class="flip-section-wrapper" id="overview">
             <div class="white-container paper-container torn-top torn-bottom">
+                
                 <div class="flip-title-banner torn-header">
                     <h2 class="flip-section-title">UE COMPUTER ENGINEERING</h2>
                 </div>
 
-                <div class="flip-ticker-bar">
-                    <div class="flip-ticker-track">
-                        <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING × COMPUTING × INNOVATION _ &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING × COMPUTING × INNOVATION _ &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <!-- EXCLUSIVE OVERVIEW TICKER BAR -->
+                <div class="overview-ticker-bar">
+                    <div class="overview-ticker-track">
+                        <div class="overview-ticker-content">
+                            <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING &times; COMPUTING &times; INNOVATION &nbsp;&bull;&nbsp;</span>
+                        </div>
+                        <div class="overview-ticker-content" aria-hidden="true">
+                            <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING &times; COMPUTING &times; INNOVATION &nbsp;&bull;&nbsp;</span>
+                        </div>
                     </div>
                 </div>
 
@@ -194,15 +195,15 @@
                                 <div class="cpe-flip-card-front paper-card">
                                     <span class="story-tag">Read more &rarr;</span>
                                     <h3>Building Skills for the Digital World</h3>
-                                    <p>The Bachelor of Science in Computer Engineering (BSCpE) at the University of the East (UE) combines engineering, computer science, electronics, hardware, and software.</p>
+                                    <p>The BSCpE program at UE integrates engineering, computing, electronics, and digital system integration.</p>
                                 </div>
-                                <div class="cpe-flip-card-back paper-card textured-bp">
+                                <div class="cpe-flip-card-back paper-card">
                                     <h3>What Students Develop</h3>
                                     <ul class="flip-list">
-                                        <li>Programming & Problem Solving</li>
-                                        <li>Computer Hardware & Circuits</li>
-                                        <li>Software Development</li>
-                                        <li>Embedded & Digital Systems</li>
+                                        <li>Programming &amp; Problem Solving</li>
+                                        <li>Hardware Design &amp; Circuits</li>
+                                        <li>Software Systems Development</li>
+                                        <li>Embedded &amp; Digital Architecture</li>
                                     </ul>
                                 </div>
                             </div>
@@ -215,11 +216,11 @@
                                 <div class="cpe-flip-card-front paper-card">
                                     <span class="story-tag">Read more &rarr;</span>
                                     <h3>Learn. Build. Innovate.</h3>
-                                    <p>UE's Computer Engineering program emphasizes the practical application of what students learn through semestral and year-long projects.</p>
+                                    <p>UE CpE emphasizes practical application through hands-on lab work, experimentation, and year-long design projects.</p>
                                 </div>
-                                <div class="cpe-flip-card-back paper-card textured-bp2">
+                                <div class="cpe-flip-card-back paper-card">
                                     <h3>Program Goal</h3>
-                                    <p>UE aims to develop Computer Engineering graduates who are professionally competent, globally competitive, and technically capable.</p>
+                                    <p>Developing Computer Engineering graduates who are technically proficient, globally competitive, and innovative.</p>
                                 </div>
                             </div>
                         </div>
@@ -231,31 +232,35 @@
                                 <div class="cpe-flip-card-front paper-card">
                                     <span class="story-tag">Read more &rarr;</span>
                                     <h3>Hands-On Experience</h3>
-                                    <p>Through state-of-the-art laboratories and hackathons, UE CpE students translate classroom concepts into real-world technological solutions.</p>
+                                    <p>Translating theoretical principles into functional prototypes using specialized hardware/software laboratories.</p>
                                 </div>
-                                <div class="cpe-flip-card-back paper-card textured-bp">
+                                <div class="cpe-flip-card-back paper-card">
                                     <h3>UE CpE Experience</h3>
-                                    <p>Encouraging students to apply knowledge through projects, experimentation, and active system development.</p>
+                                    <p>Fostering active learning through hackathons, team projects, and real-world engineering challenges.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- DISCIPLINES SECTION -->
+        <!-- DISCIPLINES SECTION ("THE MANY SIDES OF COMPUTER ENGINEERING") -->
         <section class="disciplines-section" id="disciplines">
-            <div class="disciplines-trigger-zone" id="disciplinesTriggerZone"></div>
-            
             <div class="disciplines-sidebar paper-card" id="disciplinesSidebar">
                 <nav class="disciplines-nav">
-                    <button class="disc-link back-to-overview-btn" id="backToOverviewBtn">&larr; BACK TO OVERVIEW</button>
-                    <button class="disc-link active" data-target="embedded">EMBEDDED SYSTEMS</button>
+                    <button class="disc-link active" data-target="default">DEFAULT VIEW</button>
+                    <button class="disc-link" data-target="embedded">EMBEDDED SYSTEMS</button>
                     <button class="disc-link" data-target="iot">INTERNET OF THINGS</button>
                     <button class="disc-link" data-target="networks">COMPUTER NETWORKS</button>
                     <button class="disc-link" data-target="cybersecurity">CYBERSECURITY</button>
                     <button class="disc-link" data-target="software">SOFTWARE DEVELOPMENT</button>
+                    <button class="disc-link" data-target="ai">ARTIFICIAL INTELLIGENCE</button>
+                    <button class="disc-link" data-target="datascience">DATA SCIENCE</button>
+                    <button class="disc-link" data-target="robotics">ROBOTICS &amp; AUTOMATION</button>
+                    <button class="disc-link" data-target="hardware">COMPUTER HARDWARE</button>
+                    <button class="disc-link" data-target="cloud">CLOUD &amp; EDGE COMPUTING</button>
                 </nav>
             </div>
 
@@ -264,31 +269,399 @@
                     <div id="disciplineDefault" class="discipline-view active">
                         <h2 class="discipline-title torn-header">THE MANY SIDES OF <span class="cpe-blue">COMPUTER ENGINEERING</span></h2>
                         <div class="discipline-text">
-                            <p>Computer Engineering is more than just computers. It is a field that connects electronics, programming, communication, intelligence, and automation to create the technologies around us.</p>
+                            <p>Computer Engineering connects electronics, software, communication, intelligence, and automation to power modern systems.</p>
                         </div>
                         
                         <h2 class="discipline-subtitle">EXPLORE THE DISCIPLINES</h2>
                         <div class="discipline-text">
-                            <p>There is no single path in <strong>Computer Engineering</strong>. Hover over the navigation to discover the different fields.</p>
+                            <p>Hover or click on the side menu items to explore each core discipline in detail.</p>
                             <br>
-                            <p class="explore-hint">[ HOVER TO EXPLORE &larr; ]</p>
+                            <p class="explore-hint">[ SELECT A DISCIPLINE &larr; ]</p>
                         </div>
                     </div>
 
                     <div id="disciplineDynamic" class="discipline-view">
+                        <button id="backToOverviewBtn" class="back-btn">&larr; BACK TO OVERVIEW</button>
                         <h2 class="discipline-title uppercase-title" id="dynTitle">EMBEDDED SYSTEMS</h2>
                         <div class="discipline-text">
-                            <p><strong id="dynSubtitle">Computers hidden inside the things we use.</strong></p>
+                            <p><strong id="dynSubtitle">Computers hidden inside everyday devices.</strong></p>
                             <br>
-                            <p id="dynDesc">Embedded systems are specialized computers designed to perform specific functions within larger devices.</p>
+                            <p id="dynDesc">Embedded systems are specialized processing units designed to perform targeted computational tasks inside larger equipment.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- CAREERS & JOB OPPORTUNITIES SECTION -->
+        <section class="careers-section" id="careers">
+            <div class="white-container paper-container torn-top torn-bottom">
+                
+                <!-- HEADER BANNER -->
+                <div class="careers-header-banner">
+                    <div class="banner-left">
+                        <span class="sub-tag">UE COMPUTER ENGINEERING</span>
+                        <h2 class="careers-main-title">CAREER &amp; JOB OPPORTUNITIES</h2>
+                        <span class="sub-tagline">ONE DEGREE MANY SPECIALIZATIONS</span>
+                    </div>
+                    <div class="banner-right">
+                        <div class="accent-badge">BUILD / SOLVE / INNOVATE!</div>
+                        <p class="careers-intro-p">
+                            Pumili o mag-click ng specific na trabaho sa ibaba para makita ang eksaktong job description, technical duties, at gif/visual preview ng bawat role.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- DIAGRAM LAYOUT WITH INDIVIDUAL JOB LINKS -->
+                <div class="careers-diagram-wrapper">
+                    <!-- TOP ROW CARDS -->
+                    <div class="careers-card-grid top-grid">
+                        <div class="career-card paper-card">
+                            <h3>SOFTWARE &amp; SYSTEMS</h3>
+                            <ul class="career-list">
+                                <li><a href="javascript:void(0)" onclick="openJobModal('software_engineer')">Software Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('devops_engineer')">DevOps Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('systems_engineer')">Systems Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('tech_support')">Technical Support Engineer &rarr;</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="career-card paper-card">
+                            <h3>HARDWARE AND EMBEDDED</h3>
+                            <ul class="career-list">
+                                <li><a href="javascript:void(0)" onclick="openJobModal('computer_engineer')">Computer Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('hardware_engineer')">Hardware Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('iot_engineer')">IoT Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('embedded_engineer')">Embedded Systems Engineer &rarr;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- CENTER MONOTON TEXT -->
+                    <div class="career-center-badge">
+                        <span class="cpe-monoton-text">CPE</span>
+                    </div>
+
+                    <!-- MIDDLE ROW CARDS -->
+                    <div class="careers-card-grid middle-grid">
+                        <div class="career-card paper-card">
+                            <h3>AI DATA &amp; ROBOTICS</h3>
+                            <ul class="career-list">
+                                <li><a href="javascript:void(0)" onclick="openJobModal('ai_ml_engineer')">AI / Machine Learning Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('robotics_specialist')">Robotics Specialist &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('data_scientist')">Data Scientist &rarr;</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="career-card paper-card">
+                            <h3>NETWORKS AND SECURITY</h3>
+                            <ul class="career-list">
+                                <li><a href="javascript:void(0)" onclick="openJobModal('network_engineer')">Network Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('cloud_engineer')">Cloud Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('cybersecurity_engineer')">Cybersecurity Engineer &rarr;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- BOTTOM ROW CARD -->
+                    <div class="careers-card-grid bottom-grid">
+                        <div class="career-card paper-card center-card">
+                            <h3>RESEARCH AND INNOVATION</h3>
+                            <ul class="career-list">
+                                <li><a href="javascript:void(0)" onclick="openJobModal('rnd_engineer')">Research and Development Engineer &rarr;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
-    <script src="script.js?v=20260920-2"></script>
+    <!-- CAREER INDIVIDUAL JOB MODAL POPUP -->
+    <div class="career-modal-overlay" id="careerModalOverlay" onclick="closeJobModal(event)">
+        <div class="career-modal-container paper-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeJobModalForce()">&times;</button>
+            <div class="modal-header">
+                <span class="modal-subtag" id="modalCategoryBadge">JOB ROLE DETAILS</span>
+                <h2 id="modalJobTitle">Software Engineer</h2>
+                <div class="modal-divider"></div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-description-col">
+                    <h3>Role Overview</h3>
+                    <p id="modalJobDescription">Description goes here...</p>
+                    
+                    <h4 class="skills-heading">Key Duties &amp; Daily Responsibilities:</h4>
+                    <ul class="modal-skills-list" id="modalJobDuties">
+                        <!-- Dynamic list -->
+                    </ul>
+                </div>
+
+                <div class="modal-visuals-col">
+                    <div class="visuals-card-box">
+                        <div class="visuals-header">
+                            <span class="visuals-badge">JOB VISUAL / GIF PREVIEW</span>
+                            <h4 id="modalVisualTitle">Visual Demonstration</h4>
+                        </div>
+                        <div class="visuals-image-container">
+                            <img id="modalJobVisual" src="" alt="Job Visual GIF" onerror="this.src='Assets/cpetext.png'">
+                        </div>
+                        <p class="visual-caption" id="modalJobCaption">Visual representation of work environment and duties.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // SEPARATE DATA & GIF PREVIEWS FOR EACH INDIVIDUAL JOB
+        const jobDetailsData = {
+            // SOFTWARE & SYSTEMS
+            software_engineer: {
+                title: "Software Engineer",
+                category: "SOFTWARE & SYSTEMS",
+                desc: "Ang Software Engineer ay responsible sa pagdidisenyo, pag-code, at pagte-test ng mga web applications, desktop programs, at software algorithms para sa iba't ibang platforms.",
+                duties: [
+                    "Pagsulat ng malinis, scalable, at maintainable code (Java, C++, Python, JavaScript).",
+                    "Pag-debug at pag-fix ng software bugs.",
+                    "Pakikipagtulungan sa UI/UX designers at database architects.",
+                    "Building APIs at backend web microservices."
+                ],
+                gif: "Assets/careers/software_engineer.gif",
+                caption: "Software engineer typing code, debugging backend services, and reviewing logic."
+            },
+            devops_engineer: {
+                title: "DevOps Engineer",
+                category: "SOFTWARE & SYSTEMS",
+                desc: "Nagsisilbing tulay sa pagitan ng software developers at IT operations team para sa mabilis at automated na release ng mga software updates.",
+                duties: [
+                    "Managing CI/CD pipeline automation (Jenkins, GitHub Actions).",
+                    "Automating cloud deployment processes at infrastructure monitoring.",
+                    "Containerization gamit ang Docker at Kubernetes orchestration.",
+                    "Ensuring zero system downtime during application updates."
+                ],
+                gif: "Assets/careers/devops.gif",
+                caption: "DevOps engineer building deployment pipelines and managing cloud servers."
+            },
+            systems_engineer: {
+                title: "Systems Engineer",
+                category: "SOFTWARE & SYSTEMS",
+                desc: "Nangangasiwa sa pangkalahatang integration at performance ng complex hardware, operating systems, at computing infrastructures.",
+                duties: [
+                    "Operating System configuration at system performance tuning.",
+                    "Hardware and software integration testing.",
+                    "Creating disaster recovery systems and backup protocols.",
+                    "Analyzing computing resource metrics and bottleneck issues."
+                ],
+                gif: "Assets/careers/systems.gif",
+                caption: "Systems engineer configuring high-performance enterprise server architecture."
+            },
+            tech_support: {
+                title: "Technical Support Engineer",
+                category: "SOFTWARE & SYSTEMS",
+                desc: "Aksyon-agad sa pagresolba ng mga complex technical issues at troubleshooting ng parehong hardware at software systems ng mga kliyente o kumpanya.",
+                duties: [
+                    "Troubleshooting system logs, network issues, and software errors.",
+                    "Providing second-level at third-level technical support.",
+                    "Documenting technical knowledge bases at step-by-step guides.",
+                    "Simulating user issues to find system bug root causes."
+                ],
+                gif: "Assets/careers/tech_support.gif",
+                caption: "Technical support engineer analyzing server logs and solving hardware issues."
+            },
+
+            // HARDWARE & EMBEDDED
+            computer_engineer: {
+                title: "Computer Engineer",
+                category: "HARDWARE AND EMBEDDED",
+                desc: "Nangunguna sa pagbuo at pag-aayos ng parehong physical circuit components at low-level computer software interface.",
+                duties: [
+                    "Designing computer chips, motherboards, and processor architecture.",
+                    "Benchmarking processing speed, thermal output, and power delivery.",
+                    "Interfacing hardware modules with system device drivers.",
+                    "Prototyping next-gen computational hardware devices."
+                ],
+                gif: "Assets/careers/computer_engineer.gif",
+                caption: "Computer Engineer examining processor architecture and motherboard circuit traces."
+            },
+            hardware_engineer: {
+                title: "Hardware Engineer",
+                category: "HARDWARE AND EMBEDDED",
+                desc: "Nakatutok sa physical design, PCB layouting, testing, at manufacturing ng mga electronic circuit boards at electronic devices.",
+                duties: [
+                    "Schematic design at PCB (Printed Circuit Board) layout engineering.",
+                    "Testing electronic circuits using oscilloscopes & multimeter equipment.",
+                    "Component selection, signal integrity analysis, and soldering.",
+                    "Ensuring compliance with hardware safety & power efficiency standards."
+                ],
+                gif: "Assets/careers/hardware.gif",
+                caption: "Hardware Engineer soldering circuit boards and taking electrical measurements."
+            },
+            iot_engineer: {
+                title: "IoT (Internet of Things) Engineer",
+                category: "HARDWARE AND EMBEDDED",
+                desc: "Gumagawa ng mga smart devices at sensor networks na nagpapadala ng data sa internet (Smart Home, Smart Cities, Industrial IoT).",
+                duties: [
+                    "Integrating microcontrollers (ESP32, Raspberry Pi) with wireless sensors.",
+                    "Developing MQTT, Wi-Fi, and Bluetooth communication protocols.",
+                    "Connecting hardware sensors safely to cloud IoT platforms.",
+                    "Optimizing low-power hardware consumption for battery-operated devices."
+                ],
+                gif: "Assets/careers/iot.gif",
+                caption: "IoT Engineer configuring wireless sensors and smart home connected hardware."
+            },
+            embedded_engineer: {
+                title: "Embedded Systems Engineer",
+                category: "HARDWARE AND EMBEDDED",
+                desc: "Nagsusulat ng low-level firmware code para direktang kontrolin ang mga microprocessors sa loob ng sasakyan, medical devices, o appliances.",
+                duties: [
+                    "Programming microcontrollers directly in C/C++ and Assembly language.",
+                    "Interfacing with hardware busses (I2C, SPI, UART, CAN bus).",
+                    "Building real-time operating system (RTOS) firmware routines.",
+                    "Debugging low-level memory layout and hardware interrupt timers."
+                ],
+                gif: "Assets/careers/embedded.gif",
+                caption: "Embedded engineer flashing custom firmware onto microcontrollers."
+            },
+
+            // AI DATA & ROBOTICS
+            ai_ml_engineer: {
+                title: "AI / Machine Learning Engineer",
+                category: "AI DATA & ROBOTICS",
+                desc: "Gumagawa ng mga intelligent algorithms at deep learning neural networks na may kakayahang matuto mula sa data at magdesisyon nang kusa.",
+                duties: [
+                    "Training Machine Learning & Deep Learning models (PyTorch, TensorFlow).",
+                    "Designing Computer Vision algorithms and Natural Language Processing (NLP).",
+                    "Optimizing AI inference speed on GPU acceleration platforms.",
+                    "Deploying AI models to cloud APIs or edge computing devices."
+                ],
+                gif: "Assets/careers/ai_ml.gif",
+                caption: "AI engineer training neural networks and monitoring deep learning loss graphs."
+            },
+            robotics_specialist: {
+                title: "Robotics Specialist",
+                category: "AI DATA & ROBOTICS",
+                desc: "Nagmamanupaktura at nagpo-program ng mga automated robotic arms, autonomous mobile robots (AMRs), at industrial automation systems.",
+                duties: [
+                    "Programming robot kinematics, motor controllers, and actuators.",
+                    "Integrating LiDAR, camera vision, and sonar sensors using ROS (Robot Operating System).",
+                    "Designing path-planning and obstacle avoidance algorithms.",
+                    "Building automated robotic assembly systems for manufacturing."
+                ],
+                gif: "Assets/careers/robotics.gif",
+                caption: "Robotics Specialist adjusting arm servos and calibrating motion sensors."
+            },
+            data_scientist: {
+                title: "Data Scientist",
+                category: "AI DATA & ROBOTICS",
+                desc: "Nagsusuri ng malalaking volume ng raw computing data para makakita ng patterns, predictive insights, at data-driven strategies.",
+                duties: [
+                    "Data cleaning, exploratory data analysis, and statistical modeling.",
+                    "Writing predictive Python scripts and SQL database queries.",
+                    "Creating interactive data dashboards for enterprise decision-making.",
+                    "Applying machine learning classification and clustering tools."
+                ],
+                gif: "Assets/careers/data_science.gif",
+                caption: "Data Scientist building predictive models and visualizing real-time analytics."
+            },
+
+            // NETWORKS & SECURITY
+            network_engineer: {
+                title: "Network Engineer",
+                category: "NETWORKS AND SECURITY",
+                desc: "Nangangalaga sa physical at logical infrastructure ng mga network systems (routers, switches, fiber optic cables, at LAN/WAN routing).",
+                duties: [
+                    "Configuring Cisco/MikroTik routers, switches, and VLAN networks.",
+                    "Optimizing bandwidth traffic and troubleshooting network latency.",
+                    "Designing redundant network topologies for zero data loss.",
+                    "Installing enterprise server rack wiring and network interfaces."
+                ],
+                gif: "Assets/careers/network_engineer.gif",
+                caption: "Network Engineer connecting server racks and troubleshooting router routing tables."
+            },
+            cloud_engineer: {
+                title: "Cloud Engineer",
+                category: "NETWORKS AND SECURITY",
+                desc: "Nagtatayo at nagpapatakbo ng mga virtual cloud server infrastructure sa AWS, Google Cloud, o Microsoft Azure.",
+                duties: [
+                    "Designing cloud infrastructure architecture (Virtual Private Clouds, Subnets).",
+                    "Managing cloud storage scalability, load balancers, and microservices.",
+                    "Automating cloud deployment using Infrastructure as Code (Terraform).",
+                    "Ensuring high-availability data replication and cost efficiency."
+                ],
+                gif: "Assets/careers/cloud.gif",
+                caption: "Cloud Engineer managing virtual cloud server clusters and network gateways."
+            },
+            cybersecurity_engineer: {
+                title: "Cybersecurity Engineer",
+                category: "NETWORKS AND SECURITY",
+                desc: "Protektor laban sa cyberattacks, hacking, data breaches, at unauthorized access sa mga computer networks at sensitive databases.",
+                duties: [
+                    "Conducting vulnerability assessments and ethical penetration testing.",
+                    "Configuring Next-Gen Firewalls, Intrusion Detection Systems (IDS/IPS).",
+                    "Implementing end-to-end data encryption and Multi-Factor Authentication.",
+                    "Responding to live security breaches and conducting digital forensics."
+                ],
+                gif: "Assets/careers/cybersecurity.gif",
+                caption: "Cybersecurity Specialist analyzing threat logs and blocking cyberattacks."
+            },
+
+            // RESEARCH & INNOVATION
+            rnd_engineer: {
+                title: "Research and Development (R&D) Engineer",
+                category: "RESEARCH AND INNOVATION",
+                desc: "Nagsasagawa ng mga makabagong eksperimento para mag-invent ng mga bagong hardware, software algorithms, at breakthrough technologies.",
+                duties: [
+                    "Designing experimental prototypes for unreleased tech hardware/software.",
+                    "Benchmarking novel computational theories and hardware designs.",
+                    "Authoring research papers, patents, and engineering documentation.",
+                    "Collaborating with research institutions and technology innovators."
+                ],
+                gif: "Assets/careers/rnd.gif",
+                caption: "R&D Engineer running lab simulations and prototyping next-gen tech."
+            }
+        };
+
+        function openJobModal(jobKey) {
+            const data = jobDetailsData[jobKey];
+            if (!data) return;
+
+            document.getElementById('modalCategoryBadge').innerText = data.category;
+            document.getElementById('modalJobTitle').innerText = data.title;
+            document.getElementById('modalJobDescription').innerText = data.desc;
+            document.getElementById('modalVisualTitle').innerText = data.title + " in Action";
+            
+            document.getElementById('modalJobVisual').src = data.gif;
+            document.getElementById('modalJobCaption').innerText = data.caption;
+
+            const dutiesList = document.getElementById('modalJobDuties');
+            dutiesList.innerHTML = '';
+            data.duties.forEach(duty => {
+                const li = document.createElement('li');
+                li.innerText = duty;
+                dutiesList.appendChild(li);
+            });
+
+            const modal = document.getElementById('careerModalOverlay');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeJobModal(event) {
+            if (event.target.id === 'careerModalOverlay') {
+                closeJobModalForce();
+            }
+        }
+
+        function closeJobModalForce() {
+            const modal = document.getElementById('careerModalOverlay');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
