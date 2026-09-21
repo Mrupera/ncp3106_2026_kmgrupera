@@ -21,8 +21,7 @@ html {
 }
 
 body {
-    background: url('bp1.png') repeat center center;
-    background-size: cover;
+    background: #f4f1e8;
     color: #1a1a1a;
     font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -132,7 +131,7 @@ body {
     width: min(1200px, 94%);
     margin: 0 auto;
     padding-top: 64px;
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
     min-height: 100vh;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
 }
@@ -147,10 +146,13 @@ body {
     margin: 0;
     padding: 40px 20px 30px;
     text-align: center;
-    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('scrunchp.png');
-    background-size: cover;
+    background: #f4f1e8;
     border: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.site-heading::after {
+    display: none !important;
 }
 
 .site-heading h1 {
@@ -249,7 +251,7 @@ body.nav-active .site-heading h1 {
     grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.95fr);
     align-items: center;
     gap: 45px;
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
 }
 
 .text-carousel-container {
@@ -266,8 +268,7 @@ body.nav-active .site-heading h1 {
     min-height: 290px;
     overflow: hidden;
     border-radius: 6px;
-    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
     transform: none;
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
@@ -371,8 +372,7 @@ body.nav-active .site-heading h1 {
     width: 100%;
     padding: 24px 18px 18px 18px;
     margin-top: 0;
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     border-radius: 6px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
     transform: none;
@@ -459,7 +459,7 @@ body.nav-active .site-heading h1 {
 .about-slider-section {
     position: relative;
     width: 100%;
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
     padding: var(--space-lg) 0;
 }
 
@@ -511,8 +511,7 @@ body.nav-active .site-heading h1 {
 }
 
 .about-header-box {
-    background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     padding: 35px 40px 25px 40px;
     display: flex;
     flex-direction: column;
@@ -581,18 +580,21 @@ body.nav-active .site-heading h1 {
    9. FLIP CARD SECTION
    ========================================== */
 .flip-section-wrapper {
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
     padding: var(--space-lg) 0;
     width: 100%;
 }
 
 .flip-title-banner {
     width: 100%;
-    background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     padding: 40px 20px 30px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.flip-title-banner::after {
+    display: none !important;
 }
 
 .flip-section-title {
@@ -697,8 +699,7 @@ body.nav-active .site-heading h1 {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     padding: 2.2rem 1.8rem;
     border-radius: 4px;
     display: flex;
@@ -744,13 +745,12 @@ body.nav-active .site-heading h1 {
    ========================================== */
 .info-page-wrapper {
     padding: var(--space-lg) 30px;
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
     min-height: calc(100vh - 220px);
 }
 
 .info-card {
-    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     padding: 45px 50px;
     border-radius: 6px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -764,8 +764,7 @@ body.nav-active .site-heading h1 {
 }
 
 .topic-grid-card {
-    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     border: 1px solid rgba(11, 43, 90, 0.15);
     border-radius: 6px;
     padding: 28px 24px;
@@ -822,7 +821,7 @@ body.nav-active .site-heading h1 {
 .disciplines-section {
     position: relative !important;
     width: 100%;
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
     overflow: hidden !important;
     padding: var(--space-lg) 0;
 }
@@ -844,7 +843,7 @@ body.nav-active .site-heading h1 {
     left: -320px !important;
     width: 320px !important;
     height: 100% !important;
-    background-color: #0b2b5a !important;
+    background-color: rgba(11, 43, 90, 0.9) !important;
     background-image: none !important;
     z-index: 25 !important;
     padding: 40px 0;
@@ -915,8 +914,7 @@ body.nav-active .site-heading h1 {
 }
 
 .disciplines-container {
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('scrunchp.png');
-    background-size: cover;
+    background: #fdfbf7;
     min-height: 550px;
 }
 
@@ -999,7 +997,7 @@ body.nav-active .site-heading h1 {
     position: relative;
     width: 100%;
     padding: var(--space-lg) 0;
-    background: url('bp1.png') repeat center center;
+    background: #f4f1e8;
 }
 
 .careers-section .white-container {
@@ -1068,42 +1066,38 @@ body.nav-active .site-heading h1 {
 .careers-diagram-wrapper {
     position: relative;
     width: 100%;
-    min-height: 550px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-}
-
-.careers-arrows-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
+    padding: 10px 0;
 }
 
 .careers-card-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px 120px;
+    gap: 30px 100px;
     width: 100%;
     position: relative;
     z-index: 2;
+}
+
+.careers-card-grid.top-grid {
+    margin-bottom: 10px;
+}
+
+.careers-card-grid.middle-grid {
+    margin-top: 10px;
+    margin-bottom: 25px;
 }
 
 .careers-card-grid.bottom-grid {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 15px;
 }
 
 .careers-card-grid.bottom-grid .career-card {
-    max-width: 420px;
+    max-width: 440px;
     width: 100%;
 }
 
@@ -1149,16 +1143,28 @@ body.nav-active .site-heading h1 {
 .career-center-badge {
     position: relative;
     z-index: 3;
-    margin: 20px 0;
+    margin: 15px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-.cpe-center-img {
-    max-height: 80px;
-    width: auto;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+.cpe-monoton-text {
+    font-family: 'Monoton', cursive, sans-serif;
+    font-size: clamp(4.5rem, 8vw, 6.5rem);
+    color: #0b2b5a;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+    display: inline-block;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.cpe-monoton-text:hover {
+    transform: scale(1.05);
 }
 
 /* ==========================================
@@ -1175,7 +1181,6 @@ body.nav-active .site-heading h1 {
     .discipline-images-grid { grid-template-columns: repeat(2, 1fr); }
     .careers-header-banner { grid-template-columns: 1fr; gap: 20px; }
     .careers-card-grid { grid-template-columns: 1fr; gap: 20px; }
-    .careers-arrows-svg { display: none; }
 }
 
 @media (max-width: 700px) {
@@ -1258,18 +1263,17 @@ button:focus-visible, a:focus-visible {
    14. UNIFIED NEWSPAPER & PAPER TEXTURE SYSTEM
    ========================================== */
 body.newspaper-theme {
-    background-color: #f4f1ea;
-    background-image: url('Assets/scrunchp.png');
-    background-repeat: repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    color: #1a1a1a;
+    background-color: #f4f1e8 !important;
+    background-image: none !important;
+    background-repeat: repeat !important;
+    background-size: 100% 100% !important;
+    animation: none !important;
 }
 
 .paper-container {
-    background-color: rgba(253, 251, 247, 0.92) !important;
-    background-image: url('Assets/scrunchp.png');
-    background-blend-mode: overlay;
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
+    background-blend-mode: normal;
     background-size: cover;
     border: 1px solid #d4ceb8;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
@@ -1277,19 +1281,19 @@ body.newspaper-theme {
 }
 
 .paper-card {
-    background-color: #fdfbf7;
-    background-image: url('Assets/bp.png');
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
     background-size: cover;
     border: 1px solid #e2dcce;
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .paper-card.textured-bp {
-    background-image: url('Assets/bp.png');
+    background-image: none !important;
 }
 
 .paper-card.textured-bp2 {
-    background-image: url('Assets/bp2.png');
+    background-image: none !important;
 }
 
 .torn-header {
@@ -1327,9 +1331,9 @@ body.newspaper-theme {
 .white-container, 
 .paper-container, 
 .subpage-content {
-    background-color: rgba(253, 251, 247, 0.94) !important;
-    background-image: url('Assets/scrunchp.png');
-    background-blend-mode: overlay;
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
+    background-blend-mode: normal;
     background-size: cover;
     border: 1px solid #d4ceb8;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
@@ -1420,8 +1424,8 @@ body.newspaper-theme {
 .info-card,
 .white-container,
 .info-page-wrapper {
-    background-color: transparent !important;
-    background-image: url('Assets/scrunchp.png') !important;
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
     background-repeat: repeat;
     background-size: cover;
     border: 1px solid #d4ceb8;
@@ -1430,13 +1434,13 @@ body.newspaper-theme {
 .topic-grid-card,
 .info-page-wrapper .col,
 .modal-content-custom {
-    background-color: transparent !important;
+    background-color: #fdfbf7 !important;
     box-shadow: none !important;
 }
 
 .paper-card {
-    background-color: #f7f3e9 !important;
-    background-image: url('Assets/scrunchp.png') !important;
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
     background-size: cover;
     background-repeat: repeat;
     border: 1px dashed #c0b9a0 !important;
@@ -1447,8 +1451,8 @@ body.newspaper-theme {
    ========================================== */
 body,
 body.newspaper-theme {
-    background-color: #e8e2d2 !important;
-    background-image: url('Assets/scrunchp.png') !important;
+    background-color: #f4f1e8 !important;
+    background-image: none !important;
     background-repeat: repeat !important;
     background-size: 100% 100% !important;
     animation: none !important;
@@ -1457,12 +1461,12 @@ body.newspaper-theme {
 .info-card,
 .white-container,
 .paper-container {
-    background-color: #d6be92 !important;
-    background-image: url('Assets/bp2.png') !important;
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
     background-repeat: repeat !important;
     background-size: 100% 100% !important;
     background-position: center !important;
-    border: 1px solid #a89474 !important;
+    border: 1px solid #d4ceb8 !important;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14) !important;
     border-radius: 0px !important;
     animation: none !important;
@@ -1472,8 +1476,8 @@ body.newspaper-theme {
 
 .topic-grid-card,
 .paper-card {
-    background-color: #f7f3e9 !important;
-    background-image: url('Assets/bp2.png') !important;
+    background-color: #fdfbf7 !important;
+    background-image: none !important;
     background-size: 100% 100% !important;
     background-position: center !important;
     background-repeat: repeat !important;
@@ -1511,7 +1515,7 @@ body.newspaper-theme {
 }
 
 .text-carousel-window {
-    background: url('Assets/bp2.png') !important;
+    background: #fdfbf7 !important;
     background-size: 100% 100% !important;
     background-repeat: no-repeat !important;
 }
@@ -1527,7 +1531,7 @@ body.newspaper-theme {
 }
 
 .announcement-carousel {
-    background: url('Assets/bp.png') !important;
+    background: #fdfbf7 !important;
     background-size: 100% 100% !important;
     background-repeat: no-repeat !important;
 }
@@ -1554,290 +1558,9 @@ body.newspaper-theme {
         0% calc(100% - 12px)
     );
 }
+
 /* ==========================================
-   CENTER CPE MONOTON TEXT FIX
-   ========================================== */
-.career-center-badge {
-    position: relative;
-    z-index: 3;
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4.5rem, 8vw, 7rem);
-    color: #0b2b5a;
-    letter-spacing: 0.12em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    display: inline-block;
-    text-shadow: 
-        2px 2px 0px rgba(255, 255, 255, 0.8),
-        4px 4px 10px rgba(11, 43, 90, 0.25);
-    transition: transform 0.3s ease;
-}
-
-.cpe-monoton-text:hover {
-    transform: scale(1.05);
-}
-/* ==========================================
-   CAREERS DIAGRAM SPACING & ARROWS FIX
-   ========================================== */
-.careers-diagram-wrapper {
-    position: relative;
-    width: 100%;
-    min-height: 750px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px 0;
-}
-
-.careers-arrows-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.careers-card-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px 140px;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.careers-card-grid.top-grid {
-    margin-bottom: 20px;
-}
-
-.careers-card-grid.middle-grid {
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.careers-card-grid.bottom-grid {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 20px;
-}
-
-.careers-card-grid.bottom-grid .career-card {
-    max-width: 440px;
-    width: 100%;
-}
-
-.career-center-badge {
-    position: relative;
-    z-index: 3;
-    margin: 25px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4rem, 7vw, 6rem);
-    color: #0b2b5a;
-    letter-spacing: 0.15em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    display: inline-block;
-    padding: 0 15px;
-    background: transparent;
-    text-shadow: 
-        2px 2px 0px rgba(255, 255, 255, 0.9),
-        4px 4px 12px rgba(11, 43, 90, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.cpe-monoton-text:hover {
-    transform: scale(1.05);
-}
-/* ==========================================
-   HAND-DRAWN STYLE & THICK GLOW CPE FIX
-   ========================================== */
-.careers-diagram-wrapper {
-    position: relative;
-    width: 100%;
-    min-height: 760px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-}
-
-.careers-arrows-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.careers-card-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px 140px;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.careers-card-grid.top-grid {
-    margin-bottom: 25px;
-}
-
-.careers-card-grid.middle-grid {
-    margin-top: 25px;
-    margin-bottom: 35px;
-}
-
-.careers-card-grid.bottom-grid {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.careers-card-grid.bottom-grid .career-card {
-    max-width: 440px;
-    width: 100%;
-}
-
-/* Center CPE Container */
-.career-center-badge {
-    position: relative;
-    z-index: 3;
-    margin: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-/* Thick White Outer Glow Wrapper */
-.cpe-glow-wrapper {
-    display: inline-block;
-    padding: 10px 25px;
-    border-radius: 50%;
-    filter: 
-        drop-shadow(0px 0px 8px #0b2b5a)
-        drop-shadow(0px 0px 16px #0b2b5a)
-        drop-shadow(0px 0px 24px rgba(255, 255, 255, 0.95));
-}
-
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4.5rem, 8vw, 6.8rem);
-    color: #0b2b5a;
-    letter-spacing: 0.12em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    display: inline-block;
-    text-shadow: 
-        -3px -3px 0 #ffffff,  
-         3px -3px 0 #ffffff,
-        -3px  3px 0 #ffffff,
-         3px  3px 0 #ffffff,
-        -5px  0px 0 #ffffff,
-         5px  0px 0 #ffffff,
-         0px -5px 0 #ffffff,
-         0px  5px 0 #ffffff,
-         0px 0px 18px rgba(255, 255, 255, 1);
-    transition: transform 0.3s ease;
-}
-
-.cpe-glow-wrapper:hover .cpe-monoton-text {
-    transform: scale(1.05);
-}
-/* ==========================================
-   CLEAN CAREERS GRID (NO ARROWS & NO GLOW)
-   ========================================== */
-.careers-diagram-wrapper {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-}
-
-.careers-card-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 100px;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.careers-card-grid.top-grid {
-    margin-bottom: 10px;
-}
-
-.careers-card-grid.middle-grid {
-    margin-top: 10px;
-    margin-bottom: 25px;
-}
-
-.careers-card-grid.bottom-grid {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.careers-card-grid.bottom-grid .career-card {
-    max-width: 440px;
-    width: 100%;
-}
-
-.career-center-badge {
-    position: relative;
-    z-index: 3;
-    margin: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4.5rem, 8vw, 6.5rem);
-    color: #0b2b5a;
-    letter-spacing: 0.12em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    display: inline-block;
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
-    transition: transform 0.3s ease;
-}
-
-.cpe-monoton-text:hover {
-    transform: scale(1.05);
-}
-/* ==========================================
-   EXCLUSIVE OVERVIEW TICKER BAR STYLES
+   18. EXCLUSIVE OVERVIEW TICKER BAR STYLES
    ========================================== */
 .overview-ticker-bar {
     width: 100%;
@@ -1875,25 +1598,9 @@ body.newspaper-theme {
         transform: translateX(-50%);
     }
 }
-/* ==========================================
-   ATTACHED TICKER BAR TO HEADER FIX
-   ========================================== */
-#overview .flip-title-banner {
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-}
 
-#overview .flip-title-banner::after {
-    display: none !important;
-}
-
-.overview-ticker-bar {
-    margin-top: 0 !important;
-    margin-bottom: 2.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
 /* ==========================================
-   ATTACH MAIN HEADER TICKER BAR FIX
+   19. ATTACH MAIN HEADER TICKER BAR FIX
    ========================================== */
 .site-heading {
     padding-bottom: 0 !important;
@@ -1908,81 +1615,64 @@ body.newspaper-theme {
     margin-top: 0 !important;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 /* ==========================================
-   CPE TEXT FIX: BOLD & REMOVE WHITE OUTLINE
+   20. SPECIALIZATION EXAMPLE GIF GALLERY
    ========================================== */
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4.5rem, 8vw, 6.5rem);
-    font-weight: 900 !important;
-    color: #0b2b5a !important;
-    -webkit-text-stroke: 0px transparent !important;
-    text-shadow: none !important;
-    filter: drop-shadow(2px 4px 8px rgba(11, 43, 90, 0.25)) !important;
-    letter-spacing: 0.12em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    display: inline-block;
-    transition: transform 0.3s ease;
+.specialization-gifs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+    max-width: 750px;
 }
 
-.cpe-monoton-text:hover {
-    transform: scale(1.05);
-}
-/* ==========================================
-   CPE TEXT FIX: REDUCE THICKNESS / MANIPIS
-   ========================================== */
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4rem, 7vw, 5.5rem) !important;
-    font-weight: 400 !important;
-    color: #0b2b5a !important;
-    transform: scaleX(0.85);
-    display: inline-block;
-    -webkit-text-stroke: 0px transparent !important;
-    text-shadow: none !important;
-    filter: none !important;
-    letter-spacing: 0.05em !important;
-    line-height: 1;
-    text-transform: uppercase;
+.spec-gif-frame {
+    background-color: #fdfbf7;
+    background-image: none;
+    background-size: cover;
+    border: 1px solid #e2dcce;
+    padding: 10px 10px 14px;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.cpe-monoton-text:hover {
-    transform: scaleX(0.85) scale(1.05);
-}
-/* ==========================================
-   CPE TEXT: BALANCED & RICH DARK BLUE GLOW
-   ========================================== */
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4rem, 7vw, 5.5rem) !important;
-    font-weight: 400 !important;
-    color: #0b2b5a !important;
-    transform: scaleX(0.85);
-    display: inline-block;
-    -webkit-text-stroke: 0px transparent !important;
-    text-shadow: none !important;
-    filter: drop-shadow(0px 0px 4px rgba(11, 43, 90, 0.95))
-            drop-shadow(0px 0px 14px rgba(11, 43, 90, 0.70))
-            drop-shadow(0px 0px 28px rgba(29, 78, 216, 0.35)) !important;
-    letter-spacing: 0.05em !important;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    transition: transform 0.3s ease, filter 0.3s ease;
+.spec-gif-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.14);
 }
 
-.cpe-monoton-text:hover {
-    transform: scaleX(0.85) scale(1.05);
-    filter: drop-shadow(0px 0px 6px rgba(11, 43, 90, 1))
-            drop-shadow(0px 0px 18px rgba(11, 43, 90, 0.85))
-            drop-shadow(0px 0px 36px rgba(29, 78, 216, 0.50)) !important;
+.spec-gif-frame img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border: 1px solid rgba(11, 43, 90, 0.15);
+    background-color: #e8e2d2;
 }
+
+.spec-gif-caption {
+    display: block;
+    margin-top: 8px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #0b2b5a;
+    line-height: 1.3;
+}
+
+@media (max-width: 700px) {
+    .specialization-gifs {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+    }
+}
+
 /* ==========================================
-   CAREER MODAL & CLICKABLE CARDS STYLES
+   21. CAREER MODAL & CLICKABLE CARDS STYLES
    ========================================== */
 .clickable-card {
     cursor: pointer;
@@ -2193,73 +1883,7 @@ body.newspaper-theme {
         padding: 1.5rem;
     }
 }
-/* ==========================================
-   CLEAN CAREERS GRID (NO ARROWS & NO GLOW)
-   ========================================== */
-.careers-diagram-wrapper {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-}
 
-.careers-card-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 100px;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.careers-card-grid.top-grid {
-    margin-bottom: 10px;
-}
-
-.careers-card-grid.middle-grid {
-    margin-top: 10px;
-    margin-bottom: 25px;
-}
-
-.careers-card-grid.bottom-grid {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.careers-card-grid.bottom-grid .career-card {
-    max-width: 440px;
-    width: 100%;
-}
-
-.career-center-badge {
-    position: relative;
-    z-index: 3;
-    margin: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.cpe-monoton-text {
-    font-family: 'Monoton', cursive, sans-serif;
-    font-size: clamp(4.5rem, 8vw, 6.5rem);
-    color: #0b2b5a;
-    letter-spacing: 0.12em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-align: center;
-    display: inline-block;
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
-    transition: transform 0.3s ease;
-}
-
-.cpe-monoton-text:hover {
-    transform: scale(1.05);
-}
 .career-list li a {
     color: #111111 !important;
     text-decoration: none;
@@ -2274,112 +1898,36 @@ body.newspaper-theme {
     text-decoration: underline;
     transform: translateX(3px);
 }
-
-/* ==========================================
-   18. PAPER JITTER & BEND ANIMATIONS (RESTORED)
-   ========================================== */
-@keyframes paperJitter {
-    0%   { background-position: 0px 0px; }
-    20%  { background-position: -3px 2px; }
-    40%  { background-position: 2px -3px; }
-    60%  { background-position: -2px -2px; }
-    80%  { background-position: 3px 1px; }
-    100% { background-position: 0px 0px; }
+/* Sidebar - semi-transparent dark blue */
+.disciplines-sidebar {
+    background-color: rgba(11, 43, 90, 0.9) !important;
+    border: none !important;
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.4) !important;
 }
 
-body,
-body.newspaper-theme {
-    background-color: #e8e2d2 !important;
-    background-image: url("Assets/scrunchp.png") !important;
-    background-repeat: repeat !important;
-    background-size: 115% 115% !important;
-    animation: paperJitter 1.2s steps(1) infinite !important;
+.disciplines-sidebar.paper-card {
+    background-color: rgba(11, 43, 90, 0.9) !important;
+    border: none !important;
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.4) !important;
 }
 
-.paper-card {
-    animation: paperJitter 1.2s steps(1) infinite !important;
-}
-
-.row .col:nth-child(even) .paper-card {
-    animation-delay: -0.4s !important;
-}
-
-@keyframes paperBend {
-    0%, 100% {
-        transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
-    }
-    50% {
-        transform: perspective(1000px) rotateX(4.5deg) rotateY(-3.5deg) translateY(-8px);
-    }
-}
-
-.paper-card.paper-bend {
-    animation: paperBend 0.65s ease-in-out !important;
-    transform-origin: center;
-}
-
-.cpe-flip-card.paper-bend,
-.topic-grid-card.paper-bend {
-    animation: paperBend 0.65s ease-in-out;
-    transform-origin: center;
-}
-
-.paper-wiggle {
-    animation: paperBend 0.4s ease-in-out;
-    transform-origin: center;
-}
-
-/* ==========================================
-   19. SPECIALIZATION EXAMPLE GIF GALLERY
-   ========================================== */
-.specialization-gifs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 40px;
-    max-width: 750px;
-}
-
+/* Gif card container - transparent, no card styling */
 .spec-gif-frame {
-    background-color: #fdfbf7;
-    background-image: url('Assets/bp.png');
+    background-color: transparent;
+    background-image: none;
     background-size: cover;
-    border: 1px solid #e2dcce;
-    padding: 10px 10px 14px;
-    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+    padding: 0px;
+    box-shadow: none;
     text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
-.spec-gif-frame:hover {
-    transform: translateY(-4px);
-    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.14);
-}
-
-.spec-gif-frame img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    border: 1px solid rgba(11, 43, 90, 0.15);
-    background-color: #e8e2d2;
-}
-
-.spec-gif-caption {
-    display: block;
-    margin-top: 8px;
-    font-family: "DM Sans", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #0b2b5a;
-    line-height: 1.3;
-}
-
-@media (max-width: 700px) {
-    .specialization-gifs {
-        grid-template-columns: 1fr;
-        max-width: 320px;
-    }
+/* Invisible gif card containers */
+.spec-gif-frame {
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    padding: 0px !important;
+    box-shadow: none !important;
+    text-align: center;
 }
