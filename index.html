@@ -23,7 +23,7 @@
                 <a href="index.html" class="nav-link active">HOME</a>
                 <a href="#about" class="nav-link">ABOUT</a>
                 <a href="#overview" class="nav-link">OVERVIEW</a>
-                <a href="#disciplines" class="nav-link">DISCIPLINES</a>
+                <a href="#specialization" class="nav-link">SPECIALIZATION</a>
                 <a href="#careers" class="nav-link">CAREERS</a>
             </nav>
         </div>
@@ -247,7 +247,7 @@
         </section>
 
         <!-- DISCIPLINES SECTION ("THE MANY SIDES OF COMPUTER ENGINEERING") -->
-        <section class="disciplines-section" id="disciplines">
+        <section class="disciplines-section" id="specialization">
             <div class="disciplines-sidebar paper-card" id="disciplinesSidebar">
                 <nav class="disciplines-nav">
                     <button class="disc-link active" data-target="default">DEFAULT VIEW</button>
@@ -272,11 +272,11 @@
                             <p>Computer Engineering connects electronics, software, communication, intelligence, and automation to power modern systems.</p>
                         </div>
                         
-                        <h2 class="discipline-subtitle">EXPLORE THE DISCIPLINES</h2>
+                        <h2 class="discipline-subtitle">EXPLORE THE SPECIALIZATIONS</h2>
                         <div class="discipline-text">
-                            <p>Hover or click on the side menu items to explore each core discipline in detail.</p>
+                            <p>Hover or click on the side menu items to explore each core specialization in detail.</p>
                             <br>
-                            <p class="explore-hint">[ SELECT A DISCIPLINE &larr; ]</p>
+                            <p class="explore-hint">[ SELECT A SPECIALIZATION &larr; ]</p>
                         </div>
                     </div>
 
@@ -287,6 +287,21 @@
                             <p><strong id="dynSubtitle">Computers hidden inside everyday devices.</strong></p>
                             <br>
                             <p id="dynDesc">Embedded systems are specialized processing units designed to perform targeted computational tasks inside larger equipment.</p>
+                        </div>
+
+                        <div class="specialization-gifs" id="specGifs">
+                            <div class="spec-gif-frame">
+                                <img id="specGif1" src="" alt="Specialization example 1">
+                                <span class="spec-gif-caption" id="specCaption1"></span>
+                            </div>
+                            <div class="spec-gif-frame">
+                                <img id="specGif2" src="" alt="Specialization example 2">
+                                <span class="spec-gif-caption" id="specCaption2"></span>
+                            </div>
+                            <div class="spec-gif-frame">
+                                <img id="specGif3" src="" alt="Specialization example 3">
+                                <span class="spec-gif-caption" id="specCaption3"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -312,27 +327,27 @@
                     </div>
                 </div>
 
-                <!-- DIAGRAM LAYOUT WITH INDIVIDUAL JOB LINKS -->
+                <!-- DIAGRAM LAYOUT WITH CLEAN BLACK JOB LINKS (NO ARROWS) -->
                 <div class="careers-diagram-wrapper">
                     <!-- TOP ROW CARDS -->
                     <div class="careers-card-grid top-grid">
                         <div class="career-card paper-card">
                             <h3>SOFTWARE &amp; SYSTEMS</h3>
                             <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('software_engineer')">Software Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('devops_engineer')">DevOps Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('systems_engineer')">Systems Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('tech_support')">Technical Support Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('software_engineer')">Software Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('devops_engineer')">DevOps Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('systems_engineer')">Systems Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('tech_support')">Technical Support Engineer</a></li>
                             </ul>
                         </div>
 
                         <div class="career-card paper-card">
                             <h3>HARDWARE AND EMBEDDED</h3>
                             <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('computer_engineer')">Computer Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('hardware_engineer')">Hardware Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('iot_engineer')">IoT Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('embedded_engineer')">Embedded Systems Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('computer_engineer')">Computer Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('hardware_engineer')">Hardware Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('iot_engineer')">IoT Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('embedded_engineer')">Embedded Systems Engineer</a></li>
                             </ul>
                         </div>
                     </div>
@@ -347,18 +362,18 @@
                         <div class="career-card paper-card">
                             <h3>AI DATA &amp; ROBOTICS</h3>
                             <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('ai_ml_engineer')">AI / Machine Learning Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('robotics_specialist')">Robotics Specialist &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('data_scientist')">Data Scientist &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('ai_ml_engineer')">AI / Machine Learning Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('robotics_specialist')">Robotics Specialist</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('data_scientist')">Data Scientist</a></li>
                             </ul>
                         </div>
 
                         <div class="career-card paper-card">
                             <h3>NETWORKS AND SECURITY</h3>
                             <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('network_engineer')">Network Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('cloud_engineer')">Cloud Engineer &rarr;</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('cybersecurity_engineer')">Cybersecurity Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('network_engineer')">Network Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('cloud_engineer')">Cloud Engineer</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('cybersecurity_engineer')">Cybersecurity Engineer</a></li>
                             </ul>
                         </div>
                     </div>
@@ -368,7 +383,7 @@
                         <div class="career-card paper-card center-card">
                             <h3>RESEARCH AND INNOVATION</h3>
                             <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('rnd_engineer')">Research and Development Engineer &rarr;</a></li>
+                                <li><a href="javascript:void(0)" onclick="openJobModal('rnd_engineer')">Research and Development Engineer</a></li>
                             </ul>
                         </div>
                     </div>
