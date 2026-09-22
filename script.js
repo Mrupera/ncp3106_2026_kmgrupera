@@ -125,9 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const movedBy = currentTranslate - prevTranslate;
 
-            if (movedBy < -50 && currentIndex < slides.length - 1) {
+            const swipeMin = Math.max(24, Math.min(50, window.innerWidth * 0.08));
+
+            if (movedBy < -swipeMin && currentIndex < slides.length - 1) {
                 currentIndex += 1;
-            } else if (movedBy > 50 && currentIndex > 0) {
+            } else if (movedBy > swipeMin && currentIndex > 0) {
                 currentIndex -= 1;
             }
 
@@ -299,10 +301,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 : e.clientX;
 
             const moved = endX - startX;
+            // Scale the swipe distance to the screen, so phones don't
+            // need a 60px drag to turn a page.
+            const threshold = Math.max(28, Math.min(60, window.innerWidth * 0.09));
 
-            if (moved < -60) {
+            if (moved < -threshold) {
                 turnTo(currentIndex + 1);
-            } else if (moved > 60) {
+            } else if (moved > threshold) {
                 turnTo(currentIndex - 1);
             }
 
@@ -397,13 +402,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (triggerZone && sidebar) {
-            triggerZone.addEventListener("mouseenter", () => {
-                sidebar.classList.add("show-sidebar");
-            });
+            // Hover-open only makes sense with a real pointer; on touch the
+            // toggle button in section 6 drives the drawer instead.
+            const hoverCapable = window.matchMedia("(hover: hover)").matches;
 
-            sidebar.addEventListener("mouseleave", () => {
-                sidebar.classList.remove("show-sidebar");
-            });
+            if (hoverCapable) {
+                triggerZone.addEventListener("mouseenter", () => {
+                    sidebar.classList.add("show-sidebar");
+                });
+
+                sidebar.addEventListener("mouseleave", () => {
+                    sidebar.classList.remove("show-sidebar");
+                    disciplinesSec.classList.remove("sidebar-open");
+                });
+            }
         }
     }
 
@@ -632,4 +644,171 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+});
+
+/* ==========================================
+   5. HEADINGS YIELD TO THE OPEN NAVBAR
+   While the navbar is showing, any heading whose box
+   overlaps its strip fades out, then returns once the
+   navbar hides or the heading scrolls clear.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.getElementById("navbar");
+    if (!navbar) return;
+
+    // Headings worth protecting from collision
+    const SELECTOR = [
+        ".site-heading h1",
+        ".masthead-dateline",
+        ".flip-section-title",
+        ".discipline-title",
+        ".discipline-subtitle",
+        ".careers-main-title",
+        ".subpage-title",
+        ".about-header-box",
+        ".career-card h3"
+    ].join(", ");
+
+    const headings = Array.from(document.querySelectorAll(SELECTOR));
+    if (headings.length === 0) return;
+
+    let ticking = false;
+
+    function navIsOpen() {
+        // The navbar slides in via .show or :hover — either counts as open
+        return navbar.classList.contains("show") || navbar.matches(":hover");
+    }
+
+    function clearAll() {
+        headings.forEach((el) => el.classList.remove("nav-colliding"));
+    }
+
+    function check() {
+        ticking = false;
+
+        if (!navIsOpen()) {
+            clearAll();
+            return;
+        }
+
+        const navBox = navbar.getBoundingClientRect();
+        // A little breathing room so text fades just before it touches
+        const navBottom = navBox.bottom + 8;
+
+        headings.forEach((el) => {
+            const box = el.getBoundingClientRect();
+
+            // Skip anything not on screen at all
+            if (box.bottom < 0 || box.top > window.innerHeight) {
+                el.classList.remove("nav-colliding");
+                return;
+            }
+
+            const overlaps = box.top < navBottom && box.bottom > navBox.top;
+            el.classList.toggle("nav-colliding", overlaps);
+        });
+    }
+
+    function request() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(check);
+        }
+    }
+
+    window.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request, { passive: true });
+    window.addEventListener("mousemove", request, { passive: true });
+    navbar.addEventListener("mouseenter", request);
+    navbar.addEventListener("mouseleave", () => {
+        // Let the hide transition start before restoring
+        setTimeout(() => { clearAll(); request(); }, 60);
+    });
+
+    request();
+});
+
+/* ==========================================
+   6. TOUCH NAVIGATION
+   The navbar and specialization drawer were both
+   hover-only, which made them unreachable on phones.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const canHover = window.matchMedia("(hover: hover)").matches;
+
+    /* ---------- Navbar toggle ---------- */
+    const navbar = document.getElementById("navbar");
+    const navToggle = document.getElementById("navToggle");
+
+    if (navbar && navToggle) {
+        function setNav(open) {
+            navbar.classList.toggle("show", open);
+            navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+            navToggle.setAttribute(
+                "aria-label",
+                open ? "Close navigation menu" : "Open navigation menu"
+            );
+        }
+
+        navToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            setNav(!navbar.classList.contains("show"));
+        });
+
+        // Tapping a link closes the menu
+        navbar.querySelectorAll(".nav-link").forEach((link) => {
+            link.addEventListener("click", () => setNav(false));
+        });
+
+        // Tapping anywhere else closes it
+        document.addEventListener("click", (e) => {
+            if (!navbar.classList.contains("show")) return;
+            if (navbar.contains(e.target) || navToggle.contains(e.target)) return;
+            setNav(false);
+        });
+
+        // Escape closes it
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") setNav(false);
+        });
+    }
+
+    /* ---------- Specialization drawer ---------- */
+    const section = document.getElementById("specialization");
+    const sidebar = document.getElementById("disciplinesSidebar");
+    const discToggle = document.getElementById("disciplinesToggle");
+
+    if (section && sidebar && discToggle) {
+        // Backdrop gives a tap-out target behind the drawer
+        let backdrop = section.querySelector(".disciplines-backdrop");
+        if (!backdrop) {
+            backdrop = document.createElement("div");
+            backdrop.className = "disciplines-backdrop";
+            section.insertBefore(backdrop, section.firstChild);
+        }
+
+        function setDrawer(open) {
+            sidebar.classList.toggle("show-sidebar", open);
+            section.classList.toggle("sidebar-open", open);
+            discToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+
+        discToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            setDrawer(!sidebar.classList.contains("show-sidebar"));
+        });
+
+        backdrop.addEventListener("click", () => setDrawer(false));
+
+        // Choosing a specialization closes the drawer on touch
+        sidebar.querySelectorAll(".disc-link").forEach((link) => {
+            link.addEventListener("click", () => {
+                if (!canHover) setDrawer(false);
+            });
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") setDrawer(false);
+        });
+    }
 });

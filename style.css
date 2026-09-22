@@ -47,10 +47,13 @@ body {
     left: 0;
     width: 100%;
     height: 64px;
-    background: rgba(43, 38, 35, 0.90);
-    backdrop-filter: blur(12px) saturate(130%);
-    -webkit-backdrop-filter: blur(12px) saturate(130%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(11, 43, 90, 0.72);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 24px rgba(11, 43, 90, 0.45),
+                0 1px 0 rgba(255, 255, 255, 0.12) inset,
+                0 8px 32px rgba(11, 43, 90, 0.28);
     z-index: 1100;
     transform: translateY(-100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
@@ -62,7 +65,23 @@ body {
 .nav-trigger-zone:hover + .navbar,
 .nav-trigger-zone:hover ~ .navbar {
     transform: translateY(0) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 34px rgba(11, 43, 90, 0.6),
+                0 1px 0 rgba(255, 255, 255, 0.16) inset,
+                0 10px 40px rgba(11, 43, 90, 0.4);
+}
+
+/* Soft light bleeding off the bottom edge */
+.navbar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -14px;
+    height: 14px;
+    pointer-events: none;
+    background: linear-gradient(to bottom,
+        rgba(11, 43, 90, 0.28),
+        rgba(11, 43, 90, 0));
 }
 
 .navbar-inner {
@@ -133,6 +152,7 @@ body {
     padding-top: 64px;
     background: #f4f1e8;
     min-height: 100vh;
+    min-height: 100dvh;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -530,12 +550,13 @@ body.nav-active .site-heading h1 {
 .title-about { font-size: 2.3rem; margin-left: 42px; letter-spacing: 0.02em; }
 .title-cpe {
     font-family: "DM Sans", sans-serif;
-    font-size: 2.1rem;
+    font-size: clamp(1.35rem, 5vw, 2.1rem);
     font-weight: 700;
     color: #0b2b5a;
     margin-top: 6px;
     margin-left: 42px;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 .about-description {
@@ -747,6 +768,7 @@ body.nav-active .site-heading h1 {
     padding: var(--space-lg) 30px;
     background: #f4f1e8;
     min-height: calc(100vh - 220px);
+    min-height: calc(100dvh - 220px);
 }
 
 .info-card {
@@ -1713,6 +1735,7 @@ body.newspaper-theme {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(4px);
     display: flex;
@@ -2747,4 +2770,469 @@ body.newspaper-theme {
 .visuals-video-link.no-video .visuals-play,
 .visuals-video-link.no-video .visuals-cue {
     display: none;
+}
+
+/* ==========================================
+   30. PREVENT NATIVE IMAGE DRAG GHOSTING
+   The book spread is a swipe/drag surface, so any
+   image inside it must not trigger the browser's own
+   drag-and-drop preview.
+   ========================================== */
+.about-slider-window img,
+.page-flipper img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* ==========================================
+   31. HEADINGS YIELD TO THE NAVBAR
+   Any heading sitting under the open navbar steps
+   aside rather than being bluntly covered.
+   ========================================== */
+.nav-colliding {
+    opacity: 0 !important;
+    transform: translateY(-10px) scale(0.99) !important;
+    filter: blur(5px) !important;
+    pointer-events: none !important;
+}
+
+.site-heading h1,
+.flip-section-title,
+.discipline-title,
+.careers-main-title,
+.subpage-title,
+.about-header-box,
+.career-card h3,
+.discipline-subtitle {
+    transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-colliding {
+        transition-duration: 0.01s !important;
+        filter: none !important;
+        transform: none !important;
+    }
+}
+
+/* ==========================================
+   32. MOBILE + TOUCH SUPPORT
+   Phones have no hover, so anything that was
+   hover-only needs a real tap target.
+   ========================================== */
+
+/* -- Kill iOS/Android grey flash on tap -- */
+html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+button,
+a,
+.disc-link,
+.dot {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; /* removes the 300ms double-tap zoom delay */
+}
+
+/* -- Nothing should ever scroll the page sideways -- */
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* ---------- NAV TOGGLE (hamburger) ---------- */
+.nav-toggle {
+    position: fixed;
+    top: 12px;
+    right: 14px;
+    z-index: 1200;
+    display: none;               /* shown only where hover can't reach */
+    align-items: center;
+    justify-content: center;
+    width: 46px;                 /* >= 44px Apple / 48dp Google target */
+    height: 46px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+    background: rgba(11, 43, 90, 0.88);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 4px 16px rgba(11, 43, 90, 0.4);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.nav-toggle:active {
+    transform: scale(0.94);
+}
+
+.nav-toggle-bars {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 14px;
+}
+
+.nav-toggle-bars span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: #ffffff;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.2s ease;
+}
+
+.nav-toggle-bars span:nth-child(1) { top: 0; }
+.nav-toggle-bars span:nth-child(2) { top: 6px; }
+.nav-toggle-bars span:nth-child(3) { top: 12px; }
+
+/* Morph into an X while the menu is open */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ---------- SPECIALIZATION SIDEBAR TOGGLE ---------- */
+.disciplines-toggle {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    z-index: 26;
+    display: none;               /* shown only where hover can't reach */
+    align-items: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 10px 16px 10px 14px;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    background: rgba(11, 43, 90, 0.94);
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.disciplines-toggle:active {
+    transform: scale(0.97);
+}
+
+.disciplines-toggle-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Hide the button once the drawer is open so it doesn't sit on top of it */
+.disciplines-sidebar.show-sidebar ~ .disciplines-toggle,
+.disciplines-section.sidebar-open .disciplines-toggle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Dim the page behind the open drawer, and give a tap-out target */
+.disciplines-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 24;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.disciplines-section.sidebar-open .disciplines-backdrop {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==========================================
+   Touch devices / small screens
+   ========================================== */
+@media (hover: none), (max-width: 900px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .disciplines-toggle {
+        display: flex;
+    }
+
+    /* The hover trigger strip is useless without a pointer */
+    .nav-trigger-zone {
+        display: none;
+    }
+
+    .disciplines-trigger-zone {
+        display: none !important;
+    }
+
+    /* Hover must not open the drawer on touch (causes sticky-hover bugs) */
+    .disciplines-trigger-zone:hover + .disciplines-sidebar,
+    .disciplines-sidebar:hover {
+        left: -320px !important;
+    }
+
+    .disciplines-sidebar.show-sidebar,
+    .disciplines-sidebar.open {
+        left: 0 !important;
+    }
+}
+
+@media (max-width: 900px) {
+    /* Careers grid: stack, and drop the 100px gutter */
+    .careers-card-grid,
+    .careers-card-grid.top-grid,
+    .careers-card-grid.middle-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+
+    .careers-section .white-container {
+        padding: 28px 18px;
+    }
+
+    /* Sidebar becomes a proper drawer */
+    .disciplines-sidebar {
+        width: min(280px, 82vw) !important;
+        left: calc(-1 * min(280px, 82vw)) !important;
+    }
+
+    .disciplines-content-area {
+        padding: 56px 20px 48px 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    /* Nav becomes a stacked panel under the toggle */
+    .navbar {
+        height: auto;
+        padding-bottom: 8px;
+    }
+
+    .navbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px 62px 6px 18px; /* right padding clears the toggle */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0;
+        overflow-x: visible;
+        padding: 0;
+    }
+
+    .nav-link {
+        width: 100%;
+        min-height: 44px;          /* real tap target */
+        display: flex;
+        align-items: center;
+        font-size: 0.82rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link.active::after {
+        bottom: 8px;
+        width: 22px;
+    }
+
+    /* Masthead */
+    .site-heading {
+        padding: 28px 14px 20px;
+    }
+
+    .site-heading h1 {
+        font-size: clamp(1.9rem, 9vw, 3rem);
+        white-space: normal;
+        line-height: 1.05;
+    }
+
+    .masthead-dateline {
+        font-size: 0.64rem;
+        letter-spacing: 0.1em;
+    }
+
+    /* Hero */
+    .main-section {
+        padding: 34px 16px 44px;
+        gap: 34px;
+    }
+
+    .text-slide {
+        padding: 26px 20px;
+    }
+
+    .text-carousel-window {
+        min-height: 0;
+    }
+
+    /* About spread */
+    .about-header-box {
+        padding: 24px 20px 18px;
+    }
+
+    .title-all,
+    .title-about {
+        font-size: 1.7rem;
+    }
+
+    .title-about,
+    .title-cpe {
+        margin-left: 18px;
+    }
+
+    .about-description {
+        padding: 20px 20px 28px;
+    }
+
+    .quote-text {
+        font-size: 1.4rem;
+    }
+
+    /* Flip cards */
+    .flip-cards-container {
+        padding: 0 16px;
+    }
+
+    .cpe-flip-card {
+        height: 330px;
+    }
+
+    .cpe-flip-card-front,
+    .cpe-flip-card-back {
+        padding: 1.6rem 1.2rem;
+    }
+
+    /* Careers */
+    .careers-main-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+
+    .career-card {
+        padding: 18px 18px;
+    }
+
+    .cpe-monoton-text {
+        font-size: clamp(3rem, 16vw, 4.5rem);
+    }
+
+    /* Tickers shrink */
+    .information-content,
+    .overview-ticker-bar {
+        font-size: 0.7rem;
+    }
+
+    /* Bigger carousel dots — 8px is far below the 44px guideline */
+    .carousel-dots {
+        gap: 14px;
+        padding: 6px 0;
+    }
+
+    .dot {
+        width: 11px;
+        height: 11px;
+        position: relative;
+    }
+
+    .dot::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 44px;
+        height: 44px;      /* invisible tap area around the visible dot */
+    }
+
+    .dot.active {
+        width: 26px;
+    }
+
+    /* Discipline copy */
+    .discipline-title {
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
+    }
+
+    .discipline-text p {
+        font-size: 0.92rem;
+    }
+
+    /* Modal fits the visible screen, close button always reachable */
+    .career-modal-overlay {
+        padding: 12px;
+        align-items: flex-start;
+    }
+
+    .career-modal-container {
+        padding: 1.4rem 1.1rem 1.8rem;
+        max-height: 88vh;
+        max-height: 88dvh;
+        margin-top: 12px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.4rem;
+        padding-right: 40px;   /* keeps title clear of the X */
+    }
+
+    .modal-close-btn {
+        top: 8px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.9rem;
+    }
+
+    /* Back button */
+    .back-btn {
+        min-height: 44px;
+    }
+
+    /* Specialization gifs full width */
+    .specialization-gifs {
+        max-width: 100%;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 420px) {
+    .site-heading h1 {
+        font-size: clamp(1.6rem, 10vw, 2.2rem);
+    }
+
+    .title-all,
+    .title-about {
+        font-size: 1.45rem;
+    }
+
+    .disciplines-content-area {
+        padding: 52px 14px 40px 14px;
+    }
+
+    .careers-section .white-container {
+        padding: 22px 12px;
+    }
 }

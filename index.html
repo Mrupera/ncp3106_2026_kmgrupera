@@ -31,6 +31,13 @@
 
     <div class="nav-trigger-zone"></div>
 
+    <!-- TOUCH / SMALL-SCREEN MENU BUTTON (hover can't reach the navbar) -->
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navbar">
+        <span class="nav-toggle-bars" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </span>
+    </button>
+
     <main class="page-container">
         
         <!-- SITE TITLE HEADER -->
@@ -133,7 +140,7 @@
                             <div class="page-flipper">
                                 <div class="page-face page-front">
                                     <div class="about-image-column">
-                                        <img src="Assets/cpetext.png" alt="3D CPE Text" class="cpe-3d-image">
+                                        <img src="Assets/cpetext.png" alt="3D CPE Text" class="cpe-3d-image" draggable="false">
                                     </div>
                                 </div>
                                 <div class="page-face page-back"></div>
@@ -142,7 +149,7 @@
 
                         <div class="about-slide grid-right">
                             <div class="about-placeholder-column">
-                                <img src="Assets/hw-sw-diagram.png" alt="Hardware and Software Integration" class="about-diagram-img">
+                                <img src="Assets/hw-sw-diagram.png" alt="Hardware and Software Integration" class="about-diagram-img" draggable="false">
                             </div>
                             <div class="page-flipper">
                                 <div class="page-face page-front">
@@ -283,6 +290,12 @@
 
         <!-- DISCIPLINES SECTION ("THE MANY SIDES OF COMPUTER ENGINEERING") -->
         <section class="disciplines-section" id="specialization">
+            <!-- TAP TARGET so the sidebar is reachable without hover -->
+            <button class="disciplines-toggle" id="disciplinesToggle" aria-label="Open specialization list" aria-expanded="false" aria-controls="disciplinesSidebar">
+                <span class="disciplines-toggle-icon" aria-hidden="true">&#9776;</span>
+                <span class="disciplines-toggle-label">SPECIALIZATIONS</span>
+            </button>
+
             <div class="disciplines-sidebar paper-card" id="disciplinesSidebar">
                 <nav class="disciplines-nav">
                     <button class="disc-link active" data-target="default">DEFAULT VIEW</button>
@@ -509,7 +522,7 @@
                     "Containerization using Docker and Kubernetes orchestration.",
                     "Ensuring zero system downtime during application updates."
                 ],
-                gif: "Assets/careers/devops.gif",
+                gif: "Assets/gifs/devops.gif",
                 video: "https://www.youtube.com/watch?v=QlZRwbVRzOU",
                 caption: "DevOps engineer building deployment pipelines and managing cloud servers."
             },
@@ -523,7 +536,7 @@
                     "Creating disaster recovery systems and backup protocols.",
                     "Analyzing computing resource metrics and bottleneck issues."
                 ],
-                gif: "Assets/careers/systems.gif",
+                gif: "Assets/gifs/systems.gif",
                 video: "https://www.youtube.com/watch?v=3K6iJEobfz4",
                 caption: "Systems engineer configuring high-performance enterprise server architecture."
             },
@@ -537,7 +550,7 @@
                     "Documenting technical knowledge bases and step-by-step guides.",
                     "Reproducing user issues to trace the root cause of system bugs."
                 ],
-                gif: "Assets/careers/tech_support.gif",
+                gif: "Assets/gifs/techsupp.gif",
                 video: "https://www.youtube.com/watch?v=eWxrmNDLtoE",
                 caption: "Technical support engineer analyzing server logs and solving hardware issues."
             },
@@ -553,7 +566,7 @@
                     "Interfacing hardware modules with system device drivers.",
                     "Prototyping next-generation computational hardware devices."
                 ],
-                gif: "Assets/careers/computer_engineer.gif",
+                gif: "Assets/gifs/comeng.gif",
                 video: "https://www.youtube.com/watch?v=m8ZoxzX0hro",
                 caption: "Computer Engineer examining processor architecture and motherboard circuit traces."
             },
@@ -567,7 +580,7 @@
                     "Component selection, signal integrity analysis, and soldering.",
                     "Ensuring compliance with hardware safety and power efficiency standards."
                 ],
-                gif: "Assets/careers/hardware.gif",
+                gif: "Assets/gifs/hw.gif",
                 video: "https://www.youtube.com/watch?v=l09D6OycD4o",
                 caption: "Hardware Engineer soldering circuit boards and taking electrical measurements."
             },
@@ -581,7 +594,7 @@
                     "Connecting hardware sensors securely to cloud IoT platforms.",
                     "Optimizing low-power consumption for battery-operated devices."
                 ],
-                gif: "Assets/careers/iot.gif",
+                gif: "Assets/gifs/iot.gif",
                 video: "https://www.youtube.com/watch?v=dEOOAhMcm-I",
                 caption: "IoT Engineer configuring wireless sensors and smart home connected hardware."
             },
@@ -595,7 +608,7 @@
                     "Building real-time operating system (RTOS) firmware routines.",
                     "Debugging low-level memory layout and hardware interrupt timers."
                 ],
-                gif: "Assets/careers/embedded.gif",
+                gif: "Assets/gifs/EBS.gif",
                 video: "https://www.youtube.com/watch?v=3AXDli9tQMo",
                 caption: "Embedded engineer flashing custom firmware onto microcontrollers."
             },
@@ -611,7 +624,7 @@
                     "Optimizing AI inference speed on GPU acceleration platforms.",
                     "Deploying AI models to cloud APIs or edge computing devices."
                 ],
-                gif: "Assets/careers/ai_ml.gif",
+                gif: "Assets/gifs/ML.gif",
                 video: "https://www.youtube.com/watch?v=GDCnydDWRnM",
                 caption: "AI engineer training neural networks and monitoring deep learning loss graphs."
             },
@@ -625,7 +638,7 @@
                     "Designing path-planning and obstacle avoidance algorithms.",
                     "Building automated robotic assembly systems for manufacturing."
                 ],
-                gif: "Assets/careers/robotics.gif",
+                gif: "Assets/gifs/robotics.gif",
                 video: "https://www.youtube.com/watch?v=YHBaZE4ySjU",
                 caption: "Robotics Specialist adjusting arm servos and calibrating motion sensors."
             },
@@ -639,7 +652,7 @@
                     "Creating interactive data dashboards for enterprise decision-making.",
                     "Applying machine learning classification and clustering tools."
                 ],
-                gif: "Assets/careers/data_science.gif",
+                gif: "Assets/gifs/ds.gif",
                 video: "https://www.youtube.com/watch?v=F1ZpufU-DMY",
                 caption: "Data Scientist building predictive models and visualizing real-time analytics."
             },
@@ -655,7 +668,7 @@
                     "Designing redundant network topologies for zero data loss.",
                     "Installing enterprise server rack wiring and network interfaces."
                 ],
-                gif: "Assets/careers/network_engineer.gif",
+                gif: "Assets/gifs/neteng.gif",
                 video: "https://www.youtube.com/watch?v=9363HYH6rQA",
                 caption: "Network Engineer connecting server racks and troubleshooting router routing tables."
             },
@@ -669,7 +682,7 @@
                     "Automating cloud deployment using Infrastructure as Code (Terraform).",
                     "Ensuring high-availability data replication and cost efficiency."
                 ],
-                gif: "Assets/careers/cloud.gif",
+                gif: "Assets/gifs/cleng.gif",
                 video: "https://www.youtube.com/watch?v=la16tdlsB_4",
                 caption: "Cloud Engineer managing virtual cloud server clusters and network gateways."
             },
@@ -683,7 +696,7 @@
                     "Implementing end-to-end data encryption and multi-factor authentication.",
                     "Responding to live security breaches and conducting digital forensics."
                 ],
-                gif: "Assets/careers/cybersecurity.gif",
+                gif: "Assets/gifs/cs.gif",
                 video: "https://www.youtube.com/watch?v=3LInnz3p1QQ",
                 caption: "Cybersecurity Specialist analyzing threat logs and blocking cyberattacks."
             },
@@ -699,7 +712,7 @@
                     "Authoring research papers, patents, and engineering documentation.",
                     "Collaborating with research institutions and technology innovators."
                 ],
-                gif: "Assets/careers/rnd.gif",
+                gif: "Assets/gifs/research.gif",
                 video: "https://www.youtube.com/watch?v=d7a0RNe7Klo",
                 caption: "R&D Engineer running lab simulations and prototyping next-generation tech."
             }
