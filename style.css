@@ -1446,6 +1446,13 @@ body.newspaper-theme {
     border: 1px dashed #c0b9a0 !important;
 }
 
+/* Override paper-card styling for disciplines sidebar */
+.disciplines-sidebar.paper-card {
+    background-color: rgba(11, 43, 90, 0.9) !important;
+    border: none !important;
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.4) !important;
+}
+
 /* ==========================================
    15. STATIC PAPER STACK OVERRIDES
    ========================================== */
@@ -1628,12 +1635,12 @@ body.newspaper-theme {
 }
 
 .spec-gif-frame {
-    background-color: #fdfbf7;
+    background-color: transparent;
     background-image: none;
     background-size: cover;
-    border: 1px solid #e2dcce;
-    padding: 10px 10px 14px;
-    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+    padding: 0px;
+    box-shadow: none;
     text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -1898,36 +1905,846 @@ body.newspaper-theme {
     text-decoration: underline;
     transform: translateX(3px);
 }
-/* Sidebar - semi-transparent dark blue */
-.disciplines-sidebar {
-    background-color: rgba(11, 43, 90, 0.9) !important;
-    border: none !important;
-    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.4) !important;
+
+/* ==========================================
+   22. OPEN-BOOK SPREAD — ABOUT SLIDER
+   The right half is hinged at the spine and turns
+   leftward; its reverse face carries the CPE mark.
+   ========================================== */
+
+/* -- Equal halves so the spine lands dead center -- */
+.about-slide.grid-left,
+.about-slide.grid-right {
+    grid-template-columns: 50% 50% !important;
 }
 
-.disciplines-sidebar.paper-card {
-    background-color: rgba(11, 43, 90, 0.9) !important;
-    border: none !important;
-    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.4) !important;
+/* -- Retire the flat dashed divider; the gutter replaces it -- */
+.about-slide.grid-left .about-text-column,
+.about-slide.grid-right .about-text-column {
+    border-right: none !important;
+    border-left: none !important;
 }
 
-/* Gif card container - transparent, no card styling */
-.spec-gif-frame {
-    background-color: transparent;
-    background-image: none;
-    background-size: cover;
-    border: none;
-    padding: 0px;
-    box-shadow: none;
-    text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* -- Stage: gives the turning page depth -- */
+.about-slider-window {
+    position: relative;
+    min-height: 480px;
+    overflow: visible;
+    perspective: 2400px;
+    perspective-origin: 50% 45%;
 }
-/* Invisible gif card containers */
-.spec-gif-frame {
-    background-color: transparent !important;
-    background-image: none !important;
-    border: none !important;
-    padding: 0px !important;
-    box-shadow: none !important;
+
+/* -- Fake thickness: stacked page edges on the outer sides -- */
+.about-slider-window::before,
+.about-slider-window::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    width: 8px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-slider-window::before {
+    left: -7px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.11), rgba(0, 0, 0, 0.03) 45%, transparent);
+    box-shadow: -3px 0 0 rgba(0, 0, 0, 0.05),
+                -6px 0 0 rgba(0, 0, 0, 0.035),
+                -9px 0 0 rgba(0, 0, 0, 0.02);
+}
+
+.about-slider-window::after {
+    right: -7px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.11), rgba(0, 0, 0, 0.03) 45%, transparent);
+    box-shadow: 3px 0 0 rgba(0, 0, 0, 0.05),
+                6px 0 0 rgba(0, 0, 0, 0.035),
+                9px 0 0 rgba(0, 0, 0, 0.02);
+}
+
+/* -- Track stacks the spreads -- */
+.about-slider-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    width: 100%;
+    min-height: 480px;
+    transform: none !important;
+    transition: none !important;
+    transform-style: preserve-3d;
+}
+
+/* -- The gutter: both halves curve down into the crease -- */
+.about-slider-track::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 46px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 14;
+    background: linear-gradient(to right,
+        rgba(0, 0, 0, 0)    0%,
+        rgba(0, 0, 0, 0.05) 20%,
+        rgba(0, 0, 0, 0.15) 41%,
+        rgba(0, 0, 0, 0.21) 50%,
+        rgba(0, 0, 0, 0.15) 59%,
+        rgba(0, 0, 0, 0.05) 80%,
+        rgba(0, 0, 0, 0)    100%);
+}
+
+/* -- Spreads stack on top of each other -- */
+.about-slide {
+    grid-area: 1 / 1;
+    position: relative;
+    width: 100%;
+    display: grid;
+    background: #fdfbf7;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    transform-style: preserve-3d;
+}
+
+.about-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 3;
+}
+
+/* The outgoing spread rides above while its page turns */
+.about-slide.turning {
+    opacity: 1;
+    visibility: visible;
+    z-index: 8;
+}
+
+/* Its left half drops out once the page has swung past upright */
+.about-slide.turning .about-text-column,
+.about-slide.turning .about-placeholder-column {
+    animation: leftHalfHandoff 0.85s linear forwards;
+}
+
+@keyframes leftHalfHandoff {
+    0%, 52%   { opacity: 1; }
+    53%, 100% { opacity: 0; }
+}
+
+/* ---- The hinged right page ---- */
+.page-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    will-change: transform;
+    z-index: 10;
+}
+
+.page-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: #fdfbf7;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-face > * {
+    flex: 1;
+    width: 100%;
+}
+
+/* The reverse side: blank paper, shaded toward the crease */
+.page-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(to left,
+        rgba(0, 0, 0, 0.07) 0%,
+        rgba(0, 0, 0, 0.02) 8%,
+        rgba(0, 0, 0, 0) 22%), #fdfbf7;
+}
+
+/* ---- Turn: page swings left onto the facing page ---- */
+.about-slide.turning .page-flipper {
+    animation: pageTurnForward 0.85s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+@keyframes pageTurnForward {
+    0% {
+        transform: rotateY(0deg);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    45% {
+        box-shadow: 22px 0 55px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        transform: rotateY(-180deg);
+        box-shadow: -14px 0 40px rgba(0, 0, 0, 0.12);
+    }
+}
+
+/* ---- Reverse: page lifts back off to the right ---- */
+.about-slide.turning-back .page-flipper {
+    animation: pageTurnBack 0.85s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+@keyframes pageTurnBack {
+    0% {
+        transform: rotateY(-180deg);
+        box-shadow: -14px 0 40px rgba(0, 0, 0, 0.12);
+    }
+    55% {
+        box-shadow: 22px 0 55px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        transform: rotateY(0deg);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+.about-slide.turning-back {
+    opacity: 1;
+    visibility: visible;
+    z-index: 8;
+}
+
+.about-slide.turning-back .about-text-column,
+.about-slide.turning-back .about-placeholder-column {
+    animation: leftHalfReturn 0.85s linear forwards;
+}
+
+@keyframes leftHalfReturn {
+    0%, 47%   { opacity: 0; }
+    48%, 100% { opacity: 1; }
+}
+
+/* -- Mobile: one column, so no spread to fold — fade instead -- */
+@media (max-width: 900px) {
+    .about-slider-window {
+        perspective: none;
+        min-height: 0;
+    }
+
+    .about-slider-track::after,
+    .about-slider-window::before,
+    .about-slider-window::after {
+        display: none;
+    }
+
+    .page-flipper {
+        min-height: 0;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .page-face {
+        position: relative;
+        height: auto;
+        backface-visibility: visible;
+    }
+
+    .page-back {
+        display: none;
+    }
+
+    .about-slide.turning .page-flipper,
+    .about-slide.turning-back .page-flipper {
+        animation: none !important;
+    }
+
+    .about-slide.turning .about-text-column,
+    .about-slide.turning .about-placeholder-column,
+    .about-slide.turning-back .about-text-column,
+    .about-slide.turning-back .about-placeholder-column {
+        animation: none !important;
+        opacity: 1;
+    }
+
+    .about-slide.grid-left .about-text-column,
+    .about-slide.grid-right .about-text-column {
+        border-bottom: 3px dashed rgba(0, 0, 0, 0.25) !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-slide.turning .page-flipper,
+    .about-slide.turning-back .page-flipper,
+    .about-slide.turning .about-text-column,
+    .about-slide.turning-back .about-text-column {
+        animation-duration: 0.01s;
+    }
+}
+
+/* ==========================================
+   23. CLOSED BOOK COVER — opens on scroll into view
+   ========================================== */
+
+/* -- The cover occupies the right half and hinges on the spine -- */
+.book-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 50%;
+    z-index: 30;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.book-cover-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 50px 40px;
+}
+
+/* -- Front: the bound cover -- */
+.book-cover-front {
+    background:
+        linear-gradient(to right,
+            rgba(0, 0, 0, 0.28) 0%,
+            rgba(0, 0, 0, 0.10) 4%,
+            rgba(255, 255, 255, 0.04) 12%,
+            rgba(0, 0, 0, 0) 30%),
+        linear-gradient(135deg, #0e3468 0%, #0b2b5a 55%, #071d3d 100%);
+    box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.35),
+                6px 8px 30px rgba(0, 0, 0, 0.32);
+    border-radius: 0 4px 4px 0;
+}
+
+.cover-caption {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.5rem, 2.9vw, 2.6rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     text-align: center;
+    color: rgba(255, 255, 255, 0.94);
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.cover-rule {
+    width: 46%;
+    height: 1px;
+    background: linear-gradient(to right,
+        transparent,
+        rgba(255, 255, 255, 0.45),
+        transparent);
+}
+
+/* -- Back of the cover: inside board, seen as it swings -- */
+.book-cover-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(to left,
+        rgba(0, 0, 0, 0.10) 0%,
+        rgba(0, 0, 0, 0.03) 10%,
+        rgba(0, 0, 0, 0) 26%), #fdfbf7;
+    border-radius: 4px 0 0 4px;
+}
+
+/* -- While shut, the spread and gutter stay out of sight -- */
+.about-slider-window.book-closed .about-slide {
+    visibility: hidden;
+}
+
+.about-slider-window.book-closed .about-slider-track::after,
+.about-slider-window.book-closed::before,
+.about-slider-window.book-closed::after {
+    opacity: 0;
+}
+
+/* -- The opening swing -- */
+.about-slider-window.book-opening .book-cover {
+    animation: coverOpen 1.05s cubic-bezier(0.55, 0.06, 0.3, 1) forwards;
+}
+
+@keyframes coverOpen {
+    0% {
+        transform: rotateY(0deg);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    40% {
+        box-shadow: 30px 0 70px rgba(0, 0, 0, 0.35);
+    }
+    100% {
+        transform: rotateY(-180deg);
+        box-shadow: -18px 0 45px rgba(0, 0, 0, 0.12);
+    }
+}
+
+/* Spread fades up behind the cover as it lifts */
+.about-slider-window.book-opening .about-slide.active {
+    visibility: visible;
+    animation: spreadReveal 1.05s ease forwards;
+}
+
+@keyframes spreadReveal {
+    0%, 30% { opacity: 0; }
+    100%    { opacity: 1; }
+}
+
+.about-slider-window.book-opening .about-slider-track::after,
+.about-slider-window.book-opening::before,
+.about-slider-window.book-opening::after {
+    transition: opacity 0.5s ease 0.45s;
+    opacity: 1;
+}
+
+/* -- Once open, the cover is gone for good -- */
+.about-slider-window.book-open .book-cover {
+    display: none;
+}
+
+/* -- Nudge: the shut cover invites a click -- */
+.about-slider-window.book-closed .book-cover {
+    cursor: pointer;
+}
+
+.about-slider-window.book-closed .book-cover:hover {
+    transform: rotateY(-4deg);
+    transition: transform 0.4s ease;
+}
+
+/* -- Mobile: no spread, so skip the cover entirely -- */
+@media (max-width: 900px) {
+    .book-cover {
+        display: none !important;
+    }
+
+    .about-slider-window.book-closed .about-slide {
+        visibility: visible;
+    }
+
+    .about-slider-window.book-closed .about-slider-track::after,
+    .about-slider-window.book-closed::before,
+    .about-slider-window.book-closed::after {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-slider-window.book-opening .book-cover,
+    .about-slider-window.book-opening .about-slide.active {
+        animation-duration: 0.01s;
+    }
+}
+
+/* ==========================================
+   24. "WHY DOES IT MATTER" REASON LIST
+   ========================================== */
+.why-reasons {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    counter-reset: reason;
+}
+
+.why-reasons li {
+    position: relative;
+    counter-increment: reason;
+    padding-left: 34px;
+    margin-bottom: 13px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #2a2521;
+    text-align: left;
+}
+
+.why-reasons li:last-child {
+    margin-bottom: 0;
+}
+
+.why-reasons li::before {
+    content: counter(reason, decimal-leading-zero);
+    position: absolute;
+    top: 1px;
+    left: 0;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #0b2b5a;
+    opacity: 0.55;
+}
+
+.why-reasons li strong {
+    color: #0b2b5a;
+    font-weight: 700;
+}
+
+.about-slide:nth-child(3) .about-description {
+    padding: 30px 40px 40px 40px;
+}
+
+@media (max-width: 900px) {
+    .why-reasons li {
+        text-align: left;
+    }
+}
+
+/* ==========================================
+   25. INK-RISE — content settles in after a turn
+   ========================================== */
+.about-slide.content-enter .about-header-box,
+.about-slide.content-enter .about-description > p,
+.about-slide.content-enter .why-reasons li,
+.about-slide.content-enter .quote-text,
+.about-slide.content-enter .cpe-3d-image,
+.about-slide.content-enter .about-diagram-img {
+    animation: inkRise 0.6s cubic-bezier(0.2, 0.8, 0.25, 1) backwards;
+}
+
+@keyframes inkRise {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* -- Order of arrival: heading, then body, then the list -- */
+.about-slide.content-enter .about-header-box   { animation-delay: 0.04s; }
+.about-slide.content-enter .cpe-3d-image,
+.about-slide.content-enter .about-diagram-img  { animation-delay: 0.10s; }
+.about-slide.content-enter .about-description > p:nth-of-type(1) { animation-delay: 0.16s; }
+.about-slide.content-enter .about-description > p:nth-of-type(2) { animation-delay: 0.23s; }
+.about-slide.content-enter .about-description > p:nth-of-type(3) { animation-delay: 0.30s; }
+
+/* The quote gets a touch more air, it's the focal point */
+.about-slide.content-enter .quote-text {
+    animation: quoteRise 0.78s cubic-bezier(0.2, 0.8, 0.25, 1) 0.14s backwards;
+}
+
+@keyframes quoteRise {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Reasons cascade one after another */
+.about-slide.content-enter .why-reasons li:nth-child(1) { animation-delay: 0.30s; }
+.about-slide.content-enter .why-reasons li:nth-child(2) { animation-delay: 0.37s; }
+.about-slide.content-enter .why-reasons li:nth-child(3) { animation-delay: 0.44s; }
+.about-slide.content-enter .why-reasons li:nth-child(4) { animation-delay: 0.51s; }
+.about-slide.content-enter .why-reasons li:nth-child(5) { animation-delay: 0.58s; }
+.about-slide.content-enter .why-reasons li:nth-child(6) { animation-delay: 0.65s; }
+.about-slide.content-enter .why-reasons li:nth-child(7) { animation-delay: 0.72s; }
+.about-slide.content-enter .why-reasons li:nth-child(8) { animation-delay: 0.79s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .about-slide.content-enter .about-header-box,
+    .about-slide.content-enter .about-description > p,
+    .about-slide.content-enter .why-reasons li,
+    .about-slide.content-enter .quote-text,
+    .about-slide.content-enter .cpe-3d-image,
+    .about-slide.content-enter .about-diagram-img {
+        animation-duration: 0.01s;
+        animation-delay: 0s;
+    }
+}
+
+/* ==========================================
+   26. BACK TO OVERVIEW BUTTON
+   ========================================== */
+.back-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding: 9px 20px 9px 16px;
+    background: transparent;
+    border: 1.5px solid #0b2b5a;
+    border-radius: 30px;
+    color: #0b2b5a;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Fill slides in from the left on hover/focus */
+.back-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #0b2b5a;
+    transform: translateX(-100%);
+    transition: transform 0.32s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 0;
+}
+
+.back-btn:hover::before,
+.back-btn:focus-visible::before {
+    transform: translateX(0);
+}
+
+.back-btn span,
+.back-btn {
+    z-index: 1;
+}
+
+/* Arrow travels a touch further left than the text on hover */
+.back-btn .back-arrow {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    transition: transform 0.32s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.back-btn:hover .back-arrow,
+.back-btn:focus-visible .back-arrow {
+    transform: translateX(-4px);
+}
+
+.back-btn .back-label {
+    position: relative;
+    z-index: 1;
+}
+
+.back-btn:hover,
+.back-btn:focus-visible {
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(11, 43, 90, 0.28);
+    transform: translateY(-1px);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(11, 43, 90, 0.22);
+}
+
+.back-btn:focus-visible {
+    outline: 3px solid rgba(11, 43, 90, 0.35);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   27. CAREER CARD DESCRIPTIONS
+   ========================================== */
+.career-desc {
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #4a453d;
+    margin: -4px 0 14px;
+}
+
+/* ==========================================
+   28. CLICKABLE CAREER GIF -> YOUTUBE
+   ========================================== */
+.career-gif-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 0 16px;
+    overflow: hidden;
+    border: 1px solid rgba(11, 43, 90, 0.18);
+    border-radius: 3px;
+    background-color: #e8e2d2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.career-gif-link:hover,
+.career-gif-link:focus-visible {
+    transform: translateY(-3px);
+    border-color: #0b2b5a;
+    box-shadow: 0 10px 22px rgba(11, 43, 90, 0.25);
+}
+
+.career-gif {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.28s ease;
+}
+
+.career-gif-link:hover .career-gif,
+.career-gif-link:focus-visible .career-gif {
+    transform: scale(1.04);
+    filter: brightness(0.72);
+}
+
+/* Play badge sits center, grows on hover */
+.career-gif-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 3px;
+    border-radius: 50%;
+    background: rgba(11, 43, 90, 0.82);
+    color: #ffffff;
+    font-size: 0.95rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.career-gif-link:hover .career-gif-play,
+.career-gif-link:focus-visible .career-gif-play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Label slides up from the bottom edge */
+.career-gif-cue {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 8px 10px;
+    background: linear-gradient(to top, rgba(11, 43, 90, 0.92), rgba(11, 43, 90, 0));
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.career-gif-link:hover .career-gif-cue,
+.career-gif-link:focus-visible .career-gif-cue {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.career-gif-link:focus-visible {
+    outline: 3px solid rgba(11, 43, 90, 0.4);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   29. MODAL VISUAL -> YOUTUBE LINK
+   ========================================== */
+.visuals-video-link {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.visuals-video-link.no-video {
+    cursor: default;
+    pointer-events: none;
+}
+
+.visuals-video-link .visuals-image-container {
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.visuals-video-link:hover .visuals-image-container,
+.visuals-video-link:focus-visible .visuals-image-container {
+    border-color: #0b2b5a;
+    box-shadow: 0 8px 18px rgba(11, 43, 90, 0.25);
+}
+
+.visuals-video-link:hover img,
+.visuals-video-link:focus-visible img {
+    filter: brightness(0.68);
+    transform: scale(1.04);
+    transition: filter 0.25s ease, transform 0.4s ease;
+}
+
+.visuals-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 3px;
+    border-radius: 50%;
+    background: rgba(11, 43, 90, 0.85);
+    color: #ffffff;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.visuals-cue {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 7px 10px;
+    background: linear-gradient(to top, rgba(11, 43, 90, 0.92), rgba(11, 43, 90, 0));
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+.visuals-video-link:hover .visuals-play,
+.visuals-video-link:focus-visible .visuals-play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.visuals-video-link:hover .visuals-cue,
+.visuals-video-link:focus-visible .visuals-cue {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.visuals-video-link.no-video .visuals-play,
+.visuals-video-link.no-video .visuals-cue {
+    display: none;
 }

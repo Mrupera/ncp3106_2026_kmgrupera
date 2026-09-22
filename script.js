@@ -157,7 +157,228 @@ document.addEventListener("DOMContentLoaded", () => {
     // Attach Carousels
     setupCarousel("textCarouselWindow", "textCarouselTrack", "textDots", 6000);
     setupCarousel("announcementWindow", "announcementTrack", "announcementDots", 4000);
-    setupCarousel("aboutSliderWindow", "aboutSliderTrack", "aboutDots", 7000);
+
+    /* ==========================================
+       2b. BOOK PAGE-TURN CAROUSEL (ABOUT SECTION)
+       Rotation-based, so it can't share the translateX engine above.
+       ========================================== */
+    function setupBookCarousel(windowId, trackId, dotsId, autoPlayMs = 7000) {
+        const windowEl = document.getElementById(windowId);
+        const trackEl = document.getElementById(trackId);
+        const dotsContainer = document.getElementById(dotsId);
+
+        if (!windowEl || !trackEl) return;
+
+        const pages = Array.from(trackEl.children);
+        if (pages.length === 0) return;
+
+        let currentIndex = 0;
+        let isTurning = false;
+        let timer = null;
+
+        // Swipe tracking
+        let startX = 0;
+        let isPointerDown = false;
+
+        function syncDots() {
+            if (!dotsContainer) return;
+            Array.from(dotsContainer.children).forEach((dot, idx) => {
+                dot.classList.toggle("active", idx === currentIndex);
+            });
+        }
+
+        function clearPageClasses(el) {
+            el.classList.remove("turning", "turning-back");
+        }
+
+        // Re-run the staggered entrance on a spread's content
+        function playReveal(slide) {
+            if (!slide) return;
+            slide.classList.remove("content-enter");
+            void slide.offsetWidth; // reflow, so the animation restarts
+            slide.classList.add("content-enter");
+            setTimeout(() => slide.classList.remove("content-enter"), 1700);
+        }
+
+        function turnTo(nextIndex) {
+            if (isTurning) return;
+
+            // Wrap around
+            if (nextIndex < 0) nextIndex = pages.length - 1;
+            if (nextIndex >= pages.length) nextIndex = 0;
+            if (nextIndex === currentIndex) return;
+
+            const outgoing = pages[currentIndex];
+            const incoming = pages[nextIndex];
+
+            const forward =
+                nextIndex > currentIndex ||
+                (currentIndex === pages.length - 1 && nextIndex === 0);
+
+            isTurning = true;
+
+            // Content rises once the turning page has swung clear of it
+            setTimeout(() => playReveal(incoming), 400);
+
+            if (forward) {
+                // Next spread waits underneath; the current right page
+                // swings left on the spine.
+                incoming.classList.add("active");
+                outgoing.classList.remove("active");
+                outgoing.classList.add("turning");
+
+                const flipper = outgoing.querySelector(".page-flipper");
+                const watched = flipper || outgoing;
+
+                watched.addEventListener("animationend", function done(e) {
+                    if (e.target !== watched) return;
+                    watched.removeEventListener("animationend", done);
+                    clearPageClasses(outgoing);
+                    isTurning = false;
+                });
+            } else {
+                // Reverse: the previous page lifts back off to the right
+                outgoing.classList.remove("active");
+                incoming.classList.add("turning-back");
+
+                const flipper = incoming.querySelector(".page-flipper");
+                const watched = flipper || incoming;
+
+                watched.addEventListener("animationend", function done(e) {
+                    if (e.target !== watched) return;
+                    watched.removeEventListener("animationend", done);
+                    clearPageClasses(incoming);
+                    incoming.classList.add("active");
+                    isTurning = false;
+                });
+            }
+
+            currentIndex = nextIndex;
+            syncDots();
+        }
+
+        // --- Dots ---
+        if (dotsContainer) {
+            Array.from(dotsContainer.children).forEach((dot, idx) => {
+                dot.addEventListener("click", () => {
+                    turnTo(idx);
+                    resetTimer();
+                });
+            });
+        }
+
+        // --- Autoplay ---
+        function startTimer() {
+            if (autoPlayMs && !timer) {
+                timer = setInterval(() => turnTo(currentIndex + 1), autoPlayMs);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timer = null;
+            startTimer();
+        }
+
+        // --- Swipe / drag: distance maps to direction, not to rotation ---
+        function pointerStart(e) {
+            isPointerDown = true;
+            startX = e.type.includes("touch")
+                ? (e.touches[0] ? e.touches[0].clientX : 0)
+                : e.clientX;
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function pointerEnd(e) {
+            if (!isPointerDown) return;
+            isPointerDown = false;
+
+            const endX = e.type.includes("touch")
+                ? (e.changedTouches[0] ? e.changedTouches[0].clientX : startX)
+                : e.clientX;
+
+            const moved = endX - startX;
+
+            if (moved < -60) {
+                turnTo(currentIndex + 1);
+            } else if (moved > 60) {
+                turnTo(currentIndex - 1);
+            }
+
+            startTimer();
+        }
+
+        windowEl.style.cursor = "grab";
+        windowEl.addEventListener("mousedown", pointerStart);
+        windowEl.addEventListener("mouseup", pointerEnd);
+        windowEl.addEventListener("mouseleave", () => { isPointerDown = false; });
+        windowEl.addEventListener("touchstart", pointerStart, { passive: true });
+        windowEl.addEventListener("touchend", pointerEnd);
+
+        // --- Init ---
+        pages.forEach((page, idx) => {
+            clearPageClasses(page);
+            page.classList.toggle("active", idx === 0);
+        });
+        syncDots();
+
+        /* ---- Closed cover: hold everything until the book opens ---- */
+        const cover = windowEl.querySelector(".book-cover");
+        const startsClosed =
+            cover && windowEl.classList.contains("book-closed");
+
+        function openBook() {
+            if (!windowEl.classList.contains("book-closed")) return;
+
+            windowEl.classList.remove("book-closed");
+            windowEl.classList.add("book-opening");
+
+            // First spread rises as the cover lifts clear
+            setTimeout(() => playReveal(pages[currentIndex]), 520);
+
+            const settle = () => {
+                windowEl.classList.remove("book-opening");
+                windowEl.classList.add("book-open");
+                startTimer();
+            };
+
+            cover.addEventListener("animationend", function done(e) {
+                if (e.target !== cover) return;
+                cover.removeEventListener("animationend", done);
+                settle();
+            });
+
+            // Fallback in case the animation never reports back
+            setTimeout(() => {
+                if (!windowEl.classList.contains("book-open")) settle();
+            }, 1600);
+        }
+
+        if (startsClosed) {
+            cover.addEventListener("click", openBook);
+
+            if ("IntersectionObserver" in window) {
+                const watcher = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            watcher.disconnect();
+                            setTimeout(openBook, 420);
+                        }
+                    });
+                }, { threshold: 0.35 });
+
+                watcher.observe(windowEl);
+            } else {
+                setTimeout(openBook, 900);
+            }
+        } else {
+            windowEl.classList.add("book-open");
+            startTimer();
+        }
+    }
+
+    setupBookCarousel("aboutSliderWindow", "aboutSliderTrack", "aboutDots", 7000);
 
     /* ==========================================
        3. EXCLUSIVE SPECIALIZATION SIDEBAR TOGGLE & CONTENT SWITCH
@@ -193,9 +414,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Computers hidden inside everyday devices.",
             desc: "Embedded systems combine hardware processors and microcontrollers with custom software to run specialized real-time operations in automotive, medical, and consumer electronics. Engineers in this field write firmware that talks directly to sensors, motors, and displays, balancing tight memory and power budgets against strict timing requirements — a missed deadline in an airbag controller or an insulin pump isn't a bug report, it's a safety issue. You'll find embedded systems anywhere a device needs to think for itself without a full computer attached: a car's anti-lock brakes, a washing machine's control board, a pacemaker.",
             gifs: [
-                { src: "Assets/specialization/embedded-1.gif", caption: "Automotive ECU Firmware" },
-                { src: "Assets/specialization/embedded-2.gif", caption: "Medical Device Control" },
-                { src: "Assets/specialization/embedded-3.gif", caption: "Smart Appliance Board" }
+                { src: "Assets/gifs/AEF.gif", caption: "Automotive ECU Firmware" },
+                { src: "Assets/gifs/MDC.gif", caption: "Medical Device Control" },
+                { src: "Assets/gifs/SAB.gif", caption: "Smart Appliance Board" }
             ]
         },
         iot: {
@@ -203,9 +424,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Connecting physical objects to the digital world.",
             desc: "IoT integrates embedded hardware, microcontrollers, wireless sensors, and cloud systems to collect and exchange real-time data across smart networks. Engineers here design the low-power radios and communication protocols (Wi-Fi, Bluetooth Low Energy, LoRa, MQTT) that let a thousand small devices report back to a central system without draining their batteries in a week. It's the field behind smart homes, connected agriculture sensors, and factory floors where every machine reports its own health before it breaks down.",
             gifs: [
-                { src: "Assets/specialization/iot-1.gif", caption: "Smart Home Sensor Network" },
-                { src: "Assets/specialization/iot-2.gif", caption: "Industrial IoT Monitoring" },
-                { src: "Assets/specialization/iot-3.gif", caption: "Wearable Device Sync" }
+                { src: "Assets/gifs/SHSN.gif", caption: "Smart Home Sensor Network" },
+                { src: "Assets/gifs/IIM.gif", caption: "Industrial IoT Monitoring" },
+                { src: "Assets/gifs/WDS.gif", caption: "Wearable Device Sync" }
             ]
         },
         networks: {
@@ -213,9 +434,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "The infrastructure behind global communication.",
             desc: "Computer networks focus on designing, deploying, and maintaining the secure data-transmission protocols, router configurations, and enterprise infrastructure that keep information moving. Engineers here plan how thousands of devices share bandwidth without collision, build redundant paths so a single failed cable doesn't take down a building, and tune systems to keep latency low even under heavy load. This is the invisible backbone behind everything from a university's Wi-Fi to a bank's transaction network.",
             gifs: [
-                { src: "Assets/specialization/networks-1.gif", caption: "Enterprise Network Design" },
-                { src: "Assets/specialization/networks-2.gif", caption: "Router & Switch Config" },
-                { src: "Assets/specialization/networks-3.gif", caption: "Data Center Cabling" }
+                { src: "Assets/gifs/END.gif", caption: "Enterprise Network Design" },
+                { src: "Assets/gifs/RSC.gif", caption: "Router & Switch Config" },
+                { src: "Assets/gifs/DCC.gif", caption: "Data Center Cabling" }
             ]
         },
         cybersecurity: {
@@ -223,9 +444,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Defending systems and networks from digital threats.",
             desc: "Cybersecurity protects hardware, software, and communication channels against unauthorized access, data breaches, and malicious attacks. The work spans finding weaknesses before attackers do (penetration testing), building the firewalls and intrusion-detection systems that stand guard around the clock, and responding when something does get through. It's a field that rewards paranoia in a healthy way — assuming every system will eventually be probed, and designing so that a single failure doesn't become a catastrophe.",
             gifs: [
-                { src: "Assets/specialization/cybersecurity-1.gif", caption: "Penetration Testing" },
-                { src: "Assets/specialization/cybersecurity-2.gif", caption: "Firewall & IDS Setup" },
-                { src: "Assets/specialization/cybersecurity-3.gif", caption: "Security Operations Center" }
+                { src: "Assets/gifs/PT.gif", caption: "Penetration Testing" },
+                { src: "Assets/gifs/FWID.gif", caption: "Firewall & IDS Setup" },
+                { src: "Assets/gifs/SOC.gif", caption: "Security Operations Center" }
             ]
         },
         software: {
@@ -233,9 +454,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Crafting applications, logic, and system tools.",
             desc: "Software development encompasses system software, firmware, algorithms, and application logic that bridge raw hardware capabilities with human interaction. Engineers here move across the full stack — databases, backend services, APIs, and the interfaces people actually touch — while keeping code maintainable as it grows past a few hundred lines into something a whole team has to work on together. In Computer Engineering specifically, this often means software that talks closely to hardware: drivers, operating systems, and the tools other engineers build on top of.",
             gifs: [
-                { src: "Assets/specialization/software-1.gif", caption: "Full-Stack Web App" },
-                { src: "Assets/specialization/software-2.gif", caption: "Mobile App Development" },
-                { src: "Assets/specialization/software-3.gif", caption: "API & Backend Services" }
+                { src: "Assets/gifs/FSWA.gif", caption: "Full-Stack Web App" },
+                { src: "Assets/gifs/MAD.gif", caption: "Mobile App Development" },
+                { src: "Assets/gifs/ABS.gif", caption: "API & Backend Services" }
             ]
         },
         ai: {
@@ -243,9 +464,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Empowering machines to learn and reason.",
             desc: "AI in computer engineering focuses on machine learning, neural networks, computer vision, and the hardware accelerators built specifically to process intelligent algorithms fast. It's not just writing the models — it's understanding how they run on real silicon, why a network that trains fine on a workstation might be too slow or power-hungry to run on a phone, and how to compress or optimize it so it still works where it needs to. This field increasingly sits right at the hardware/software boundary that Computer Engineering is built around.",
             gifs: [
-                { src: "Assets/specialization/ai-1.gif", caption: "Computer Vision Demo" },
-                { src: "Assets/specialization/ai-2.gif", caption: "Neural Network Training" },
-                { src: "Assets/specialization/ai-3.gif", caption: "Natural Language Processing" }
+                { src: "Assets/gifs/CVD.gif", caption: "Computer Vision Demo" },
+                { src: "Assets/gifs/NNT.gif", caption: "Neural Network Training" },
+                { src: "Assets/gifs/NLP.gif", caption: "Natural Language Processing" }
             ]
         },
         datascience: {
@@ -253,9 +474,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Extracting insight from massive datasets.",
             desc: "Data Science leverages computational models, statistical analytics, and distributed computing frameworks to process and interpret massive streams of information. The work ranges from cleaning messy raw data into something usable, to building the pipelines that move it at scale, to the visualizations and predictive models that turn numbers into decisions other people can actually act on. In a computer engineering context, this often means caring as much about the infrastructure moving the data as the models analyzing it.",
             gifs: [
-                { src: "Assets/specialization/datascience-1.gif", caption: "Data Visualization Dashboard" },
-                { src: "Assets/specialization/datascience-2.gif", caption: "Predictive Model Output" },
-                { src: "Assets/specialization/datascience-3.gif", caption: "Big Data Pipeline" }
+                { src: "Assets/gifs/DVD.gif", caption: "Data Visualization Dashboard" },
+                { src: "Assets/gifs/PMO.gif", caption: "Predictive Model Output" },
+                { src: "Assets/gifs/BDP.gif", caption: "Big Data Pipeline" }
             ]
         },
         robotics: {
@@ -263,9 +484,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Merging mechanical design with autonomous code.",
             desc: "Robotics combines sensor integration, motor control, kinematics, and real-time computation to construct autonomous machines and industrial automation systems. Engineers here have to make hardware and software agree with each other in real time — a robotic arm doesn't get to wait for a slow network request before it decides where to move next. The field spans everything from a single robotic arm on an assembly line to fleets of autonomous mobile robots navigating a warehouse floor together.",
             gifs: [
-                { src: "Assets/specialization/robotics-1.gif", caption: "Robotic Arm in Motion" },
-                { src: "Assets/specialization/robotics-2.gif", caption: "Autonomous Navigation" },
-                { src: "Assets/specialization/robotics-3.gif", caption: "Industrial Automation Line" }
+                { src: "Assets/gifs/ram.gif", caption: "Robotic Arm in Motion" },
+                { src: "Assets/gifs/AN.gif", caption: "Autonomous Navigation" },
+                { src: "Assets/gifs/IAL.gif", caption: "Industrial Automation Line" }
             ]
         },
         hardware: {
@@ -273,9 +494,9 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Designing physical circuits, chips, and microprocessors.",
             desc: "Hardware engineering focuses on VLSI chip design, printed circuit board (PCB) layout, microarchitecture, logic gates, and the physical testing that confirms a design actually works once it's built. This is the discipline closest to the physics of computing itself — signal integrity, heat dissipation, and power delivery all become real constraints, not abstractions. Every processor, memory chip, and circuit board that every other specialization eventually runs on started here.",
             gifs: [
-                { src: "Assets/specialization/hardware-1.gif", caption: "PCB Design Layout" },
-                { src: "Assets/specialization/hardware-2.gif", caption: "Chip Fabrication Process" },
-                { src: "Assets/specialization/hardware-3.gif", caption: "Circuit Testing & Debug" }
+                { src: "Assets/gifs/pdl.gif", caption: "PCB Design Layout" },
+                { src: "Assets/gifs/cfd.gif", caption: "Chip Fabrication Process" },
+                { src: "Assets/gifs/ectd.gif", caption: "Circuit Testing & Debug" }
             ]
         },
         cloud: {

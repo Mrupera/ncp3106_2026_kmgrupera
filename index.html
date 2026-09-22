@@ -104,7 +104,18 @@
         <!-- ABOUT SLIDER SECTION -->
         <section class="about-slider-section" id="about">
             <div class="white-container paper-container torn-top torn-bottom">
-                <div class="about-slider-window" id="aboutSliderWindow">
+                <div class="about-slider-window book-closed" id="aboutSliderWindow">
+
+                    <!-- CLOSED BOOK COVER: hinged at the spine, swings open -->
+                    <div class="book-cover" id="bookCover">
+                        <div class="book-cover-face book-cover-front">
+                            <div class="cover-rule"></div>
+                            <span class="cover-caption">Computer Engineering</span>
+                            <div class="cover-rule"></div>
+                        </div>
+                        <div class="book-cover-face book-cover-back"></div>
+                    </div>
+
                     <div class="about-slider-track" id="aboutSliderTrack">
                         
                         <div class="about-slide grid-left active">
@@ -119,8 +130,13 @@
                                     <p><strong>Computer engineers</strong> work with systems ranging from processors and circuit boards to computers, smart devices, and embedded systems.</p>
                                 </div>
                             </div>
-                            <div class="about-image-column">
-                                <img src="Assets/cpetext.png" alt="3D CPE Text" class="cpe-3d-image">
+                            <div class="page-flipper">
+                                <div class="page-face page-front">
+                                    <div class="about-image-column">
+                                        <img src="Assets/cpetext.png" alt="3D CPE Text" class="cpe-3d-image">
+                                    </div>
+                                </div>
+                                <div class="page-face page-back"></div>
                             </div>
                         </div>
 
@@ -128,16 +144,21 @@
                             <div class="about-placeholder-column">
                                 <img src="Assets/hw-sw-diagram.png" alt="Hardware and Software Integration" class="about-diagram-img">
                             </div>
-                            <div class="about-text-column newspaper-col">
-                                <div class="about-header-box center-align">
-                                    <span class="title-connection">CONNECTION BETWEEN</span>
-                                    <h2 class="title-hw-sw">Hardware<br><span class="plus-symbol">+</span><br>Software</h2>
+                            <div class="page-flipper">
+                                <div class="page-face page-front">
+                                    <div class="about-text-column newspaper-col">
+                                        <div class="about-header-box center-align">
+                                            <span class="title-connection">CONNECTION BETWEEN</span>
+                                            <h2 class="title-hw-sw">Hardware<br><span class="plus-symbol">+</span><br>Software</h2>
+                                        </div>
+                                        <div class="about-description">
+                                            <p>At the heart of Computer Engineering is the relationship between hardware and software. Hardware provides the physical foundation, while software provides instructions that execute tasks.</p>
+                                            <p class="feature-group"><strong>Hardware:</strong> Processors &bull; Memory &bull; Circuits &bull; Sensors</p>
+                                            <p class="feature-group"><strong>Software:</strong> Programs &bull; Operating Systems &bull; Firmware &bull; Algorithms</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="about-description">
-                                    <p>At the heart of Computer Engineering is the relationship between hardware and software. Hardware provides the physical foundation, while software provides instructions that execute tasks.</p>
-                                    <p class="feature-group"><strong>Hardware:</strong> Processors &bull; Memory &bull; Circuits &bull; Sensors</p>
-                                    <p class="feature-group"><strong>Software:</strong> Programs &bull; Operating Systems &bull; Firmware &bull; Algorithms</p>
-                                </div>
+                                <div class="page-face page-back"></div>
                             </div>
                         </div>
 
@@ -148,12 +169,26 @@
                                 </div>
                                 <div class="about-description">
                                     <p>Computer Engineering plays a fundamental role in modern technology. It powers everything from smartphones and vehicles to robotics, communications, and intelligent cloud systems.</p>
+
+                                    <ul class="why-reasons">
+                                        <li><strong>Runs daily life.</strong> Phones, cars, and medical devices.</li>
+                                        <li><strong>Holds up infrastructure.</strong> Grids, hospitals, transport, banking.</li>
+                                        <li><strong>Bridges hardware and software.</strong> The seam no other field covers.</li>
+                                        <li><strong>Makes new tech practical.</strong> AI, robotics, and IoT beyond the lab.</li>
+                                        <li><strong>Carries real stakes.</strong> Safety systems cannot fail.</li>
+                                        <li><strong>Opens many doors.</strong> One degree, many industries.</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="about-quote-column">
-                                <blockquote class="quote-text">
-                                    &ldquo;COMPUTER ENGINEERING IS WHERE IDEAS BECOME INTELLIGENT SYSTEMS&rdquo;
-                                </blockquote>
+                            <div class="page-flipper">
+                                <div class="page-face page-front">
+                                    <div class="about-quote-column">
+                                        <blockquote class="quote-text">
+                                            &ldquo;COMPUTER ENGINEERING IS WHERE IDEAS BECOME INTELLIGENT SYSTEMS&rdquo;
+                                        </blockquote>
+                                    </div>
+                                </div>
+                                <div class="page-face page-back"></div>
                             </div>
                         </div>
 
@@ -281,7 +316,10 @@
                     </div>
 
                     <div id="disciplineDynamic" class="discipline-view">
-                        <button id="backToOverviewBtn" class="back-btn">&larr; BACK TO OVERVIEW</button>
+                        <button id="backToOverviewBtn" class="back-btn">
+                            <span class="back-arrow">&larr;</span>
+                            <span class="back-label">Back to Overview</span>
+                        </button>
                         <h2 class="discipline-title uppercase-title" id="dynTitle">EMBEDDED SYSTEMS</h2>
                         <div class="discipline-text">
                             <p><strong id="dynSubtitle">Computers hidden inside everyday devices.</strong></p>
@@ -322,7 +360,7 @@
                     <div class="banner-right">
                         <div class="accent-badge">BUILD / SOLVE / INNOVATE!</div>
                         <p class="careers-intro-p">
-                            Pumili o mag-click ng specific na trabaho sa ibaba para makita ang eksaktong job description, technical duties, at gif/visual preview ng bawat role.
+                            Select or click a specific job below to see its full job description, technical duties, and a visual preview of each role.
                         </p>
                     </div>
                 </div>
@@ -333,6 +371,8 @@
                     <div class="careers-card-grid top-grid">
                         <div class="career-card paper-card">
                             <h3>SOFTWARE &amp; SYSTEMS</h3>
+                            <p class="career-desc">Building the applications and platforms that run on every device.</p>
+
                             <ul class="career-list">
                                 <li><a href="javascript:void(0)" onclick="openJobModal('software_engineer')">Software Engineer</a></li>
                                 <li><a href="javascript:void(0)" onclick="openJobModal('devops_engineer')">DevOps Engineer</a></li>
@@ -343,6 +383,7 @@
 
                         <div class="career-card paper-card">
                             <h3>HARDWARE AND EMBEDDED</h3>
+                            <p class="career-desc">Designing the circuits and firmware inside smart devices.</p>
                             <ul class="career-list">
                                 <li><a href="javascript:void(0)" onclick="openJobModal('computer_engineer')">Computer Engineer</a></li>
                                 <li><a href="javascript:void(0)" onclick="openJobModal('hardware_engineer')">Hardware Engineer</a></li>
@@ -361,6 +402,7 @@
                     <div class="careers-card-grid middle-grid">
                         <div class="career-card paper-card">
                             <h3>AI DATA &amp; ROBOTICS</h3>
+                            <p class="career-desc">Turning data into intelligent, autonomous systems.</p>
                             <ul class="career-list">
                                 <li><a href="javascript:void(0)" onclick="openJobModal('ai_ml_engineer')">AI / Machine Learning Engineer</a></li>
                                 <li><a href="javascript:void(0)" onclick="openJobModal('robotics_specialist')">Robotics Specialist</a></li>
@@ -370,6 +412,7 @@
 
                         <div class="career-card paper-card">
                             <h3>NETWORKS AND SECURITY</h3>
+                            <p class="career-desc">Connecting and protecting the infrastructure behind it all.</p>
                             <ul class="career-list">
                                 <li><a href="javascript:void(0)" onclick="openJobModal('network_engineer')">Network Engineer</a></li>
                                 <li><a href="javascript:void(0)" onclick="openJobModal('cloud_engineer')">Cloud Engineer</a></li>
@@ -382,6 +425,7 @@
                     <div class="careers-card-grid bottom-grid">
                         <div class="career-card paper-card center-card">
                             <h3>RESEARCH AND INNOVATION</h3>
+                            <p class="career-desc">Pushing the field forward through experimentation and discovery.</p>
                             <ul class="career-list">
                                 <li><a href="javascript:void(0)" onclick="openJobModal('rnd_engineer')">Research and Development Engineer</a></li>
                             </ul>
@@ -421,9 +465,14 @@
                             <span class="visuals-badge">JOB VISUAL / GIF PREVIEW</span>
                             <h4 id="modalVisualTitle">Visual Demonstration</h4>
                         </div>
-                        <div class="visuals-image-container">
-                            <img id="modalJobVisual" src="" alt="Job Visual GIF" onerror="this.src='Assets/cpetext.png'">
-                        </div>
+                        <a id="modalJobVideoLink" class="visuals-video-link"
+                           href="#" target="_blank" rel="noopener noreferrer">
+                            <div class="visuals-image-container">
+                                <img id="modalJobVisual" src="" alt="Job Visual GIF" onerror="this.src='Assets/cpetext.png'">
+                                <span class="visuals-play" aria-hidden="true">&#9654;</span>
+                                <span class="visuals-cue">Watch on YouTube</span>
+                            </div>
+                        </a>
                         <p class="visual-caption" id="modalJobCaption">Visual representation of work environment and duties.</p>
                     </div>
                 </div>
@@ -439,53 +488,57 @@
             software_engineer: {
                 title: "Software Engineer",
                 category: "SOFTWARE & SYSTEMS",
-                desc: "Ang Software Engineer ay responsible sa pagdidisenyo, pag-code, at pagte-test ng mga web applications, desktop programs, at software algorithms para sa iba't ibang platforms.",
+                desc: "Software Engineers design, code, and test web applications, desktop programs, and software algorithms across a range of platforms.",
                 duties: [
-                    "Pagsulat ng malinis, scalable, at maintainable code (Java, C++, Python, JavaScript).",
-                    "Pag-debug at pag-fix ng software bugs.",
-                    "Pakikipagtulungan sa UI/UX designers at database architects.",
-                    "Building APIs at backend web microservices."
+                    "Writing clean, scalable, and maintainable code (Java, C++, Python, JavaScript).",
+                    "Debugging and fixing software defects.",
+                    "Collaborating with UI/UX designers and database architects.",
+                    "Building APIs and backend web microservices."
                 ],
-                gif: "Assets/careers/software_engineer.gif",
+                gif: "Assets/gifs/SWS.gif",
+                video: "https://www.youtube.com/watch?v=GVDsxArvG2A",
                 caption: "Software engineer typing code, debugging backend services, and reviewing logic."
             },
             devops_engineer: {
                 title: "DevOps Engineer",
                 category: "SOFTWARE & SYSTEMS",
-                desc: "Nagsisilbing tulay sa pagitan ng software developers at IT operations team para sa mabilis at automated na release ng mga software updates.",
+                desc: "DevOps Engineers bridge the software development and IT operations teams, enabling fast and automated release of software updates.",
                 duties: [
                     "Managing CI/CD pipeline automation (Jenkins, GitHub Actions).",
-                    "Automating cloud deployment processes at infrastructure monitoring.",
-                    "Containerization gamit ang Docker at Kubernetes orchestration.",
+                    "Automating cloud deployment processes and infrastructure monitoring.",
+                    "Containerization using Docker and Kubernetes orchestration.",
                     "Ensuring zero system downtime during application updates."
                 ],
                 gif: "Assets/careers/devops.gif",
+                video: "https://www.youtube.com/watch?v=QlZRwbVRzOU",
                 caption: "DevOps engineer building deployment pipelines and managing cloud servers."
             },
             systems_engineer: {
                 title: "Systems Engineer",
                 category: "SOFTWARE & SYSTEMS",
-                desc: "Nangangasiwa sa pangkalahatang integration at performance ng complex hardware, operating systems, at computing infrastructures.",
+                desc: "Systems Engineers oversee the overall integration and performance of complex hardware, operating systems, and computing infrastructure.",
                 duties: [
-                    "Operating System configuration at system performance tuning.",
+                    "Operating system configuration and system performance tuning.",
                     "Hardware and software integration testing.",
                     "Creating disaster recovery systems and backup protocols.",
                     "Analyzing computing resource metrics and bottleneck issues."
                 ],
                 gif: "Assets/careers/systems.gif",
+                video: "https://www.youtube.com/watch?v=3K6iJEobfz4",
                 caption: "Systems engineer configuring high-performance enterprise server architecture."
             },
             tech_support: {
                 title: "Technical Support Engineer",
                 category: "SOFTWARE & SYSTEMS",
-                desc: "Aksyon-agad sa pagresolba ng mga complex technical issues at troubleshooting ng parehong hardware at software systems ng mga kliyente o kumpanya.",
+                desc: "Technical Support Engineers resolve complex technical issues and troubleshoot both hardware and software systems for clients and companies.",
                 duties: [
-                    "Troubleshooting system logs, network issues, at software errors.",
-                    "Providing second-level at third-level technical support.",
-                    "Documenting technical knowledge bases at step-by-step guides.",
-                    "Simulating user issues to find system bug root causes."
+                    "Troubleshooting system logs, network issues, and software errors.",
+                    "Providing second-level and third-level technical support.",
+                    "Documenting technical knowledge bases and step-by-step guides.",
+                    "Reproducing user issues to trace the root cause of system bugs."
                 ],
                 gif: "Assets/careers/tech_support.gif",
+                video: "https://www.youtube.com/watch?v=eWxrmNDLtoE",
                 caption: "Technical support engineer analyzing server logs and solving hardware issues."
             },
 
@@ -493,53 +546,57 @@
             computer_engineer: {
                 title: "Computer Engineer",
                 category: "HARDWARE AND EMBEDDED",
-                desc: "Nangunguna sa pagbuo at pag-aayos ng parehong physical circuit components at low-level computer software interface.",
+                desc: "Computer Engineers lead the design and repair of both physical circuit components and the low-level software interfaces that drive them.",
                 duties: [
-                    "Designing computer chips, motherboards, at processor architecture.",
-                    "Benchmarking processing speed, thermal output, at power delivery.",
+                    "Designing computer chips, motherboards, and processor architecture.",
+                    "Benchmarking processing speed, thermal output, and power delivery.",
                     "Interfacing hardware modules with system device drivers.",
-                    "Prototyping next-gen computational hardware devices."
+                    "Prototyping next-generation computational hardware devices."
                 ],
                 gif: "Assets/careers/computer_engineer.gif",
+                video: "https://www.youtube.com/watch?v=m8ZoxzX0hro",
                 caption: "Computer Engineer examining processor architecture and motherboard circuit traces."
             },
             hardware_engineer: {
                 title: "Hardware Engineer",
                 category: "HARDWARE AND EMBEDDED",
-                desc: "Nakatutok sa physical design, PCB layouting, testing, at manufacturing ng mga electronic circuit boards at electronic devices.",
+                desc: "Hardware Engineers focus on the physical design, PCB layout, testing, and manufacturing of electronic circuit boards and devices.",
                 duties: [
-                    "Schematic design at PCB (Printed Circuit Board) layout engineering.",
-                    "Testing electronic circuits using oscilloscopes & multimeter equipment.",
-                    "Component selection, signal integrity analysis, at soldering.",
-                    "Ensuring compliance with hardware safety & power efficiency standards."
+                    "Schematic design and PCB (Printed Circuit Board) layout engineering.",
+                    "Testing electronic circuits using oscilloscopes and multimeter equipment.",
+                    "Component selection, signal integrity analysis, and soldering.",
+                    "Ensuring compliance with hardware safety and power efficiency standards."
                 ],
                 gif: "Assets/careers/hardware.gif",
+                video: "https://www.youtube.com/watch?v=l09D6OycD4o",
                 caption: "Hardware Engineer soldering circuit boards and taking electrical measurements."
             },
             iot_engineer: {
                 title: "IoT (Internet of Things) Engineer",
                 category: "HARDWARE AND EMBEDDED",
-                desc: "Gumagawa ng mga smart devices at sensor networks na nagpapadala ng data sa internet (Smart Home, Smart Cities, Industrial IoT).",
+                desc: "IoT Engineers build smart devices and sensor networks that transmit data over the internet, powering smart homes, smart cities, and industrial IoT.",
                 duties: [
                     "Integrating microcontrollers (ESP32, Raspberry Pi) with wireless sensors.",
-                    "Developing MQTT, Wi-Fi, at Bluetooth communication protocols.",
-                    "Connecting hardware sensors safely to cloud IoT platforms.",
-                    "Optimizing low-power hardware consumption for battery-operated devices."
+                    "Developing MQTT, Wi-Fi, and Bluetooth communication protocols.",
+                    "Connecting hardware sensors securely to cloud IoT platforms.",
+                    "Optimizing low-power consumption for battery-operated devices."
                 ],
                 gif: "Assets/careers/iot.gif",
+                video: "https://www.youtube.com/watch?v=dEOOAhMcm-I",
                 caption: "IoT Engineer configuring wireless sensors and smart home connected hardware."
             },
             embedded_engineer: {
                 title: "Embedded Systems Engineer",
                 category: "HARDWARE AND EMBEDDED",
-                desc: "Nagsusulat ng low-level firmware code para direktang kontrolin ang mga microprocessors sa loob ng sasakyan, medical devices, o appliances.",
+                desc: "Embedded Systems Engineers write low-level firmware that directly controls the microprocessors inside vehicles, medical devices, and appliances.",
                 duties: [
-                    "Programming microcontrollers directly in C/C++ at Assembly language.",
-                    "Interfacing with hardware busses (I2C, SPI, UART, CAN bus).",
+                    "Programming microcontrollers directly in C/C++ and Assembly language.",
+                    "Interfacing with hardware buses (I2C, SPI, UART, CAN bus).",
                     "Building real-time operating system (RTOS) firmware routines.",
-                    "Debugging low-level memory layout at hardware interrupt timers."
+                    "Debugging low-level memory layout and hardware interrupt timers."
                 ],
                 gif: "Assets/careers/embedded.gif",
+                video: "https://www.youtube.com/watch?v=3AXDli9tQMo",
                 caption: "Embedded engineer flashing custom firmware onto microcontrollers."
             },
 
@@ -547,97 +604,104 @@
             ai_ml_engineer: {
                 title: "AI / Machine Learning Engineer",
                 category: "AI DATA & ROBOTICS",
-                desc: "Gumagawa ng mga intelligent algorithms at deep learning neural networks na may kakayahang matuto mula sa data at magdesisyon nang kusa.",
+                desc: "AI and Machine Learning Engineers build intelligent algorithms and deep learning neural networks capable of learning from data and making decisions on their own.",
                 duties: [
-                    "Training Machine Learning & Deep Learning models (PyTorch, TensorFlow).",
-                    "Designing Computer Vision algorithms at Natural Language Processing (NLP).",
+                    "Training machine learning and deep learning models (PyTorch, TensorFlow).",
+                    "Designing computer vision algorithms and natural language processing (NLP).",
                     "Optimizing AI inference speed on GPU acceleration platforms.",
-                    "Deploying AI models to cloud APIs o edge computing devices."
+                    "Deploying AI models to cloud APIs or edge computing devices."
                 ],
                 gif: "Assets/careers/ai_ml.gif",
-                caption: "AI engineer training neural networks at monitoring deep learning loss graphs."
+                video: "https://www.youtube.com/watch?v=GDCnydDWRnM",
+                caption: "AI engineer training neural networks and monitoring deep learning loss graphs."
             },
             robotics_specialist: {
                 title: "Robotics Specialist",
                 category: "AI DATA & ROBOTICS",
-                desc: "Nagmamanupaktura at nagpo-program ng mga automated robotic arms, autonomous mobile robots (AMRs), at industrial automation systems.",
+                desc: "Robotics Specialists build and program automated robotic arms, autonomous mobile robots (AMRs), and industrial automation systems.",
                 duties: [
-                    "Programming robot kinematics, motor controllers, at actuators.",
-                    "Integrating LiDAR, camera vision, at sonar sensors using ROS (Robot Operating System).",
-                    "Designing path-planning at obstacle avoidance algorithms.",
+                    "Programming robot kinematics, motor controllers, and actuators.",
+                    "Integrating LiDAR, camera vision, and sonar sensors using ROS (Robot Operating System).",
+                    "Designing path-planning and obstacle avoidance algorithms.",
                     "Building automated robotic assembly systems for manufacturing."
                 ],
                 gif: "Assets/careers/robotics.gif",
-                caption: "Robotics Specialist adjusting arm servos at calibrating motion sensors."
+                video: "https://www.youtube.com/watch?v=YHBaZE4ySjU",
+                caption: "Robotics Specialist adjusting arm servos and calibrating motion sensors."
             },
             data_scientist: {
                 title: "Data Scientist",
                 category: "AI DATA & ROBOTICS",
-                desc: "Nagsusuri ng malalaking volume ng raw computing data para makakita ng patterns, predictive insights, at data-driven strategies.",
+                desc: "Data Scientists analyze large volumes of raw computing data to uncover patterns, predictive insights, and data-driven strategies.",
                 duties: [
-                    "Data cleaning, exploratory data analysis, at statistical modeling.",
-                    "Writing predictive Python scripts at SQL database queries.",
+                    "Data cleaning, exploratory data analysis, and statistical modeling.",
+                    "Writing predictive Python scripts and SQL database queries.",
                     "Creating interactive data dashboards for enterprise decision-making.",
-                    "Applying machine learning classification at clustering tools."
+                    "Applying machine learning classification and clustering tools."
                 ],
                 gif: "Assets/careers/data_science.gif",
-                caption: "Data Scientist building predictive models at visualizing real-time analytics."
+                video: "https://www.youtube.com/watch?v=F1ZpufU-DMY",
+                caption: "Data Scientist building predictive models and visualizing real-time analytics."
             },
 
             // NETWORKS & SECURITY
             network_engineer: {
                 title: "Network Engineer",
                 category: "NETWORKS AND SECURITY",
-                desc: "Nangangalaga sa physical at logical infrastructure ng mga network systems (routers, switches, fiber optic cables, at LAN/WAN routing).",
+                desc: "Network Engineers maintain the physical and logical infrastructure of network systems, including routers, switches, fiber optic cabling, and LAN/WAN routing.",
                 duties: [
-                    "Configuring Cisco/MikroTik routers, switches, at VLAN networks.",
-                    "Optimizing bandwidth traffic at troubleshooting network latency.",
+                    "Configuring Cisco/MikroTik routers, switches, and VLAN networks.",
+                    "Optimizing bandwidth traffic and troubleshooting network latency.",
                     "Designing redundant network topologies for zero data loss.",
-                    "Installing enterprise server rack wiring at network interfaces."
+                    "Installing enterprise server rack wiring and network interfaces."
                 ],
                 gif: "Assets/careers/network_engineer.gif",
-                caption: "Network Engineer connecting server racks at troubleshooting router routing tables."
+                video: "https://www.youtube.com/watch?v=9363HYH6rQA",
+                caption: "Network Engineer connecting server racks and troubleshooting router routing tables."
             },
             cloud_engineer: {
                 title: "Cloud Engineer",
                 category: "NETWORKS AND SECURITY",
-                desc: "Nagtatayo at nagpapatakbo ng mga virtual cloud server infrastructure sa AWS, Google Cloud, o Microsoft Azure.",
+                desc: "Cloud Engineers build and operate virtual cloud server infrastructure on AWS, Google Cloud, or Microsoft Azure.",
                 duties: [
                     "Designing cloud infrastructure architecture (Virtual Private Clouds, Subnets).",
-                    "Managing cloud storage scalability, load balancers, at microservices.",
+                    "Managing cloud storage scalability, load balancers, and microservices.",
                     "Automating cloud deployment using Infrastructure as Code (Terraform).",
-                    "Ensuring high-availability data replication at cost efficiency."
+                    "Ensuring high-availability data replication and cost efficiency."
                 ],
                 gif: "Assets/careers/cloud.gif",
-                caption: "Cloud Engineer managing virtual cloud server clusters at network gateways."
+                video: "https://www.youtube.com/watch?v=la16tdlsB_4",
+                caption: "Cloud Engineer managing virtual cloud server clusters and network gateways."
             },
             cybersecurity_engineer: {
                 title: "Cybersecurity Engineer",
                 category: "NETWORKS AND SECURITY",
-                desc: "Protektor laban sa cyberattacks, hacking, data breaches, at unauthorized access sa mga computer networks at sensitive databases.",
+                desc: "Cybersecurity Engineers defend against cyberattacks, hacking, data breaches, and unauthorized access to computer networks and sensitive databases.",
                 duties: [
-                    "Conducting vulnerability assessments at ethical penetration testing.",
-                    "Configuring Next-Gen Firewalls, Intrusion Detection Systems (IDS/IPS).",
-                    "Implementing end-to-end data encryption at Multi-Factor Authentication.",
-                    "Responding to live security breaches at conducting digital forensics."
+                    "Conducting vulnerability assessments and ethical penetration testing.",
+                    "Configuring next-generation firewalls and intrusion detection systems (IDS/IPS).",
+                    "Implementing end-to-end data encryption and multi-factor authentication.",
+                    "Responding to live security breaches and conducting digital forensics."
                 ],
                 gif: "Assets/careers/cybersecurity.gif",
-                caption: "Cybersecurity Specialist analyzing threat logs at blocking cyberattacks."
+                video: "https://www.youtube.com/watch?v=3LInnz3p1QQ",
+                caption: "Cybersecurity Specialist analyzing threat logs and blocking cyberattacks."
             },
 
             // RESEARCH & INNOVATION
             rnd_engineer: {
                 title: "Research and Development (R&D) Engineer",
                 category: "RESEARCH AND INNOVATION",
-                desc: "Nagsasagawa ng mga makabagong eksperimento para mag-invent ng mga bagong hardware, software algorithms, at breakthrough technologies.",
+                desc: "R&D Engineers run experiments to invent new hardware, software algorithms, and breakthrough technologies.",
                 duties: [
-                    "Designing experimental prototypes for unreleased tech hardware/software.",
-                    "Benchmarking novel computational theories at hardware designs.",
-                    "Authoring research papers, patents, at engineering documentation.",
-                    "Collaborating with research institutions at technology innovators."
+                    "Designing experimental prototypes for unreleased hardware and software.",
+                    "Benchmarking novel computational theories and hardware designs.",
+                    "Authoring research papers, patents, and engineering documentation.",
+                    "Collaborating with research institutions and technology innovators."
                 ],
                 gif: "Assets/careers/rnd.gif",
-                caption: "R&D Engineer running lab simulations at prototyping next-gen tech."
+                video: "https://www.youtube.com/watch?v=d7a0RNe7Klo",
+                caption: "R&D Engineer running lab simulations and prototyping next-generation tech."
             }
         };
 
@@ -652,6 +716,17 @@
             
             document.getElementById('modalJobVisual').src = data.gif;
             document.getElementById('modalJobCaption').innerText = data.caption;
+
+            // Point the visual at that role's explainer video
+            const videoLink = document.getElementById('modalJobVideoLink');
+            if (data.video) {
+                videoLink.href = data.video;
+                videoLink.title = "Watch: What is a " + data.title + "?";
+                videoLink.classList.remove('no-video');
+            } else {
+                videoLink.removeAttribute('href');
+                videoLink.classList.add('no-video');
+            }
 
             const dutiesList = document.getElementById('modalJobDuties');
             dutiesList.innerHTML = '';
