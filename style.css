@@ -3515,3 +3515,24 @@ html, body {
     max-width: 100%;
     overflow-wrap: break-word;
 }
+
+/* ==========================================
+   38. HARDWARE + SOFTWARE DIAGRAM SIZING
+   The element had animation rules but no actual
+   dimensions, so it had nothing to lay out against.
+   ========================================== */
+.about-diagram-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
+}
+
+@media (max-width: 900px) {
+    .about-diagram-img {
+        max-width: 78%;
+    }
+}
