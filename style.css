@@ -2781,7 +2781,6 @@ body.newspaper-theme {
 .about-slider-window img,
 .page-flipper img {
     -webkit-user-drag: none;
-    user-drag: none;
     -webkit-user-select: none;
     user-select: none;
     pointer-events: none;
@@ -3235,4 +3234,284 @@ body {
     .careers-section .white-container {
         padding: 22px 12px;
     }
+}
+
+/* ==========================================
+   33. FORCE LIGHT SCHEME + FULL-WIDTH ON PHONES
+   Android browsers (Samsung Internet, Chrome) will
+   auto-invert a light page into dark mode, which
+   destroys the paper look. Opt out explicitly.
+   ========================================== */
+:root {
+    color-scheme: light only;
+}
+
+html {
+    color-scheme: light only;
+    background-color: #f4f1e8;
+}
+
+/* Samsung Internet's own inversion hook */
+@media (inverted-colors: inverted) {
+    html, body {
+        filter: none !important;
+    }
+}
+
+/* Belt and braces: nothing may scroll sideways */
+html, body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+/* ==========================================
+   34. MOBILE LAYOUT CORRECTIONS (from device testing)
+   ========================================== */
+@media (max-width: 900px) {
+    /* The 94% rule left a dead gutter; fill the screen instead */
+    .page-container {
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    /* Justified text opens ugly rivers in narrow columns */
+    .text-slide p,
+    .about-description p,
+    .careers-intro-p,
+    .cpe-flip-card-front p,
+    .cpe-flip-card-back p,
+    .discipline-text p,
+    .why-reasons li {
+        text-align: left !important;
+        hyphens: none;
+    }
+}
+
+/* ---------- Sticky hover on touch ----------
+   A tap registers as :hover on touch and never
+   clears, so cards were stranded mid-flip.
+   Flip by click only where there's no pointer. */
+@media (hover: none) {
+    .cpe-flip-card:hover .cpe-flip-card-inner {
+        transform: none;
+    }
+
+    .cpe-flip-card.flipped .cpe-flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    /* Same problem on every other hover-lift element */
+    .career-card:hover,
+    .topic-grid-card:hover,
+    .text-carousel-window:hover,
+    .announcement-carousel:hover,
+    .spec-gif-frame:hover,
+    .career-gif-link:hover,
+    .back-btn:hover {
+        transform: none;
+    }
+
+    .back-btn:hover::before {
+        transform: translateX(-100%);
+    }
+
+    .back-btn:hover {
+        color: #0b2b5a;
+    }
+
+    /* Active states still give tap feedback */
+    .career-card:active,
+    .topic-grid-card:active {
+        transform: scale(0.99);
+    }
+}
+
+@media (max-width: 700px) {
+    /* Cards size to content (see section 36); just trim the floor */
+    .cpe-flip-card,
+    .cpe-flip-card-inner,
+    .cpe-flip-card-front,
+    .cpe-flip-card-back {
+        min-height: 260px;
+    }
+
+    /* Tap hint, since hover no longer flips */
+    .story-tag {
+        font-size: 0.62rem;
+    }
+
+    /* Announcement image was bleeding past its card */
+    .announcement-container {
+        max-width: 100%;
+    }
+
+    .announcement-carousel {
+        padding: 22px 12px 14px;
+    }
+
+    /* Ticker text was clipping mid-word */
+    .information-content {
+        gap: 8px;
+        padding: 4px 8px;
+    }
+}
+
+/* ==========================================
+   35. BOOK SPREAD ON PHONES — FIXES
+   Section 22 forces 50/50 columns with !important
+   for the spine alignment, which crushed the text
+   into half a phone screen. Undo it here.
+   ========================================== */
+@media (max-width: 900px) {
+    .about-slide.grid-left,
+    .about-slide.grid-right {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Only the visible spread should set the section height,
+       otherwise short slides inherit the tallest one's blank space */
+    .about-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .about-slide.active {
+        position: relative;
+    }
+
+    .about-slider-track {
+        display: block;
+        position: relative;
+    }
+
+    /* Cross-fade instead of a page turn */
+    .about-slide.active {
+        animation: spreadFadeIn 0.38s ease forwards;
+    }
+
+    @keyframes spreadFadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Image sits under the text rather than beside it */
+    .about-image-column,
+    .about-placeholder-column,
+    .about-quote-column {
+        padding: 22px 18px 30px;
+    }
+
+    .cpe-3d-image,
+    .about-diagram-img {
+        max-width: 78%;
+        margin: 0 auto;
+    }
+
+    .page-flipper {
+        width: 100%;
+    }
+
+    .page-face {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   36. FLIP CARDS SIZE TO THEIR CONTENT
+   A hard height: 380px meant any overflow (browser
+   zoom, narrow columns, longer headings) spilled
+   text out past the card border. Stack both faces
+   in one grid cell so the card grows to fit the
+   taller of the two instead.
+   ========================================== */
+.cpe-flip-card {
+    height: auto;
+    min-height: 340px;
+}
+
+.cpe-flip-card-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 340px;
+    height: 100%;
+}
+
+.cpe-flip-card-front,
+.cpe-flip-card-back {
+    grid-area: 1 / 1;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    min-height: 340px;
+    overflow: hidden;      /* nothing escapes the card edge */
+}
+
+/* Justified text opens rivers in a three-column grid —
+   it was already ragged at desktop width */
+.cpe-flip-card-front p,
+.cpe-flip-card-back p {
+    text-align: left;
+    overflow-wrap: break-word;
+}
+
+/* Headings scale down as the column narrows so they
+   stop wrapping to four lines */
+.cpe-flip-card-front h3,
+.cpe-flip-card-back h3 {
+    font-size: clamp(1.02rem, 1.5vw, 1.3rem);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+}
+
+.cpe-flip-card-front p,
+.cpe-flip-card-back p,
+.flip-list li {
+    font-size: clamp(0.84rem, 1.05vw, 0.94rem);
+    line-height: 1.55;
+}
+
+/* Give the three columns a little breathing room */
+.flip-card-col {
+    padding: 0 1.25rem;
+}
+
+@media (max-width: 1100px) {
+    .cpe-flip-card,
+    .cpe-flip-card-inner,
+    .cpe-flip-card-front,
+    .cpe-flip-card-back {
+        min-height: 300px;
+    }
+}
+
+/* ==========================================
+   37. MASTHEAD MUST STAY INSIDE ITS CONTAINER
+   white-space: nowrap forced the title onto one
+   line regardless of available width, so it broke
+   out of the page container. Let it scale, and
+   wrap rather than overflow.
+   ========================================== */
+.site-heading h1 {
+    white-space: normal;
+    max-width: 100%;
+    font-size: clamp(1.9rem, 5.2vw, 4.6rem);
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+.site-heading {
+    overflow: hidden;   /* hard stop: nothing escapes the masthead block */
+}
+
+/* Same guard on the other oversized display headings */
+.flip-section-title,
+.careers-main-title,
+.discipline-title {
+    max-width: 100%;
+    overflow-wrap: break-word;
 }

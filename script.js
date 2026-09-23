@@ -222,6 +222,34 @@ document.addEventListener("DOMContentLoaded", () => {
             // Content rises once the turning page has swung clear of it
             setTimeout(() => playReveal(incoming), 400);
 
+            // Below 900px the turn animation is disabled, so animationend
+            // never fires. Without a fallback the carousel locks on the
+            // first swipe. settle() runs once, whichever path gets there.
+            function watchTurn(el, onSettle) {
+                const flipper = el.querySelector(".page-flipper");
+                const watched = flipper || el;
+                let settled = false;
+
+                function settle() {
+                    if (settled) return;
+                    settled = true;
+                    watched.removeEventListener("animationend", onEnd);
+                    clearTimeout(guard);
+                    onSettle();
+                    isTurning = false;
+                }
+
+                function onEnd(e) {
+                    if (e.target !== watched) return;
+                    settle();
+                }
+
+                watched.addEventListener("animationend", onEnd);
+
+                // Fires if the animation is absent, interrupted, or skipped
+                const guard = setTimeout(settle, 1000);
+            }
+
             if (forward) {
                 // Next spread waits underneath; the current right page
                 // swings left on the spine.
@@ -229,29 +257,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 outgoing.classList.remove("active");
                 outgoing.classList.add("turning");
 
-                const flipper = outgoing.querySelector(".page-flipper");
-                const watched = flipper || outgoing;
-
-                watched.addEventListener("animationend", function done(e) {
-                    if (e.target !== watched) return;
-                    watched.removeEventListener("animationend", done);
-                    clearPageClasses(outgoing);
-                    isTurning = false;
-                });
+                watchTurn(outgoing, () => clearPageClasses(outgoing));
             } else {
                 // Reverse: the previous page lifts back off to the right
                 outgoing.classList.remove("active");
                 incoming.classList.add("turning-back");
 
-                const flipper = incoming.querySelector(".page-flipper");
-                const watched = flipper || incoming;
-
-                watched.addEventListener("animationend", function done(e) {
-                    if (e.target !== watched) return;
-                    watched.removeEventListener("animationend", done);
+                watchTurn(incoming, () => {
                     clearPageClasses(incoming);
                     incoming.classList.add("active");
-                    isTurning = false;
                 });
             }
 
