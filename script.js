@@ -826,3 +826,518 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+/* ==========================================
+   7. FACULTY SECTION
+   Dots switch the four Faculty slides (no autoplay).
+   The professor index on slide 3 only swaps the
+   featured portrait + nameplate; it never changes
+   the active slide.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const facWindow = document.getElementById("facWindow");
+    if (!facWindow) return;
+
+    /* ---------- Slide dots ---------- */
+    const slides = Array.from(facWindow.querySelectorAll(".fac-slide"));
+    const dots = Array.from(document.querySelectorAll("#facDots .dot"));
+
+    const prevBtn = document.getElementById("facPrev");
+    const nextBtn = document.getElementById("facNext");
+    const count = document.getElementById("facCount");
+    let currentSlide = 0;
+
+    function goToSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        currentSlide = index;
+        slides.forEach((slide, i) => {
+            const on = i === index;
+            slide.classList.toggle("active", on);
+            slide.setAttribute("aria-hidden", on ? "false" : "true");
+        });
+        dots.forEach((dot, i) => {
+            const on = i === index;
+            dot.classList.toggle("active", on);
+            dot.setAttribute("aria-current", on ? "true" : "false");
+        });
+        // Boundaries disable (not wrap) so the four-slide sequence stays obvious.
+        // aria-disabled keeps the button focusable, so keyboard focus is never lost.
+        if (prevBtn) prevBtn.setAttribute("aria-disabled", index === 0 ? "true" : "false");
+        if (nextBtn) nextBtn.setAttribute("aria-disabled", index === slides.length - 1 ? "true" : "false");
+        if (count) count.textContent =
+            String(index + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+    }
+
+    // Phones: slides differ in height, so keep the top of the new slide in view
+    function keepSlideInView() {
+        if (!window.matchMedia("(max-width: 900px)").matches) return;
+        const top = facWindow.getBoundingClientRect().top;
+        if (top < 0) facWindow.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function step(delta) {
+        const target = currentSlide + delta;
+        if (target < 0 || target >= slides.length) return;
+        goToSlide(target);
+        keepSlideInView();
+    }
+
+    dots.forEach((dot, i) => dot.addEventListener("click", () => { goToSlide(i); keepSlideInView(); }));
+    if (prevBtn) prevBtn.addEventListener("click", () => step(-1));
+    if (nextBtn) nextBtn.addEventListener("click", () => step(1));
+
+    /* ---------- Professor index ----------
+       Exactly three professors. Entries in [brackets]
+       are placeholders awaiting verified information;
+       an empty photo shows the "Photo to be added" panel. */
+    const professors = [
+        { name: "Engr. Mary Ann Limkian, PCpE", role: "CpE Faculty", photo: "Assets/mamlim.jpg" },
+        { name: "Engr. Onofre Corpuz",          role: "CpE Faculty", photo: "Assets/faculty/corpuz.jpg" },
+        { name: "Engr. Joehmel Coral",          role: "CpE Faculty", photo: "Assets/faculty/coral.jpg" }
+    ];
+
+    const rows = Array.from(document.querySelectorAll("#facIndex .fac-row"));
+    const feature = document.getElementById("facFeature");
+    const portrait = document.getElementById("facPortrait");
+    const plateNum = document.getElementById("facPlateNum");
+    const plateName = document.getElementById("facPlateName");
+    const plateRole = document.getElementById("facPlateRole");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let current = 0;
+    let swapTimer = null;
+
+    function applyProfessor(index) {
+        const p = professors[index];
+        plateNum.textContent = String(index + 1).padStart(2, "0");
+        plateName.textContent = p.name;
+        plateRole.textContent = p.role;
+        feature.classList.toggle("no-photo", !p.photo);
+        if (p.photo) {
+            portrait.src = p.photo;
+            portrait.alt = "Portrait of " + p.name;
+        } else {
+            portrait.removeAttribute("src");
+            portrait.alt = "";
+        }
+    }
+
+    function selectProfessor(index) {
+        if (index === current || !professors[index]) return;
+        current = index;
+
+        rows.forEach((row, i) => {
+            const on = i === index;
+            row.classList.toggle("is-current", on);
+            row.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+
+        clearTimeout(swapTimer);
+        if (reduceMotion) {
+            applyProfessor(index);
+        } else {
+            feature.classList.add("is-swapping");
+            swapTimer = setTimeout(() => {
+                applyProfessor(index);
+                feature.classList.remove("is-swapping");
+            }, 180);
+        }
+
+        // Phones: the portrait sits above the list, so bring it back into view
+        if (window.matchMedia("(max-width: 900px)").matches) {
+            const top = feature.getBoundingClientRect().top;
+            if (top < 0 || top > window.innerHeight * 0.5) {
+                feature.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+            }
+        }
+    }
+
+    rows.forEach((row) => {
+        row.addEventListener("click", () => selectProfessor(Number(row.dataset.prof)));
+    });
+
+    goToSlide(0);
+});
+
+/* ==========================================
+   8. SCPES WORLD
+   Threshold reveal, Meet the Officers (looping 3D strip + spotlight)
+   and Gatherings (one story at a time, 5 s each, only while in view).
+   Names/positions are exactly as printed on Assets/Officers cards;
+   [bracketed] values are placeholders awaiting verification.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    if (!document.getElementById("scpes")) return;
+    const data = {
+            officers: [
+                { name: "Charlize Baldovino", role: "President",                              img: "baldovino" },
+                { name: "Jawad Macawadib",    role: "VP for Internal Affairs",                img: "macawadib" },
+                { name: "Joshua Madriaga",    role: "VP for External Affairs",                img: "madriaga" },
+                { name: "Ghenny Manabat",     role: "VP for Secretariat",                     img: "manabat" },
+                { name: "Jessica Apostol",    role: "VP for Business and Finance",            img: "apostol" },
+                { name: "Mei Rupera",         role: "VP for Technical Operations",            img: "rupera" },
+                { name: "Roselle Landayan",   role: "VP for Events and Programs",             img: "landayan" },
+                { name: "Jian Cruz",          role: "VP for Creatives & Communication",       img: "cruz" },
+                { name: "Joe Cornita",        role: "VP for Media",                           img: "cornita" },
+                { name: "Joshua Purificacion",role: "VP for Career Development",              img: "purificacion" },
+                { name: "Earl Lorenzo",       role: "VP for Community & Social Responsibility", img: "lorenzo" },
+                { name: "Felix Adriano",      role: "VP for Recreation and Wellness",         img: "adriano" },
+                { name: "Bench Paed",         role: "VP for Logistics & Volunteer's Coordination", img: "paed" }
+            ],
+            gatherings: [
+                { kind: "Competition", title: "Packet Hacks 2025", deck: "First Runner-Up",
+                  img: "iotcon", pos: "50% 45%",
+                  facts: [["Result", "First Runner-Up"], ["Date", "[To confirm]"], ["Team", "[To confirm]"]],
+                  caption: "On stage after the “First Runner-Up” announcement." },
+                { kind: "Research", title: "1st Computer Engineering Research Colloquium-Forum", deck: null,
+                  img: "researchcolloqium", pos: "50% 40%",
+                  facts: [["Date", "[To confirm]"], ["Venue", "[To confirm]"]],
+                  caption: "Participants with their certificates." },
+                { kind: "Projects", title: "[Project exhibit title]", deck: "CalamiTech · Doze · SIBOLTech · TheraFlow",
+                  img: "research", pos: "50% 60%",
+                  facts: [["Projects shown", "CalamiTech, Doze, SIBOLTech, TheraFlow"], ["Date", "[To confirm]"]],
+                  gallery: ["calamitech", "dozen", "siboltech", "theraflow", "smoki"],
+                  caption: "Project posters lined up for the exhibit." },
+                { kind: "Outreach", title: "SHS Work Immersion", deck: null,
+                  img: "workimmersionshs", pos: "50% 40%",
+                  facts: [["Date", "[To confirm]"]],
+                  caption: "Senior high school work immersion participants with SCPES." },
+                { kind: "Community", title: "Free Coffee & Bread", deck: "July 28 · 2/F LB · 8AM",
+                  img: "bread1", pos: "50% 50%",
+                  facts: [["When", "July 28, 8AM (until supplies last)"], ["Where", "2/F LB"], ["Open to", "The whole CENG’G community and UE support staff"]],
+                  gallery: ["bread2"],
+                  caption: "Open to students, faculty, admin & staff, security guards and janitors." },
+                { kind: "Community", title: "Freshman Huddle", deck: null,
+                  img: "freshmenhuddle", pos: "50% 45%",
+                  facts: [["Date", "September 2026"]],
+                  caption: "A tradition every year for the freshman class." },
+                { kind: "Organization", title: "SCPES A.Y. 26–27", deck: "#AllOutCPE",
+                  img: "org1", pos: "50% 35%",
+                  facts: [["Academic year", "2026–27"]],
+                  caption: "Society of Computer Engineering Students." },
+                { kind: "Organization", title: "SCPES A.Y. 25–26", deck: "#CpENonStop",
+                  img: "org2", pos: "50% 45%",
+                  facts: [["Academic year", "2025–26"]],
+                  caption: "Society of Computer Engineering Students." }
+            ]
+        };
+    const OFF = (k, alt) => "Assets/Officers/portraits/" + k + (alt ? "-2" : "") + ".jpg";
+    const EV = (k) => "Assets/SCPE/" + ({ calamitech: "Calamitech" }[k] || k) + ".jpg";
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isNarrow = () => window.matchMedia("(max-width: 900px)").matches;
+    const pad = (n) => String(n).padStart(2, "0");
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const isPh = (s) => /^\[.*\]$/.test(s);
+
+    /* ---------- A · threshold reveal ---------- */
+    const core = document.querySelector(".sw-thr-core");
+    if (core && "IntersectionObserver" in window) {
+        new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { core.classList.add("is-in"); o.disconnect(); } }), { threshold: 0.25 }).observe(core);
+    } else if (core) core.classList.add("is-in");
+
+    /* ---------- B/D · collection stage ---------- */
+    function Stage(el) {
+        const kind = el.dataset.collection;               // "officers" | "gatherings"
+        const items = data[kind];
+        const n = items.length;
+        const track = el.querySelector(".sw-track");
+        const ruler = el.querySelector(".sw-ruler");
+        const count = el.querySelector(".sw-count");
+        const prev = el.querySelector(".sw-prev");
+        const next = el.querySelector(".sw-next");
+        const openBtn = el.querySelector(".sw-open");
+        const spot = el.querySelector(".sw-spot");
+        const idImg = el.querySelector(".sw-id-img");
+        const idNum = el.querySelector(".sw-id-num");
+        const idRole = el.querySelector(".sw-id-role");
+        const src = (it, alt) => kind === "officers" ? OFF(it.img, alt) : EV(it.img);
+
+        // cards
+        const cards = items.map((it, i) => {
+            const b = document.createElement("button");
+            b.type = "button"; b.className = "sw-card";
+            b.setAttribute("aria-label", kind === "officers" ? `${pad(i + 1)}, ${it.role}, ${it.name}` : `${pad(i + 1)}, ${it.kind}, ${it.title}`);
+            b.innerHTML = `<span class="sw-card-img"><img src="${src(it)}" alt="" style="object-position:${it.pos || "50% 20%"}" draggable="false" loading="lazy"></span>
+                <span class="sw-card-meta">
+                    <span class="sw-card-num">${pad(i + 1)} / ${kind === "officers" ? "Officer" : esc(it.kind)}</span>
+                    <span class="sw-card-name">${esc(kind === "officers" ? it.name : it.title)}</span>
+                    <span class="sw-card-role">${esc(kind === "officers" ? it.role : (it.deck || "&nbsp;"))}</span>
+                </span>`;
+            if (kind !== "officers" && !it.deck) b.querySelector(".sw-card-role").innerHTML = "&nbsp;";
+            track.appendChild(b);
+            return b;
+        });
+        const ticks = items.map((_, i) => {
+            const t = document.createElement("button");
+            t.type = "button"; t.className = "sw-tick"; t.tabIndex = -1;
+            t.addEventListener("click", () => go(i));
+            ruler.appendChild(t); return t;
+        });
+
+        let target = 0, pos = 0, raf = null, index = 0;
+        const gap = () => (isNarrow() ? window.innerWidth * 0.62 + 24 : Math.min(Math.max(window.innerWidth * 0.19, 230), 290) + 56);
+
+        function layout() {
+            const g = gap();
+            cards.forEach((c, i) => {
+                let d = i - pos; d = ((d % n) + n + n / 2) % n - n / 2;   // loop: neighbours on both sides
+                const ad = Math.abs(d);
+                const scale = Math.max(0.78, 1.08 - ad * 0.2);
+                const x = d * g + Math.sign(d) * Math.min(ad, 1) * g * 0.14;   // centre card gets a little breathing room
+                const rot = Math.max(-26, Math.min(26, -d * 9));                  // filmstrip curve
+                const z = -Math.min(ad, 3) * 60;
+                c.style.transform = `translate(-50%, -54%) translate3d(${x}px,0,${z}px) rotateY(${reduce ? 0 : rot}deg) scale(${scale})`;
+                c.style.opacity = ad > 3.2 ? 0 : String(1 - Math.min(ad, 3) * 0.16);
+                c.style.zIndex = String(100 - Math.round(ad * 10));
+                c.classList.toggle("is-center", ad < 0.5);
+                c.tabIndex = ad < 0.5 ? 0 : -1;
+                c.setAttribute("aria-current", ad < 0.5 ? "true" : "false");
+            });
+        }
+        function tick() {
+            pos += (target - pos) * (reduce ? 1 : 0.14);
+            if (Math.abs(target - pos) < 0.001) pos = target;
+            layout();
+            raf = pos === target ? null : requestAnimationFrame(tick);
+        }
+        function kick() { if (!raf) raf = requestAnimationFrame(tick); }
+        function sync() {
+            index = ((Math.round(target) % n) + n) % n;
+            const it = items[index];
+            count.textContent = `${pad(index + 1)} / ${pad(n)}`;
+            ticks.forEach((t, i) => t.classList.toggle("is-on", i === index));
+            idImg.src = src(it); idNum.textContent = `${pad(index + 1)} / ${pad(n)}`;
+            idRole.textContent = kind === "officers" ? `${it.role} · ${it.name}` : it.title;
+        }
+        // the strip loops (like a carousel of people, not a finite list); target is unbounded,
+        // index is target wrapped into 0..n-1, and we always travel the short way round
+        function go(i) {
+            const cur = Math.round(target), curIdx = ((cur % n) + n) % n;
+            let delta = (((i - curIdx) % n) + n) % n; if (delta > n / 2) delta -= n;
+            target = cur + delta; sync(); kick();
+        }
+
+        prev.addEventListener("click", () => { target = Math.round(target) - 1; sync(); kick(); });
+        next.addEventListener("click", () => { target = Math.round(target) + 1; sync(); kick(); });
+        openBtn.addEventListener("click", () => open(index));
+        cards.forEach((c, i) => c.addEventListener("click", () => {
+            if (moved) return;
+            if (i === index) open(i); else go(i);
+        }));
+
+        // drag / swipe
+        let down = false, sx = 0, sy = 0, sp = 0, moved = false, horiz = null;
+        track.addEventListener("pointerdown", (e) => { down = true; moved = false; horiz = null; sx = e.clientX; sy = e.clientY; sp = target; });
+        window.addEventListener("pointermove", (e) => {
+            if (!down) return;
+            const dx = e.clientX - sx, dy = e.clientY - sy;
+            if (horiz === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) horiz = Math.abs(dx) > Math.abs(dy);
+            if (!horiz) return;
+            moved = true; track.classList.add("is-dragging");
+            target = sp - dx / gap(); kick();
+        });
+        window.addEventListener("pointerup", () => {
+            if (!down) return; down = false; track.classList.remove("is-dragging");
+            if (moved) { target = Math.round(target); sync(); kick(); setTimeout(() => (moved = false), 0); }
+        });
+        // horizontal wheel / trackpad only; vertical scrolling is never hijacked
+        let wheelLock = 0;
+        track.addEventListener("wheel", (e) => {
+            if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) && !e.shiftKey) return;
+            e.preventDefault();
+            const now = Date.now(); if (now - wheelLock < 260) return; wheelLock = now;
+            ((e.deltaX || e.deltaY) > 0 ? next : prev).click();
+        }, { passive: false });
+        el.addEventListener("keydown", (e) => {
+            if (spot.classList.contains("is-open")) { if (e.key === "Escape") close(); return; }
+            if (e.key === "ArrowRight") { e.preventDefault(); next.click(); }
+            if (e.key === "ArrowLeft") { e.preventDefault(); prev.click(); }
+            if (e.key === "Home") go(0);
+            if (e.key === "End") go(n - 1);
+        });
+        window.addEventListener("resize", layout);
+
+        /* ---------- C/E · spotlight ---------- */
+        let spotIndex = -1;
+        function officerMarkup(i) {
+            const it = items[i], nx = items[(i + 1) % n];
+            const parts = it.name.split(" "); const last = parts.pop();
+            return `<div class="sw-spot-top"><button type="button" class="sw-spot-btn sw-back"><span aria-hidden="true">&larr;</span> All officers</button>
+                    <button type="button" class="sw-spot-btn sw-close">Close <span aria-hidden="true">&times;</span></button></div>
+                <div class="sw-sp-text sw-spot-in">
+                    <span class="sw-sp-num">${pad(i + 1)}</span>
+                    <p class="sw-sp-kicker">SCPES Officer &nbsp;/&nbsp; ${pad(i + 1)} of ${pad(n)}</p>
+                    <h4 class="sw-sp-name"><span>${esc(parts.join(" "))}</span><span>${esc(last)}</span></h4>
+                    <dl class="sw-sp-table">
+                        <div><dt>Position</dt><dd>${esc(it.role)}</dd></div>
+                        <div><dt>Organization</dt><dd>Society of Computer Engineering Students</dd></div>
+                        <div><dt>Term</dt><dd class="is-ph">[To confirm]</dd></div>
+                    </dl>
+                </div>
+                <figure class="sw-sp-photo"><img src="${src(it)}" alt="${esc(it.name)}, ${esc(it.role)}"></figure>
+                <div class="sw-sp-side sw-spot-in">
+                    <p class="sw-sp-label">From the officer card</p>
+                    <figure class="sw-sp-alt"><img src="${src(it, true)}" alt="${esc(it.name)} in the SCPES varsity jacket"></figure>
+                    <button type="button" class="sw-sp-next"><img src="${src(nx)}" alt=""><span><b>Next officer</b>${esc(nx.name)}</span></button>
+                </div>`;
+        }
+        function storyMarkup(i) {
+            const it = items[i], nx = items[(i + 1) % n];
+            const gal = [it.img].concat(it.gallery || []);
+            const facts = it.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd class="${isPh(v) ? "is-ph" : ""}">${esc(v)}</dd></div>`).join("");
+            return `<figure class="sw-st-photo"><img src="${EV(it.img)}" alt="${esc(it.caption)}"></figure>
+
+                <div class="sw-st-text sw-spot-in">
+                    <span class="sw-sp-num">${pad(i + 1)}</span>
+                    <p class="sw-sp-kicker">SCPES in action &nbsp;/&nbsp; ${esc(it.kind)}</p>
+                    <h4 class="sw-st-title">${esc(it.title)}</h4>
+                    ${it.deck ? `<p class="sw-st-deck">${esc(it.deck)}</p>` : ""}
+                    <dl class="sw-sp-table">${facts}</dl>
+                    <p class="sw-st-cap">${esc(it.caption)}</p>
+                </div>
+                <div class="sw-st-side sw-spot-in">
+                    ${gal.length > 1 ? `<p class="sw-sp-label">In this story</p><div class="sw-st-thumbs">${gal.map((g, k) => `<button type="button" class="sw-st-thumb${k ? "" : " is-on"}" data-img="${g}" aria-label="Show photo ${k + 1}"><img src="${EV(g)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+                    <button type="button" class="sw-sp-next"><img src="${EV(nx.img)}" alt="" loading="lazy"><span><b>Next story</b>${esc(nx.title)}</span></button>
+                </div>`;
+        }
+        function fill(i) {
+            spotIndex = i;
+            spot.className = "sw-spot" + (kind === "officers" ? "" : " sw-spot--story");
+            spot.innerHTML = kind === "officers" ? officerMarkup(i) : storyMarkup(i);
+            spot.setAttribute("aria-label", kind === "officers" ? `${items[i].name}, ${items[i].role}` : items[i].title);
+            if (storyMode) {
+                spot.querySelector(".sw-sp-next").addEventListener("click", () => { show(i + 1); restart(); });
+            } else {
+                spot.querySelector(".sw-close").addEventListener("click", close);
+                spot.querySelector(".sw-back").addEventListener("click", close);
+                spot.querySelector(".sw-sp-next").addEventListener("click", () => { const j = (i + 1) % n; go(j); fill(j); spot.classList.add("is-open"); spot.querySelector(".sw-close").focus(); });
+            }
+            spot.querySelectorAll(".sw-st-thumb").forEach((t) => t.addEventListener("click", () => {
+                const main = spot.querySelector(".sw-st-photo img");
+                main.style.opacity = 0;
+                setTimeout(() => { main.src = EV(t.dataset.img); main.style.opacity = 1; }, reduce ? 0 : 200);
+                spot.querySelectorAll(".sw-st-thumb").forEach((x) => x.classList.toggle("is-on", x === t));
+            }));
+        }
+        function flip(fromEl, toEl, imgSrc, done) {
+            if (reduce || !fromEl || !toEl) { done(); return; }
+            const a = fromEl.getBoundingClientRect(), b = toEl.getBoundingClientRect();
+            const g = document.createElement("figure"); g.className = "sw-ghost";
+            g.innerHTML = `<img src="${imgSrc}" alt="">`;
+            Object.assign(g.style, { left: b.left + "px", top: b.top + "px", width: b.width + "px", height: b.height + "px" });
+            document.body.appendChild(g);
+            g.animate([
+                { transform: `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})` },
+                { transform: "none" }
+            ], { duration: 650, easing: "cubic-bezier(0.7, 0, 0.2, 1)" }).onfinish = () => { done(); requestAnimationFrame(() => g.remove()); };
+            g.querySelector("img").style.objectPosition = "50% 20%";
+            return g;
+        }
+        function open(i) {
+            if (i !== index) go(i);
+            fill(i);
+            spot.hidden = false;
+            el.classList.add("has-spot");
+            const target = spot.querySelector(kind === "officers" ? ".sw-sp-photo" : ".sw-st-photo");
+            target.style.visibility = "hidden";
+            requestAnimationFrame(() => {
+                flip(cards[i].querySelector(".sw-card-img"), target, src(items[i]), () => { target.style.visibility = ""; });
+                spot.classList.add("is-open");
+                spot.querySelector(".sw-close").focus({ preventScroll: true });
+                if (isNarrow()) document.documentElement.style.overflow = "hidden";
+            });
+        }
+        function close() {
+            if (spot.hidden || storyMode) return;
+            const i = spotIndex;
+            const from = spot.querySelector(kind === "officers" ? ".sw-sp-photo" : ".sw-st-photo");
+            spot.classList.remove("is-open");
+            el.classList.remove("has-spot");
+            document.documentElement.style.overflow = "";
+            flip(from, cards[i].querySelector(".sw-card-img"), src(items[i]), () => {});
+            setTimeout(() => { spot.hidden = true; spot.innerHTML = ""; cards[i].focus({ preventScroll: true }); }, reduce ? 0 : 450);
+        }
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !spot.hidden) close(); });
+
+        sync(); pos = target; layout();
+
+        /* ---------- STORY MODE: one full-frame story at a time, advancing on its own ---------- */
+        const storyMode = el.dataset.mode === "story";
+        let timer = null, paused = false, hovering = false, inView = false;
+        const DWELL = 5000;
+        const pauseBtn = document.createElement("button");
+        function show(i) {
+            i = ((i % n) + n) % n;
+            go(i);
+            if (reduce) { fill(i); spot.classList.add("is-open"); return; }
+            spot.classList.remove("is-open");
+            setTimeout(() => { fill(i); requestAnimationFrame(() => spot.classList.add("is-open")); }, 280);
+        }
+        function running() { return inView && !paused && !hovering && !reduce && !document.hidden; }
+        function restart() {
+            clearTimeout(timer);
+            el.classList.toggle("is-playing", running());
+            // restart the progress fill on the current segment
+            ticks.forEach((t) => t.classList.remove("is-run"));
+            if (running()) { void ruler.offsetWidth; ticks[index].classList.add("is-run"); timer = setTimeout(() => { show(index + 1); restart(); }, DWELL); }
+        }
+        if (storyMode) {
+            el.classList.add("is-story-mode");
+            el.style.setProperty("--sw-dwell", DWELL + "ms");
+            fill(0); spot.hidden = false; spot.classList.add("is-open");
+            spot.setAttribute("aria-modal", "false"); spot.removeAttribute("role");
+            spot.setAttribute("aria-live", "polite");
+            // Prev / Next / ticks step one story and keep the rhythm going
+            prev.addEventListener("click", () => { show(index); restart(); });
+            next.addEventListener("click", () => { show(index); restart(); });
+            ticks.forEach((t, i) => t.addEventListener("click", () => { show(i); restart(); }));
+            // pause control (required for moving content)
+            pauseBtn.type = "button"; pauseBtn.className = "sw-step sw-pause";
+            const setLabel = () => { pauseBtn.innerHTML = paused ? '<span aria-hidden="true">&#9654;</span> Play' : '<span aria-hidden="true">&#10074;&#10074;</span> Pause'; pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false"); };
+            setLabel();
+            pauseBtn.addEventListener("click", () => { paused = !paused; setLabel(); restart(); });
+            el.querySelector(".sw-controls").appendChild(pauseBtn);
+            // keyboard users: hold still while focus is inside (mouse users get the Pause button)
+            el.addEventListener("focusin", (e) => { if (e.target.matches(":focus-visible")) { hovering = true; restart(); } });
+            el.addEventListener("focusout", () => { hovering = false; restart(); });
+            document.addEventListener("visibilitychange", restart);
+            if ("IntersectionObserver" in window) {
+                new IntersectionObserver((es) => es.forEach((e) => { inView = e.isIntersecting; restart(); }), { threshold: 0.5 }).observe(el);
+            }
+            // phones: stories differ in height, so reserve the tallest one to stop the page jumping
+            const lockHeight = () => {
+                spot.style.minHeight = "";
+                if (!isNarrow()) return;
+                const cur = index; let max = 0;
+                for (let k = 0; k < n; k++) { fill(k); max = Math.max(max, spot.scrollHeight); }
+                fill(cur); spot.classList.add("is-open");
+                spot.style.minHeight = max + "px";
+            };
+            lockHeight();
+            let rz = null;
+            window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(lockHeight, 200); });
+            // arrow keys go through the same stepping
+            el.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); next.click(); } if (e.key === "ArrowLeft") { e.preventDefault(); prev.click(); } });
+        }
+        return { go, open, close, get index() { return index; } };
+    }
+
+    document.querySelectorAll(".sw-stage").forEach((el) => Stage(el));
+});
+
+
+/* ==========================================
+   9. UE FOOTER · FAQ ACCORDION
+   One answer open at a time; + becomes −.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const qs = Array.from(document.querySelectorAll(".uf-q"));
+    qs.forEach((q) => {
+        q.addEventListener("click", () => {
+            const willOpen = q.getAttribute("aria-expanded") !== "true";
+            qs.forEach((other) => {
+                const on = other === q && willOpen;
+                other.setAttribute("aria-expanded", on ? "true" : "false");
+                document.getElementById(other.getAttribute("aria-controls")).hidden = !on;
+            });
+        });
+    });
+});

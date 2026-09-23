@@ -6,11 +6,13 @@
     <meta name="color-scheme" content="light only">
     <meta name="supported-color-schemes" content="light">
     <title>Computer Engineering | UE Manila</title>
-    <link rel="stylesheet" href="style.css?v=20260923-1">
+    <link rel="stylesheet" href="style.css?v=20260924-2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Faculty section fonts. Perandory is the intended display face; Antic Didone is a temporary stand-in until a licensed Perandory web font is added. -->
+    <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Lora:wght@700&family=Open+Sans:wght@400;600&family=Raleway:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="newspaper-theme">
 
@@ -27,6 +29,9 @@
                 <a href="#overview" class="nav-link">OVERVIEW</a>
                 <a href="#specialization" class="nav-link">SPECIALIZATION</a>
                 <a href="#careers" class="nav-link">CAREERS</a>
+                <a href="#faculty" class="nav-link">FACULTY</a>
+                <a href="#scpes" class="nav-link">SCPES</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
             </nav>
         </div>
     </header>
@@ -451,7 +456,281 @@
             </div>
         </section>
 
+        <!-- FACULTY SECTION
+             Four slides switched by the dots below (no autoplay).
+             Slide 3's professor index swaps only the featured portrait
+             and nameplate; it never changes the active slide.
+             [Bracketed] text marks placeholders awaiting verified info. -->
+        <section class="faculty-section" id="faculty" aria-label="Faculty">
+            <div class="white-container paper-container torn-top torn-bottom">
+                <div class="fac-window" id="facWindow">
+
+                    <!-- SLIDE 1 · OPENING -->
+                    <article class="fac-slide fac-open active" aria-label="Faculty, slide 1 of 4">
+                        <div class="fac-open-text">
+                            <p class="fac-kicker"><span>UE Computer Engineering</span><span class="fac-kicker-rule" aria-hidden="true"></span><span>Faculty</span></p>
+                            <h2 class="fac-layered">
+                                <span class="fac-echo fac-echo-2" aria-hidden="true">FACULTY</span>
+                                <span class="fac-echo fac-echo-1" aria-hidden="true">FACULTY</span>
+                                <span class="fac-front">FACULTY</span>
+                            </h2>
+                            <p class="fac-deck">Guiding Today’s Learners, Shaping Tomorrow’s Innovators.</p>
+                            <p class="fac-body">The Computer Engineering faculty members of the University of the East are dedicated professionals who bring industry experience, academic expertise, and a passion for teaching. They help students develop the knowledge, skills, and values needed to become future leaders in technology and innovation.</p>
+                        </div>
+                        <figure class="fac-campus">
+                            <div class="fac-browser">
+                                <div class="fac-browser-bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+                                <img src="Assets/ue.jpg" alt="The University of the East building in Manila" draggable="false">
+                            </div>
+                        </figure>
+                    </article>
+
+                    <!-- SLIDE 2 · CHAIRPERSON (not part of the professor selector) -->
+                    <article class="fac-slide fac-chair" aria-label="Faculty, slide 2 of 4">
+                        <figure class="fac-chair-photo">
+                            <img src="Assets/sirej.png" alt="The Computer Engineering chairperson speaking at a Society of Computer Engineering Students event" draggable="false">
+                        </figure>
+                        <div class="fac-chair-text">
+                            <h2 class="fac-title">Meet the Chairperson</h2>
+                            <blockquote class="fac-quote">
+                                <span>“Our faculty</span>
+                                <span class="s1">encourages students</span>
+                                <span class="s2">to turn ideas</span>
+                                <span class="s1">into innovations</span>
+                                <span class="s3">that help people.”</span>
+                            </blockquote>
+                            <div class="fac-byline">
+                                <!-- PLACEHOLDER: replace with the verified chairperson name -->
+                                <p class="fac-name">Engr. Errol John Antonio</p>
+                                <p class="fac-role">Department Chairperson of Computer Engineering</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SLIDE 3 · MEET THE PROFESSORS -->
+                    <article class="fac-slide fac-profs" aria-label="Faculty, slide 3 of 4">
+                        <div class="fac-index-col">
+                            <h2 class="fac-title">Meet the Professors</h2>
+                            <ol class="fac-index" id="facIndex" aria-label="Professors">
+                                <li><button type="button" class="fac-row is-current" data-prof="0" aria-pressed="true"><span class="fac-num">01</span><span class="fac-row-text"><span class="fac-row-name">Engr. Mary Ann Limkian, PCpE</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
+                                <li><button type="button" class="fac-row" data-prof="1" aria-pressed="false"><span class="fac-num">02</span><span class="fac-row-text"><span class="fac-row-name">Engr. Onofre Corpuz</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
+                                <!-- PLACEHOLDER: professor 03 name, title and photo not yet verified -->
+                                <li><button type="button" class="fac-row is-pending" data-prof="2" aria-pressed="false"><span class="fac-num">03</span><span class="fac-row-text"><span class="fac-row-name">Engr. Joehmel Coral</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
+                            </ol>
+                        </div>
+                        <figure class="fac-feature" id="facFeature" aria-live="polite">
+                            <div class="fac-portrait">
+                                <img id="facPortrait" src="Assets/mamlim.jpg" alt="Portrait of Engr. Mary Ann Limkian, PCpE" draggable="false">
+                                <span class="fac-portrait-empty">Photo to be added</span>
+                            </div>
+                            <figcaption class="fac-plate">
+                                <span class="fac-plate-num" id="facPlateNum">01</span>
+                                <span class="fac-plate-name" id="facPlateName">Engr. Mary Ann Limkian, PCpE</span>
+                                <span class="fac-plate-role" id="facPlateRole">CpE Faculty</span>
+                            </figcaption>
+                        </figure>
+                    </article>
+
+                    <!-- SLIDE 4 · FACULTY HIGHLIGHTS -->
+                    <article class="fac-slide fac-hl" aria-label="Faculty, slide 4 of 4">
+                        <h2 class="fac-hl-title">Faculty Highlights</h2>
+                        <ul class="fac-hl-list">
+                            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V17h5v-1.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg><p>Expert guidance in core and emerging technologies</p></li>
+                            <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M3 13h18"/></svg><p>Industry and research experience</p></li>
+                            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5C4.5 4.3 8.5 4 12 6c3.5-2 7.5-1.7 10-.5V19c-2.5-1.2-6.5-1.5-10 .5-3.5-2-7.5-1.7-10-.5z"/><path d="M12 6v13.5"/></svg><p>Mentorship and commitment to success</p></li>
+                            <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M12 6.2l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.3l2-.3z"/><path d="M8.5 14l-2 7 5.5-2.5 5.5 2.5-2-7"/></svg><p>Commitment to student access</p></li>
+                        </ul>
+                        <p class="fac-hl-close">Engineered for Excellence</p>
+                    </article>
+
+                </div>
+
+                <!-- Faculty page navigation: PREV / position dots / NEXT -->
+                <nav class="fac-pager" aria-label="Faculty slides">
+                    <button type="button" class="fac-step fac-prev" id="facPrev" aria-label="Previous Faculty slide"><span class="fac-step-arrow" aria-hidden="true">&larr;</span><span>Prev</span></button>
+                    <div class="fac-pager-mid">
+                        <span class="fac-count" id="facCount" aria-live="polite">01 / 04</span>
+                        <div class="carousel-dots fac-dots" id="facDots">
+                            <button type="button" class="dot active" aria-label="Faculty slide 1: Opening" data-index="0"></button>
+                            <button type="button" class="dot" aria-label="Faculty slide 2: Chairperson" data-index="1"></button>
+                            <button type="button" class="dot" aria-label="Faculty slide 3: Professors" data-index="2"></button>
+                            <button type="button" class="dot" aria-label="Faculty slide 4: Highlights" data-index="3"></button>
+                        </div>
+                    </div>
+                    <button type="button" class="fac-step fac-next" id="facNext" aria-label="Next Faculty slide"><span>Next</span><span class="fac-step-arrow" aria-hidden="true">&rarr;</span></button>
+                </nav>
+            </div>
+        </section>
+
+        <!-- ================= SCPES WORLD =================
+             Entry threshold → Meet the Officers → Gatherings → End of chapter.
+             Cards and stories are generated by script.js (section 8). -->
+        <section class="scpes-world" id="scpes" aria-label="Society of Computer Engineering Students">
+
+            <!-- A · THRESHOLD: the cream page darkens into the SCPES chapter -->
+            <div class="sw-threshold">
+                <div class="sw-thr-top">
+                    <p class="sw-rule-label"><span>UE Computer Engineering</span><i></i><span>Next chapter</span></p>
+                </div>
+                <div class="sw-thr-core sw-reveal">
+                    <p class="sw-kicker"><span>UE Computer Engineering</span><i></i><span>Student Organization</span></p>
+                    <h2 class="sw-mark" aria-label="SCPES">
+                        <span class="sw-echo sw-echo-2" aria-hidden="true">SCPES</span>
+                        <span class="sw-echo sw-echo-1" aria-hidden="true">SCPES</span>
+                        <span class="sw-mark-front" aria-hidden="true">SCPES</span>
+                    </h2>
+                    <p class="sw-expanded">Society of Computer Engineering Students</p>
+                    <ol class="sw-contents">
+                        <li><a href="#swOfficers"><b>01</b><span>Meet the Officers</span><em>13 officers</em></a></li>
+                        <li><a href="#swGatherings"><b>02</b><span>Gatherings</span><em>SCPES in action</em></a></li>
+                        <li class="sw-follow"><b>&mdash;</b><span>@uescpes_official</span><em>facebook.com/uescpes</em></li>
+                    </ol>
+                    <a class="sw-enter" href="#swOfficers"><span>Enter</span><span class="sw-enter-line" aria-hidden="true"></span></a>
+                    <p class="sw-tags">#SoarHighCPE &nbsp;&middot;&nbsp; #JoinTheTechRevolution</p>
+                </div>
+            </div>
+
+            <!-- B + C · OFFICERS COLLECTION + SPOTLIGHT -->
+            <div class="sw-stage" id="swOfficers" data-collection="officers" tabindex="0"
+                 aria-roledescription="carousel" aria-label="Meet the Officers">
+                <header class="sw-bar">
+                    <div class="sw-local">
+                        <span class="sw-wordmark">SCPES</span>
+                        <a href="#swOfficers" class="is-here">01 Officers</a>
+                        <a href="#swGatherings">02 Gatherings</a>
+                    </div>
+                    <div class="sw-id" aria-hidden="true">
+                        <span class="sw-id-hole"></span>
+                        <img class="sw-id-img" alt="">
+                        <span class="sw-id-text"><b class="sw-id-num">01 / 13</b><span class="sw-id-role"></span></span>
+                    </div>
+                </header>
+                <div class="sw-head">
+                    <p class="sw-head-kicker">SCPES &mdash; 01</p>
+                    <h3 class="sw-head-title">Meet the Officers</h3>
+                </div>
+                <div class="sw-track" role="group" aria-label="Officers"></div>
+                <div class="sw-center-line" aria-hidden="true"></div>
+                <footer class="sw-controls">
+                    <p class="sw-hint">Drag, swipe or use &larr; &rarr;</p>
+                    <div class="sw-nav">
+                        <button type="button" class="sw-step sw-prev" aria-label="Previous officer"><span aria-hidden="true">&larr;</span> Prev</button>
+                        <div class="sw-ruler" aria-hidden="true"></div>
+                        <span class="sw-count" aria-live="polite">01 / 13</span>
+                        <button type="button" class="sw-step sw-next" aria-label="Next officer">Next <span aria-hidden="true">&rarr;</span></button>
+                    </div>
+                    <button type="button" class="sw-open">View profile <span aria-hidden="true">&nearr;</span></button>
+                </footer>
+                <div class="sw-spot" role="dialog" aria-modal="false" aria-label="Officer profile" hidden></div>
+            </div>
+
+            <!-- D + E · GATHERINGS COLLECTION + FEATURE STORY -->
+            <div class="sw-stage sw-stage--events" id="swGatherings" data-collection="gatherings" data-mode="story" tabindex="0"
+                 aria-roledescription="carousel" aria-label="Gatherings">
+                <header class="sw-bar">
+                    <div class="sw-local">
+                        <span class="sw-wordmark">SCPES</span>
+                        <a href="#swOfficers">01 Officers</a>
+                        <a href="#swGatherings" class="is-here">02 Gatherings</a>
+                    </div>
+                    <div class="sw-id" aria-hidden="true">
+                        <span class="sw-id-hole"></span>
+                        <img class="sw-id-img" alt="">
+                        <span class="sw-id-text"><b class="sw-id-num">01 / 08</b><span class="sw-id-role"></span></span>
+                    </div>
+                </header>
+                <div class="sw-head">
+                    <p class="sw-head-kicker">SCPES &mdash; 02 &middot; SCPES in action</p>
+                    <h3 class="sw-head-title">Gatherings</h3>
+                </div>
+                <div class="sw-track" role="group" aria-label="Gatherings"></div>
+                <div class="sw-center-line" aria-hidden="true"></div>
+                <footer class="sw-controls">
+                    <p class="sw-hint">Drag, swipe or use &larr; &rarr;</p>
+                    <div class="sw-nav">
+                        <button type="button" class="sw-step sw-prev" aria-label="Previous story"><span aria-hidden="true">&larr;</span> Prev</button>
+                        <div class="sw-ruler" aria-hidden="true"></div>
+                        <span class="sw-count" aria-live="polite">01 / 08</span>
+                        <button type="button" class="sw-step sw-next" aria-label="Next story">Next <span aria-hidden="true">&rarr;</span></button>
+                    </div>
+                    <button type="button" class="sw-open">Open story <span aria-hidden="true">&nearr;</span></button>
+                </footer>
+                <div class="sw-spot" role="dialog" aria-modal="false" aria-label="Story" hidden></div>
+            </div>
+
+            <!-- EXIT: the chapter releases back to the cream CPEWeb page -->
+            <div class="sw-exit">
+                <p class="sw-rule-label"><span>End of chapter</span><i></i><a href="#scpes">&uarr; Back to SCPES</a></p>
+            </div>
+        </section>
+
     </main>
+
+    <!-- ================= UE FOOTER =================
+         Flat navy, no photo. Address + trunklines from ue.edu.ph/mla;
+         Facebook = the page linked from ue.edu.ph. FAQ = placeholders. -->
+    <footer class="ue-footer" id="contact">
+        <div class="uf-in">
+            <div class="uf-brand">
+                <!-- PLACEHOLDER: the official UE seal file is not in the project yet (Assets/logo.png is the CpE mark) -->
+                <span class="uf-seal" role="img" aria-label="UE seal placeholder">UE<br>seal</span>
+                <div>
+                    <p class="uf-name">University of the East</p>
+                    <p class="uf-tag">Let Your Tomorrow Begin in the East.</p>
+                </div>
+            </div>
+
+            <div class="uf-cols">
+                <section class="uf-col" aria-labelledby="ufManila">
+                    <h2 class="uf-label" id="ufManila">UE Manila</h2>
+                    <address class="uf-address">2219 C.M. Recto Avenue, Brgy. 404, Zone 41,<br>Sampaloc, Manila, Philippines</address>
+                    <p class="uf-tel">
+                        <span class="uf-small">Trunkline</span>
+                        <a href="tel:+63287355471">(632) 8735-54-71</a>
+                        <span class="uf-sep" aria-hidden="true">|</span>
+                        <a href="tel:+63253285471">5328-5471</a>
+                    </p>
+                </section>
+
+                <section class="uf-col" aria-labelledby="ufConnect">
+                    <h2 class="uf-label" id="ufConnect">Connect with UE</h2>
+                    <a class="uf-fb" href="https://www.facebook.com/UniversityoftheEastUE/" target="_blank" rel="noopener noreferrer">
+                        <svg class="uf-fb-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.23 2.68.23v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+                        <span class="uf-fb-text">
+                            <span class="uf-fb-name">University of the East (UE)</span>
+                            <span class="uf-fb-sub">Official Facebook Page</span>
+                            <span class="uf-fb-go">Visit Facebook <span aria-hidden="true">&rarr;</span><span class="uf-sr"> (opens in a new tab)</span></span>
+                        </span>
+                    </a>
+                </section>
+            </div>
+
+            <section class="uf-faq" aria-labelledby="ufFaq">
+                <h2 class="uf-label" id="ufFaq">FAQ</h2>
+                <ul class="uf-faq-list">
+                    <li>
+                        <h3><button type="button" class="uf-q" aria-expanded="false" aria-controls="ufA1" id="ufQ1"><span>Question 01 <em>[Question to be provided]</em></span><span class="uf-pm" aria-hidden="true"></span></button></h3>
+                        <div class="uf-a" id="ufA1" role="region" aria-labelledby="ufQ1" hidden><p>[FAQ content to be provided]</p></div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="uf-q" aria-expanded="false" aria-controls="ufA2" id="ufQ2"><span>Question 02 <em>[Question to be provided]</em></span><span class="uf-pm" aria-hidden="true"></span></button></h3>
+                        <div class="uf-a" id="ufA2" role="region" aria-labelledby="ufQ2" hidden><p>[FAQ content to be provided]</p></div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="uf-q" aria-expanded="false" aria-controls="ufA3" id="ufQ3"><span>Question 03 <em>[Question to be provided]</em></span><span class="uf-pm" aria-hidden="true"></span></button></h3>
+                        <div class="uf-a" id="ufA3" role="region" aria-labelledby="ufQ3" hidden><p>[FAQ content to be provided]</p></div>
+                    </li>
+                </ul>
+            </section>
+
+            <div class="uf-bottom">
+                <p>Copyright &copy; 2026. University of the East, Philippines &middot; UE Computer Engineering</p>
+                <a href="#" class="uf-top">Back to top <span aria-hidden="true">&uarr;</span></a>
+            </div>
+        </div>
+    </footer>
+
+
 
     <!-- CAREER INDIVIDUAL JOB MODAL POPUP -->
     <div class="career-modal-overlay" id="careerModalOverlay" onclick="closeJobModal(event)">
@@ -495,7 +774,7 @@
         </div>
     </div>
 
-    <script src="script.js?v=20260923-1"></script>
+    <script src="script.js?v=20260924-2"></script>
     <script>
         // SEPARATE DATA & GIF PREVIEWS FOR EACH INDIVIDUAL JOB
         const jobDetailsData = {
