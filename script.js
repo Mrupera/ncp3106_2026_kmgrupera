@@ -985,20 +985,20 @@ document.addEventListener("DOMContentLoaded", () => {
             gatherings: [
                 { kind: "Competition", title: "Packet Hacks 2025", deck: "First Runner-Up",
                   img: "iotcon", pos: "50% 45%",
-                  facts: [["Result", "First Runner-Up"], ["Date", "[To confirm]"], ["Team", "[To confirm]"]],
-                  caption: "On stage after the “First Runner-Up” announcement." },
-                { kind: "Research", title: "1st Computer Engineering Research Colloquium-Forum", deck: null,
+                  facts: ["Result", "First Runner-Up"], 
+                  caption: "On stage after the First Runner-Up announcement." },
+                { kind: "Research", title: "1st Computer Engineering Research Colloqui-Forum", deck: null,
                   img: "researchcolloqium", pos: "50% 40%",
-                  facts: [["Date", "[To confirm]"], ["Venue", "[To confirm]"]],
+                  facts: [["Date", "May 2026"], ["Venue", "LB211"]],
                   caption: "Participants with their certificates." },
-                { kind: "Projects", title: "[Project exhibit title]", deck: "CalamiTech · Doze · SIBOLTech · TheraFlow",
+                { kind: "Projects",title: "Computer Engineering Research Colloqui-Forum Projects", deck: "CalamiTech · Doze · SIBOLTech · TheraFlow",
                   img: "research", pos: "50% 60%",
-                  facts: [["Projects shown", "CalamiTech, Doze, SIBOLTech, TheraFlow"], ["Date", "[To confirm]"]],
+                  facts: [["Projects shown", "CalamiTech, Doze, SIBOLTech, TheraFlow"], ["Date", "May 2026"], ["Venue", "LB211"]],
                   gallery: ["calamitech", "dozen", "siboltech", "theraflow", "smoki"],
                   caption: "Project posters lined up for the exhibit." },
                 { kind: "Outreach", title: "SHS Work Immersion", deck: null,
                   img: "workimmersionshs", pos: "50% 40%",
-                  facts: [["Date", "[To confirm]"]],
+                  facts: [["Date", "February 2026"], ["Venue", "LB211"]],
                   caption: "Senior high school work immersion participants with SCPES." },
                 { kind: "Community", title: "Free Coffee & Bread", deck: "July 28 · 2/F LB · 8AM",
                   img: "bread1", pos: "50% 50%",
@@ -1179,10 +1179,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button type="button" class="sw-sp-next"><img src="${src(nx)}" alt=""><span><b>Next officer</b>${esc(nx.name)}</span></button>
                 </div>`;
         }
-        function storyMarkup(i) {
+             function storyMarkup(i) {
             const it = items[i], nx = items[(i + 1) % n];
             const gal = [it.img].concat(it.gallery || []);
-            const facts = it.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd class="${isPh(v) ? "is-ph" : ""}">${esc(v)}</dd></div>`).join("");
             return `<figure class="sw-st-photo"><img src="${EV(it.img)}" alt="${esc(it.caption)}"></figure>
 
                 <div class="sw-st-text sw-spot-in">
@@ -1190,7 +1189,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="sw-sp-kicker">SCPES in action &nbsp;/&nbsp; ${esc(it.kind)}</p>
                     <h4 class="sw-st-title">${esc(it.title)}</h4>
                     ${it.deck ? `<p class="sw-st-deck">${esc(it.deck)}</p>` : ""}
-                    <dl class="sw-sp-table">${facts}</dl>
                     <p class="sw-st-cap">${esc(it.caption)}</p>
                 </div>
                 <div class="sw-st-side sw-spot-in">
