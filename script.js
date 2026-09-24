@@ -1020,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 { kind: "Community", title: "Freshman Huddle", deck: null,
                   img: "freshmenhuddle", pos: "50% 45%",
                   facts: [["Date", "[To confirm]"]],
-                  caption: "[Caption to confirm]" },
+                  caption: "A tradition every year to welcome new the batch of computer engineering students." },
                 { kind: "Organization", title: "SCPES A.Y. 26–27", deck: "#AllOutCPE",
                   img: "org1", pos: "50% 35%",
                   facts: [["Academic year", "2026–27"]],
