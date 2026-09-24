@@ -1017,7 +1017,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   facts: [["When", "July 28, 8AM (until supplies last)"], ["Where", "2/F LB"], ["Open to", "The whole CENG’G community and UE support staff"]],
                   gallery: ["bread2"],
                   caption: "Open to students, faculty, admin & staff, security guards and janitors." },
-                { kind: "Community", title: "[Gathering title]", deck: null,
+                { kind: "Community", title: "Freshman Huddle", deck: null,
                   img: "freshmenhuddle", pos: "50% 45%",
                   facts: [["Date", "[To confirm]"]],
                   caption: "[Caption to confirm]" },
