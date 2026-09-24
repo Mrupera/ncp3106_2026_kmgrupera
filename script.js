@@ -5,21 +5,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.getElementById("navbar");
 
     if (navbar) {
-        navbar.addEventListener("mouseenter", () => {
-            navbar.classList.add("show");
+        // Hover logic is for a real mouse on wide screens only. Where the menu
+        // button is shown (touch / narrow screens) the button alone opens the menu.
+        const buttonMode = window.matchMedia("(hover: none), (max-width: 900px)");
+        const isMouse = (e) => e.pointerType === "mouse" && !buttonMode.matches;
+
+        navbar.addEventListener("pointerenter", (e) => {
+            if (isMouse(e)) navbar.classList.add("show");
         });
 
-        navbar.addEventListener("mouseleave", () => {
-            navbar.classList.remove("show");
+        navbar.addEventListener("pointerleave", (e) => {
+            if (isMouse(e)) navbar.classList.remove("show");
         });
 
-        window.addEventListener("mousemove", (e) => {
+        window.addEventListener("pointermove", (e) => {
+            if (!isMouse(e)) return;
             if (e.clientY <= 60) {
                 navbar.classList.add("show");
             } else if (!navbar.matches(":hover")) {
                 navbar.classList.remove("show");
             }
         });
+
+        // Visible while the page is at the top; hides once the user scrolls down
+        const TOP_ZONE = 40;
+        const syncTop = () => navbar.classList.toggle("at-top", window.scrollY <= TOP_ZONE);
+        window.addEventListener("scroll", syncTop, { passive: true });
+        syncTop();
     }
 
     /* ==========================================
@@ -690,7 +702,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function navIsOpen() {
         // The navbar slides in via .show or :hover — either counts as open
-        return navbar.classList.contains("show") || navbar.matches(":hover");
+        return navbar.classList.contains("show") || navbar.classList.contains("at-top") || navbar.matches(":hover");
     }
 
     function clearAll() {
@@ -890,9 +902,9 @@ document.addEventListener("DOMContentLoaded", () => {
        are placeholders awaiting verified information;
        an empty photo shows the "Photo to be added" panel. */
     const professors = [
-        { name: "Engr. Mary Ann Limkian, PCpE", role: "CpE Faculty", photo: "Assets/mamlim.jpg" },
-        { name: "Engr. Onofre Corpuz",          role: "CpE Faculty", photo: "Assets/faculty/corpuz.jpg" },
-        { name: "Engr. Joehmel Coral",          role: "CpE Faculty", photo: "Assets/faculty/coral.jpg" }
+        { name: "Engr. Mary Ann Limkian, PCpE", role: "CpE Faculty", photo: "Assets/Faculty/mamlim.jpg" },
+        { name: "Engr. Onofre Corpuz",          role: "CpE Faculty", photo: "Assets/Faculty/corpuz.jpg" },
+        { name: "Engr. Joehmel Coral",          role: "CpE Faculty", photo: "Assets/Faculty/coral.jpg" }
     ];
 
     const rows = Array.from(document.querySelectorAll("#facIndex .fac-row"));
@@ -985,30 +997,30 @@ document.addEventListener("DOMContentLoaded", () => {
             gatherings: [
                 { kind: "Competition", title: "Packet Hacks 2025", deck: "First Runner-Up",
                   img: "iotcon", pos: "50% 45%",
-                  facts: ["Result", "First Runner-Up"], 
-                  caption: "On stage after the First Runner-Up announcement." },
-                { kind: "Research", title: "1st Computer Engineering Research Colloqui-Forum", deck: null,
+                  facts: [["Result", "First Runner-Up"], ["Date", "[To confirm]"], ["Team", "[To confirm]"]],
+                  caption: "On stage after the “First Runner-Up” announcement." },
+                { kind: "Research", title: "1st Computer Engineering Research Colloquium-Forum", deck: null,
                   img: "researchcolloqium", pos: "50% 40%",
-                  facts: [["Date", "May 2026"], ["Venue", "LB211"]],
+                  facts: [["Date", "[To confirm]"], ["Venue", "[To confirm]"]],
                   caption: "Participants with their certificates." },
-                { kind: "Projects",title: "Computer Engineering Research Colloqui-Forum Projects", deck: "CalamiTech · Doze · SIBOLTech · TheraFlow",
+                { kind: "Projects", title: "Project Exhibit", deck: "CalamiTech · Doze · SIBOLTech · TheraFlow",
                   img: "research", pos: "50% 60%",
-                  facts: [["Projects shown", "CalamiTech, Doze, SIBOLTech, TheraFlow"], ["Date", "May 2026"], ["Venue", "LB211"]],
+                  facts: [["Projects shown", "CalamiTech, Doze, SIBOLTech, TheraFlow"], ["Date", "[To confirm]"]],
                   gallery: ["calamitech", "dozen", "siboltech", "theraflow", "smoki"],
                   caption: "Project posters lined up for the exhibit." },
                 { kind: "Outreach", title: "SHS Work Immersion", deck: null,
                   img: "workimmersionshs", pos: "50% 40%",
-                  facts: [["Date", "February 2026"], ["Venue", "LB211"]],
+                  facts: [["Date", "[To confirm]"]],
                   caption: "Senior high school work immersion participants with SCPES." },
                 { kind: "Community", title: "Free Coffee & Bread", deck: "July 28 · 2/F LB · 8AM",
                   img: "bread1", pos: "50% 50%",
                   facts: [["When", "July 28, 8AM (until supplies last)"], ["Where", "2/F LB"], ["Open to", "The whole CENG’G community and UE support staff"]],
                   gallery: ["bread2"],
                   caption: "Open to students, faculty, admin & staff, security guards and janitors." },
-                { kind: "Community", title: "Freshman Huddle", deck: null,
+                { kind: "Community", title: "[Gathering title]", deck: null,
                   img: "freshmenhuddle", pos: "50% 45%",
-                  facts: [["Date", "September 2026"]],
-                  caption: "A tradition every year for the freshman class." },
+                  facts: [["Date", "[To confirm]"]],
+                  caption: "[Caption to confirm]" },
                 { kind: "Organization", title: "SCPES A.Y. 26–27", deck: "#AllOutCPE",
                   img: "org1", pos: "50% 35%",
                   facts: [["Academic year", "2026–27"]],
@@ -1020,7 +1032,14 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         };
     const OFF = (k, alt) => "Assets/Officers/portraits/" + k + (alt ? "-2" : "") + ".jpg";
-    const EV = (k) => "Assets/SCPE/" + ({ calamitech: "Calamitech" }[k] || k) + ".jpg";
+    // Photos are sorted into Assets/SCPE/Projects, /Events and /Orgpic
+    const FOLDER = {
+        iotcon: "Projects", researchcolloqium: "Projects", research: "Projects",
+        calamitech: "Projects", dozen: "Projects", siboltech: "Projects", theraflow: "Projects", smoki: "Projects",
+        workimmersionshs: "Events", bread1: "Events", bread2: "Events", freshmenhuddle: "Events",
+        org1: "Orgpic", org2: "Orgpic", org3: "Orgpic"
+    };
+    const EV = (k) => "Assets/SCPE/" + FOLDER[k] + "/" + ({ calamitech: "Calamitech" }[k] || k) + ".jpg";
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isNarrow = () => window.matchMedia("(max-width: 900px)").matches;
     const pad = (n) => String(n).padStart(2, "0");
@@ -1179,7 +1198,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button type="button" class="sw-sp-next"><img src="${src(nx)}" alt=""><span><b>Next officer</b>${esc(nx.name)}</span></button>
                 </div>`;
         }
-             function storyMarkup(i) {
+        function storyMarkup(i) {
             const it = items[i], nx = items[(i + 1) % n];
             const gal = [it.img].concat(it.gallery || []);
             return `<figure class="sw-st-photo"><img src="${EV(it.img)}" alt="${esc(it.caption)}"></figure>

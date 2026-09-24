@@ -6,13 +6,14 @@
     <meta name="color-scheme" content="light only">
     <meta name="supported-color-schemes" content="light">
     <title>Computer Engineering | UE Manila</title>
-    <link rel="stylesheet" href="style.css?v=20260924-2">
+    <link rel="stylesheet" href="style.css?v=20260925-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <!-- Faculty section fonts. Perandory is the intended display face; Antic Didone is a temporary stand-in until a licensed Perandory web font is added. -->
     <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Lora:wght@700&family=Open+Sans:wght@400;600&family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="newspaper-theme">
 
@@ -61,11 +62,6 @@
                     <span>BACHELOR OF SCIENCE IN COMPUTER ENGINEERING</span>
                     <span>FOLLOW UE SCPES PAGE IN FACEBOOK</span>
                 </div>
-                <div class="information-content" aria-hidden="true">
-                    <span>UE RECTO MANILA</span>
-                    <span>BACHELOR OF SCIENCE IN COMPUTER ENGINEERING</span>
-                    <span>FOLLOW UE SCPES PAGE IN FACEBOOK</span>
-                </div>
             </div>
         </div>
 
@@ -100,9 +96,9 @@
                 <div class="announcement-carousel">
                     <div class="announcement-window" id="announcementWindow">
                         <div class="announcement-track" id="announcementTrack">
-                            <img src="Assets/SCPE/admissions.jpg" class="announcement-image active" alt="Admissions announcement" draggable="false">
-                            <img src="Assets/SCPE/BSCPE.jpg" class="announcement-image" alt="Bachelor of Science in Computer Engineering announcement" draggable="false">
-                            <img src="Assets/SCPE/Scholarships.jpg" class="announcement-image" alt="Scholarships announcement" draggable="false">
+                            <img src="Assets/SCPE/About/admissions.jpg" class="announcement-image active" alt="Admissions announcement" draggable="false">
+                            <img src="Assets/SCPE/About/BSCPE.jpg" class="announcement-image" alt="Bachelor of Science in Computer Engineering announcement" draggable="false">
+                            <img src="Assets/SCPE/About/Scholarships.jpg" class="announcement-image" alt="Scholarships announcement" draggable="false">
                         </div>
                     </div>
 
@@ -229,9 +225,6 @@
                 <div class="overview-ticker-bar">
                     <div class="overview-ticker-track">
                         <div class="overview-ticker-content">
-                            <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING &times; COMPUTING &times; INNOVATION &nbsp;&bull;&nbsp;</span>
-                        </div>
-                        <div class="overview-ticker-content" aria-hidden="true">
                             <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING &times; COMPUTING &times; INNOVATION &nbsp;&bull;&nbsp;</span>
                         </div>
                     </div>
@@ -488,7 +481,7 @@
                     <!-- SLIDE 2 · CHAIRPERSON (not part of the professor selector) -->
                     <article class="fac-slide fac-chair" aria-label="Faculty, slide 2 of 4">
                         <figure class="fac-chair-photo">
-                            <img src="Assets/sirej.png" alt="The Computer Engineering chairperson speaking at a Society of Computer Engineering Students event" draggable="false">
+                            <img src="Assets/Faculty/sirej.png" alt="The Computer Engineering chairperson speaking at a Society of Computer Engineering Students event" draggable="false">
                         </figure>
                         <div class="fac-chair-text">
                             <h2 class="fac-title">Meet the Chairperson</h2>
@@ -501,8 +494,8 @@
                             </blockquote>
                             <div class="fac-byline">
                                 <!-- PLACEHOLDER: replace with the verified chairperson name -->
-                                <p class="fac-name">Engr. Errol John Antonio</p>
-                                <p class="fac-role">Department Chairperson of Computer Engineering</p>
+                                <p class="fac-name">[Chairperson’s name]</p>
+                                <p class="fac-role">Chairperson, Computer Engineering</p>
                             </div>
                         </div>
                     </article>
@@ -514,13 +507,12 @@
                             <ol class="fac-index" id="facIndex" aria-label="Professors">
                                 <li><button type="button" class="fac-row is-current" data-prof="0" aria-pressed="true"><span class="fac-num">01</span><span class="fac-row-text"><span class="fac-row-name">Engr. Mary Ann Limkian, PCpE</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
                                 <li><button type="button" class="fac-row" data-prof="1" aria-pressed="false"><span class="fac-num">02</span><span class="fac-row-text"><span class="fac-row-name">Engr. Onofre Corpuz</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
-                                <!-- PLACEHOLDER: professor 03 name, title and photo not yet verified -->
-                                <li><button type="button" class="fac-row is-pending" data-prof="2" aria-pressed="false"><span class="fac-num">03</span><span class="fac-row-text"><span class="fac-row-name">Engr. Joehmel Coral</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
+                                <li><button type="button" class="fac-row" data-prof="2" aria-pressed="false"><span class="fac-num">03</span><span class="fac-row-text"><span class="fac-row-name">Engr. Joehmel Coral</span><span class="fac-row-role">CpE Faculty</span></span></button></li>
                             </ol>
                         </div>
                         <figure class="fac-feature" id="facFeature" aria-live="polite">
                             <div class="fac-portrait">
-                                <img id="facPortrait" src="Assets/mamlim.jpg" alt="Portrait of Engr. Mary Ann Limkian, PCpE" draggable="false">
+                                <img id="facPortrait" src="Assets/Faculty/mamlim.jpg" alt="Portrait of Engr. Mary Ann Limkian, PCpE" draggable="false">
                                 <span class="fac-portrait-empty">Photo to be added</span>
                             </div>
                             <figcaption class="fac-plate">
@@ -672,7 +664,6 @@
     <footer class="ue-footer" id="contact">
         <div class="uf-in">
             <div class="uf-brand">
-                <!-- PLACEHOLDER: the official UE seal file is not in the project yet (Assets/logo.png is the CpE mark) -->
                 <img class="uf-seal-img" src="Assets/ue-seal.png" alt="University of the East seal" width="52" height="52">
                 <div>
                     <p class="uf-name">University of the East</p>
@@ -710,8 +701,7 @@
                 <ul class="uf-faq-list">
                     <li>
                         <h3><button type="button" class="uf-q" aria-expanded="false" aria-controls="ufA1" id="ufQ1"><span>Question 01 <em>How can I inquire about admission to UE?</em></span><span class="uf-pm" aria-hidden="true"></span></button></h3>
-                        <div class="uf-a" id="ufA1" role="region" aria-labelledby="ufQ1" hidden><p>Visit the official UE website 
-                             for admissions information and application guidance. You can also contact UE Manila using the telephone number listed in this footer.</p></div>
+                        <div class="uf-a" id="ufA1" role="region" aria-labelledby="ufQ1" hidden><p>Visit the official UE website for admissions information and application guidance. You can also contact UE Manila using the telephone number listed in this footer.</p></div>
                     </li>
                     <li>
                         <h3><button type="button" class="uf-q" aria-expanded="false" aria-controls="ufA2" id="ufQ2"><span>Question 02 <em>Where can I find the latest tuition and school fees?</em></span><span class="uf-pm" aria-hidden="true"></span></button></h3>
@@ -775,7 +765,7 @@
         </div>
     </div>
 
-    <script src="script.js?v=20260924-2"></script>
+    <script src="script.js?v=20260925-1"></script>
     <script>
         // SEPARATE DATA & GIF PREVIEWS FOR EACH INDIVIDUAL JOB
         const jobDetailsData = {
@@ -1049,4 +1039,4 @@
         }
     </script>
 </body>
-</html> 
+</html>

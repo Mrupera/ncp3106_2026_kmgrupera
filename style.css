@@ -3971,8 +3971,7 @@ html, body {
 .sw-card-name { font-family: var(--sw-display); font-weight: 400; font-size: 26px; line-height: 0.98; text-transform: uppercase; color: var(--sw-cream); }
 .sw-card-role { padding-top: 8px; border-top: 1px solid var(--sw-rule); font-family: Raleway, sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: 0.14em; line-height: 1.5; text-transform: uppercase; color: var(--sw-dim); }
 .sw-card:not(.is-center) .sw-card-meta { opacity: 0.55; }
-.sw-stage--events .sw-card-name { font-size: 22px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-
+.sw-stage--events .sw-card-name { font-size: 22px; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 /* controls: editorial page navigation, same language as Faculty */
 .sw-controls {
     position: absolute; left: 4vw; right: 4vw; bottom: 30px; z-index: 6;
@@ -4246,5 +4245,81 @@ html, body {
     .uf-tel a { min-height: 44px; display: inline-flex; align-items: center; }
     .uf-fb-go { min-height: 44px; }
 }
+
 .uf-seal-img { width: 52px; height: 52px; flex: none; object-fit: contain; display: block; }
 @media (max-width: 900px) { .uf-seal-img { width: 44px; height: 44px; } }
+
+/* ==========================================
+   42. STATIC INFORMATION BARS (text loop removed)
+   ========================================== */
+.information-track,
+.overview-ticker-track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+}
+
+.information-content {
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+}
+
+/* The overview bar matches the masthead bar */
+.overview-ticker-bar {
+    padding: 6px 0;
+    font-family: inherit;
+    font-size: 0.82rem;
+    white-space: normal;
+    box-shadow: none;
+}
+
+.overview-ticker-content {
+    flex-shrink: 1;
+    justify-content: center;
+    text-align: center;
+    min-height: 28px;
+    padding: 4px 12px;
+    line-height: 1.3;
+}
+
+@media (max-width: 700px) {
+    .overview-ticker-bar { font-size: 0.7rem; }
+    .overview-ticker-content { padding: 4px 8px; }
+}
+
+/* ==========================================
+   43. NAVBAR VISIBLE AT THE TOP OF THE PAGE
+   Shown while the page is at the top; hides once the user
+   scrolls down, then returns when the cursor nears the top.
+   ========================================== */
+.navbar.at-top {
+    transform: translateY(0) !important;
+}
+
+@media (hover: none), (max-width: 900px) {
+    /* At the top only the logo strip shows; the menu button opens the links */
+    .navbar.at-top:not(.show) .nav-links {
+        display: none;
+    }
+
+    /* A tap leaves :hover "stuck" on phones; only the menu button opens it here */
+    .navbar:not(.show):not(.at-top):hover {
+        transform: translateY(-100%) !important;
+    }
+}
+
+/* ==========================================
+   44. SCPES TITLE IN POPPINS
+   ========================================== */
+.sw-mark {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    /* Poppins is wider, so the title is a little smaller on phones */
+    .sw-mark { font-size: 28vw; }
+}
