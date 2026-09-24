@@ -902,9 +902,9 @@ document.addEventListener("DOMContentLoaded", () => {
        are placeholders awaiting verified information;
        an empty photo shows the "Photo to be added" panel. */
     const professors = [
-        { name: "Engr. Mary Ann Limkian, PCpE", role: "CpE Faculty", photo: "Assets/Faculty/mamlim.jpg" },
-        { name: "Engr. Onofre Corpuz",          role: "CpE Faculty", photo: "Assets/Faculty/corpuz.jpg" },
-        { name: "Engr. Joehmel Coral",          role: "CpE Faculty", photo: "Assets/Faculty/coral.jpg" }
+        { name: "Engr. Mary Ann Limkian, PCpE", role: "CpE Faculty", photo: "Assets/faculty/mamlim.jpg" },
+        { name: "Engr. Onofre Corpuz",          role: "CpE Faculty", photo: "Assets/faculty/corpuz.jpg" },
+        { name: "Engr. Joehmel Coral",          role: "CpE Faculty", photo: "Assets/faculty/coral.jpg" }
     ];
 
     const rows = Array.from(document.querySelectorAll("#facIndex .fac-row"));
