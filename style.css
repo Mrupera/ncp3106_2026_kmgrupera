@@ -4246,3 +4246,5 @@ html, body {
     .uf-tel a { min-height: 44px; display: inline-flex; align-items: center; }
     .uf-fb-go { min-height: 44px; }
 }
+.uf-seal-img { width: 52px; height: 52px; flex: none; object-fit: contain; display: block; }
+@media (max-width: 900px) { .uf-seal-img { width: 44px; height: 44px; } }
