@@ -3947,9 +3947,9 @@ html, body {
 .sw-head-kicker { margin: 0; font-family: Raleway, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sw-light); }
 .sw-head-title { margin: 10px 0 0; font-family: var(--sw-display); font-weight: 400; font-size: clamp(40px, 4.4vw, 64px); line-height: 0.95; text-transform: uppercase; color: var(--sw-cream); }
 
-.sw-center-line { position: absolute; left: 50%; top: 150px; width: 1px; height: 34px; background: var(--sw-light); z-index: 3; pointer-events: none; }
-.sw-center-line::after { content: ""; position: absolute; left: -4px; bottom: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--sw-light); }
-
+.sw-center-line {
+    display: none;
+}
 /* track: cards positioned by JS around the centre line (curved filmstrip) */
 .sw-track { position: absolute; left: 0; right: 0; top: 196px; bottom: 96px; perspective: 1600px; cursor: grab; touch-action: pan-y; z-index: 2; }
 .sw-track.is-dragging { cursor: grabbing; }
