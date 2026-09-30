@@ -145,15 +145,19 @@ body {
 
 /* ==========================================
    4. CONTAINERS & SITE HEADER
+   The page is one full-bleed canvas. .page-container no
+   longer floats as a narrow card; each section runs edge
+   to edge and centres its own content (see section 45).
    ========================================== */
 .page-container {
-    width: min(1200px, 94%);
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     padding-top: 64px;
     background: #f4f1e8;
     min-height: 100vh;
     min-height: 100dvh;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    box-shadow: none;
 }
 
 .white-container {
@@ -3835,8 +3839,8 @@ html, body {
     --sw-dim: rgba(244, 241, 232, 0.62);
     --sw-rule: rgba(244, 241, 232, 0.22);
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);   /* break out of the 1200px column: a world, not a panel */
+    width: 100%;
+    margin-left: 0;   /* the canvas is already full-bleed, so no breakout is needed */
     background: #000;
     color: var(--sw-cream);
     font-family: "Open Sans", sans-serif;
@@ -4322,4 +4326,73 @@ html, body {
 @media (max-width: 900px) {
     /* Poppins is wider, so the title is a little smaller on phones */
     .sw-mark { font-size: 28vw; }
+}
+
+/* ==========================================
+   45. FULL-BLEED CANVAS
+   Every section's paper band now runs edge to edge,
+   the same way the SCPES chapter and footer do, so
+   the page reads as one continuous surface.
+   Only the content inside each band is held to the
+   old 1200px column, so every component keeps the
+   exact size and proportions it had before.
+   Phones (<= 900px) were already full-width and are
+   untouched.
+   ========================================== */
+
+/* Bands touch the screen edges, so their side borders go */
+.page-container > section > .white-container,
+.page-container .info-page-wrapper {
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+}
+
+@media (min-width: 901px) {
+    /* Hero: same content width as the old column (1200 - 2 x 40px) */
+    .main-section {
+        padding-left: max(calc(3% + 40px), calc((100% - 1120px) / 2));
+        padding-right: max(calc(3% + 40px), calc((100% - 1120px) / 2));
+    }
+
+    /* About: the book keeps its old width; the paper band around it is full-bleed */
+    .about-slider-window {
+        width: min(1200px, 94%);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Overview: banner + address bar run edge to edge; cards were already
+       centred at max 1150px (section 9), so nothing else changes */
+
+    /* Specialization: content area is already centred at max 1100px
+       (section 11); the drawer now slides in from the screen edge */
+
+    /* Careers: the band was a narrower 1100px card; it now spans the page
+       and holds its content to the same 1040px it had inside that card */
+    .careers-section .white-container {
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: max(calc(3% + 30px), calc((100% - 1040px) / 2));
+        padding-right: max(calc(3% + 30px), calc((100% - 1040px) / 2));
+    }
+
+    /* Faculty: slides and pager stay at the old column width */
+    .fac-window {
+        width: min(1200px, 94%);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fac-pager {
+        width: calc(min(1200px, 94%) - 128px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* whatiscpe.html: the topic card keeps its old width inside a full-bleed band */
+    .info-page-wrapper {
+        padding-left: max(calc(3% + 30px), calc((100% - 1140px) / 2));
+        padding-right: max(calc(3% + 30px), calc((100% - 1140px) / 2));
+    }
 }
