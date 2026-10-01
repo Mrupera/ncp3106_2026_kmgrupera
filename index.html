@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light only">
     <meta name="supported-color-schemes" content="light">
     <title>Computer Engineering | UE Manila</title>
-    <link rel="stylesheet" href="style.css?v=20260925-1">
+    <link rel="stylesheet" href="style.css?v=20261002-11">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
     </button>
 
     <main class="page-container">
-        
+
         <!-- SITE TITLE HEADER -->
         <section class="site-heading">
             <h1>COMPUTER ENGINEERING</h1>
@@ -111,176 +111,646 @@
             </div>
         </section>
 
-        <!-- ABOUT SLIDER SECTION -->
-        <section class="about-slider-section" id="about">
-            <div class="white-container paper-container torn-top torn-bottom">
-                <div class="about-slider-window book-closed" id="aboutSliderWindow">
+        <!-- ABOUT · realistic page-flip book (StPageFlip, loaded from the CDN at the bottom of this file)
+             Editorial magazine pages: running header, page number + corner hint, spine-safe padding.
+             #book-container holds six pages = three spreads. On narrow screens it shows one page at a time. -->
+        <section class="cpe-pitch-band cpe-book-section" id="about" aria-label="About Computer Engineering">
+            <div class="cpe-pitch-wrap">
 
-                    <!-- CLOSED BOOK COVER: hinged at the spine, swings open -->
-                    <div class="book-cover" id="bookCover">
-                        <div class="book-cover-face book-cover-front">
-                            <div class="cover-rule"></div>
-                            <span class="cover-caption">Computer Engineering</span>
-                            <div class="cover-rule"></div>
-                        </div>
-                        <div class="book-cover-face book-cover-back"></div>
+                <div class="cpe-book-stage" id="cpeBookStage" tabindex="0" aria-label="Flipbook: About Computer Engineering. Use the left and right arrow keys to turn pages.">
+                    <div id="book-container" class="cpe-book-frame">
+
+                        <!-- SPREAD 1 · left: program overview -->
+                        <article class="cpe-book-page cpe-book-page--text" aria-label="Page 1">
+                            <div class="cpe-book-sheet">
+                            <header class="cpe-book-run" aria-hidden="true"><span>UE BSCPE Program Manual</span></header>
+                            <div class="cpe-book-inner">
+                                <p class="cpe-book-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2L4.5 13.5H11L10 22l9-12h-6.5z"/></svg><span>Overview</span></p>
+                                <h3 class="cpe-book-title">UE Computer Engineering</h3>
+                                <p class="cpe-book-copy"><strong>Computer Engineering (CPE)</strong> is a branch of engineering that combines computer science, electronics, and electrical engineering to design and develop computer-based systems. It focuses on understanding both the physical components of technology and the software that controls them.</p>
+                                <p class="cpe-book-copy"><strong>Computer engineers</strong> work with systems ranging from processors and circuit boards to computers, smart devices, and embedded systems.</p>
+                            </div>
+                            <footer class="cpe-book-foot" aria-hidden="true"><span class="cpe-book-folio">01</span><span class="cpe-book-hint">Drag to flip &#8599;</span></footer>
+                            </div>
+                        </article>
+
+                        <!-- SPREAD 1 · right: CPE 3D model / logo -->
+                        <article class="cpe-book-page cpe-book-page--art" aria-label="Page 2">
+                            <div class="cpe-book-sheet">
+                            <header class="cpe-book-run" aria-hidden="true"><span>Chapter 01: Introduction</span></header>
+                            <div class="cpe-book-inner cpe-book-inner--art">
+                                <img class="cpe-book-art" src="Assets/cpetext.png" alt="3D CPE Text" draggable="false">
+                            </div>
+                            <footer class="cpe-book-foot" aria-hidden="true"><span class="cpe-book-hint">Drag to flip &#8599;</span><span class="cpe-book-folio">02</span></footer>
+                            </div>
+                        </article>
+
+                        <!-- SPREAD 2 · left: hardware + software diagram -->
+                        <article class="cpe-book-page cpe-book-page--art" aria-label="Page 3">
+                            <div class="cpe-book-sheet">
+                            <header class="cpe-book-run" aria-hidden="true"><span>UE BSCPE Program Manual</span></header>
+                            <div class="cpe-book-inner cpe-book-inner--art">
+                                <img class="cpe-book-art" src="Assets/gifs/hw_sw.gif" alt="Hardware and Software Integration" draggable="false">
+                            </div>
+                            <footer class="cpe-book-foot" aria-hidden="true"><span class="cpe-book-folio">03</span><span class="cpe-book-hint">Drag to flip &#8599;</span></footer>
+                            </div>
+                        </article>
+
+                        <!-- SPREAD 2 · right: hardware + software -->
+                        <article class="cpe-book-page cpe-book-page--text" aria-label="Page 4">
+                            <div class="cpe-book-sheet">
+                            <header class="cpe-book-run" aria-hidden="true"><span>Chapter 01: Introduction</span></header>
+                            <div class="cpe-book-inner">
+                                <p class="cpe-book-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2L4.5 13.5H11L10 22l9-12h-6.5z"/></svg><span>Connection</span></p>
+                                <h3 class="cpe-book-title">Hardware + Software</h3>
+                                <p class="cpe-book-copy">At the heart of Computer Engineering is the relationship between hardware and software. Hardware provides the physical foundation, while software provides instructions that execute tasks.</p>
+                                <div class="cpe-book-kv">
+                                    <div class="cpe-book-kv-row">
+                                        <p class="cpe-book-kv-key">Hardware</p>
+                                        <ul class="cpe-book-chips">
+                                            <li>Processors</li>
+                                            <li>Memory</li>
+                                            <li>Circuits</li>
+                                            <li>Sensors</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cpe-book-kv-row">
+                                        <p class="cpe-book-kv-key">Software</p>
+                                        <ul class="cpe-book-chips">
+                                            <li>Programs</li>
+                                            <li>Operating Systems</li>
+                                            <li>Firmware</li>
+                                            <li>Algorithms</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="cpe-book-foot" aria-hidden="true"><span class="cpe-book-hint">Drag to flip &#8599;</span><span class="cpe-book-folio">04</span></footer>
+                            </div>
+                        </article>
+
+                        <!-- SPREAD 3 · left: why it matters -->
+                        <article class="cpe-book-page cpe-book-page--text" aria-label="Page 5">
+                            <div class="cpe-book-sheet">
+                            <header class="cpe-book-run" aria-hidden="true"><span>UE BSCPE Program Manual</span></header>
+                            <div class="cpe-book-inner">
+                                <h3 class="cpe-book-title">WHY DOES IT MATTER?</h3>
+                                <p class="cpe-book-copy">Computer Engineering plays a fundamental role in modern technology. It powers everything from smartphones and vehicles to robotics, communications, and intelligent cloud systems.</p>
+                                <ul class="cpe-book-list">
+                                    <li><strong>Runs daily life.</strong> Phones, cars, and medical devices.</li>
+                                    <li><strong>Holds up infrastructure.</strong> Grids, hospitals, transport, banking.</li>
+                                    <li><strong>Bridges hardware and software.</strong> The seam no other field covers.</li>
+                                    <li><strong>Makes new tech practical.</strong> AI, robotics, and IoT beyond the lab.</li>
+                                    <li><strong>Carries real stakes.</strong> Safety systems cannot fail.</li>
+                                    <li><strong>Opens many doors.</strong> One degree, many industries.</li>
+                                </ul>
+                            </div>
+                            <footer class="cpe-book-foot" aria-hidden="true"><span class="cpe-book-folio">05</span><span class="cpe-book-hint">Drag to flip &#8599;</span></footer>
+                            </div>
+                        </article>
+
+                        <!-- SPREAD 3 · right: quote -->
+                        <article class="cpe-book-page cpe-book-page--quote" aria-label="Page 6">
+                            <div class="cpe-book-sheet">
+                            <header class="cpe-book-run" aria-hidden="true"><span>Chapter 01: Introduction</span></header>
+                            <div class="cpe-book-inner cpe-book-inner--quote">
+                                <blockquote class="cpe-book-quote">
+                                    &ldquo;COMPUTER ENGINEERING IS WHERE IDEAS BECOME INTELLIGENT SYSTEMS&rdquo;
+                                </blockquote>
+                            </div>
+                            <footer class="cpe-book-foot" aria-hidden="true"><span class="cpe-book-hint">Drag to flip &#8599;</span><span class="cpe-book-folio">06</span></footer>
+                            </div>
+                        </article>
+
                     </div>
-
-                    <div class="about-slider-track" id="aboutSliderTrack">
-                        
-                        <div class="about-slide grid-left active">
-                            <div class="about-text-column newspaper-col">
-                                <div class="about-header-box">
-                                    <span class="title-all">ALL</span>
-                                    <span class="title-about">ABOUT</span>
-                                    <h2 class="title-cpe">Computer Engineering</h2>
-                                </div>
-                                <div class="about-description">
-                                    <p><strong>Computer Engineering (CPE)</strong> is a branch of engineering that combines computer science, electronics, and electrical engineering to design and develop computer-based systems. It focuses on understanding both the physical components of technology and the software that controls them.</p>
-                                    <p><strong>Computer engineers</strong> work with systems ranging from processors and circuit boards to computers, smart devices, and embedded systems.</p>
-                                </div>
-                            </div>
-                            <div class="page-flipper">
-                                <div class="page-face page-front">
-                                    <div class="about-image-column">
-                                        <img src="Assets/cpetext.png" alt="3D CPE Text" class="cpe-3d-image" draggable="false">
-                                    </div>
-                                </div>
-                                <div class="page-face page-back"></div>
-                            </div>
-                        </div>
-
-                        <div class="about-slide grid-right">
-                            <div class="about-placeholder-column">
-                                <img src="Assets/gifs/hw_sw.gif" alt="Hardware and Software Integration" class="about-diagram-img" draggable="false">
-                            </div>
-                            <div class="page-flipper">
-                                <div class="page-face page-front">
-                                    <div class="about-text-column newspaper-col">
-                                        <div class="about-header-box center-align">
-                                            <span class="title-connection">CONNECTION BETWEEN</span>
-                                            <h2 class="title-hw-sw">Hardware<br><span class="plus-symbol">+</span><br>Software</h2>
-                                        </div>
-                                        <div class="about-description">
-                                            <p>At the heart of Computer Engineering is the relationship between hardware and software. Hardware provides the physical foundation, while software provides instructions that execute tasks.</p>
-                                            <p class="feature-group"><strong>Hardware:</strong> Processors &bull; Memory &bull; Circuits &bull; Sensors</p>
-                                            <p class="feature-group"><strong>Software:</strong> Programs &bull; Operating Systems &bull; Firmware &bull; Algorithms</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="page-face page-back"></div>
-                            </div>
-                        </div>
-
-                        <div class="about-slide grid-left">
-                            <div class="about-text-column newspaper-col">
-                                <div class="about-header-box">
-                                    <h2 class="title-why">WHY DOES IT MATTER?</h2>
-                                </div>
-                                <div class="about-description">
-                                    <p>Computer Engineering plays a fundamental role in modern technology. It powers everything from smartphones and vehicles to robotics, communications, and intelligent cloud systems.</p>
-
-                                    <ul class="why-reasons">
-                                        <li><strong>Runs daily life.</strong> Phones, cars, and medical devices.</li>
-                                        <li><strong>Holds up infrastructure.</strong> Grids, hospitals, transport, banking.</li>
-                                        <li><strong>Bridges hardware and software.</strong> The seam no other field covers.</li>
-                                        <li><strong>Makes new tech practical.</strong> AI, robotics, and IoT beyond the lab.</li>
-                                        <li><strong>Carries real stakes.</strong> Safety systems cannot fail.</li>
-                                        <li><strong>Opens many doors.</strong> One degree, many industries.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="page-flipper">
-                                <div class="page-face page-front">
-                                    <div class="about-quote-column">
-                                        <blockquote class="quote-text">
-                                            &ldquo;COMPUTER ENGINEERING IS WHERE IDEAS BECOME INTELLIGENT SYSTEMS&rdquo;
-                                        </blockquote>
-                                    </div>
-                                </div>
-                                <div class="page-face page-back"></div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <div class="cpe-book-crease" aria-hidden="true"></div>
                 </div>
 
-                <div class="carousel-dots about-dots" id="aboutDots">
-                    <button class="dot active" aria-label="About slide 1" data-index="0"></button>
-                    <button class="dot" aria-label="About slide 2" data-index="1"></button>
-                    <button class="dot" aria-label="About slide 3" data-index="2"></button>
+                <div class="cpe-book-controls">
+                    <button type="button" class="cpe-book-btn" id="cpeBookPrev" aria-label="Previous pages">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>
+                    </button>
+                    <span class="cpe-book-count" id="cpeBookCount" aria-live="polite">01&ndash;02 / 06</span>
+                    <button type="button" class="cpe-book-btn" id="cpeBookNext" aria-label="Next pages">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>
+                    </button>
                 </div>
+                <p class="cpe-book-caption">Drag a page corner, click a page, or use the arrows.</p>
+
             </div>
         </section>
 
-        <!-- OVERVIEW FLIP CARDS SECTION WITH EXCLUSIVE TICKER BAR -->
-        <section class="flip-section-wrapper" id="overview">
-            <div class="white-container paper-container torn-top torn-bottom">
-                
-                <div class="flip-title-banner torn-header">
-                    <h2 class="flip-section-title">UE COMPUTER ENGINEERING</h2>
-                </div>
+        <!-- OVERVIEW · same header as the hero at the top (serif title + navy bar), then the three cards
+             "Explore details" opens the rest of the card in place: it does not leave the page.
+             No ticker, no marquee: the blue bar is static text. -->
+        <section class="cpe-pitch-band cpe-pitch-band--masthead" id="overview" aria-labelledby="cpePitchOverviewTitle">
 
-                <!-- EXCLUSIVE OVERVIEW TICKER BAR -->
-                <div class="overview-ticker-bar">
-                    <div class="overview-ticker-track">
-                        <div class="overview-ticker-content">
-                            <span>2219 Recto Ave, Sampaloc, Manila, 1008 Metro Manila - ENGINEERING &times; COMPUTING &times; INNOVATION &nbsp;&bull;&nbsp;</span>
-                        </div>
-                    </div>
-                </div>
+            <header class="cpe-pitch-masthead">
+                <h2 class="cpe-pitch-masthead-title" id="cpePitchOverviewTitle">UE COMPUTER ENGINEERING</h2>
+                <p class="cpe-pitch-masthead-bar">
+                    <span>2219 RECTO AVE, SAMPALOC, MANILA, 1008 METRO MANILA</span>
+                    <span>ENGINEERING &times; COMPUTING &times; INNOVATION</span>
+                </p>
+            </header>
 
-                <div class="flip-cards-container">
-                    <div class="flip-card-col stagger-top">
-                        <div class="cpe-flip-card" onclick="this.classList.toggle('flipped')">
-                            <div class="cpe-flip-card-inner">
-                                <div class="cpe-flip-card-front paper-card">
-                                    <span class="story-tag">Read more &rarr;</span>
-                                    <h3>Building Skills for the Digital World</h3>
-                                    <p>The BSCpE program at UE integrates engineering, computing, electronics, and digital system integration.</p>
-                                </div>
-                                <div class="cpe-flip-card-back paper-card">
-                                    <h3>What Students Develop</h3>
-                                    <ul class="flip-list">
+            <div class="cpe-pitch-wrap">
+
+                <div class="cpe-pitch-grid">
+                    <article class="cpe-pitch-card">
+                        <span class="cpe-pitch-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></span>
+                        <h3 class="cpe-pitch-card-title">Building Skills for the Digital World</h3>
+                        <p class="cpe-pitch-card-copy">The BSCpE program at UE integrates engineering, computing, electronics, and digital system integration.</p>
+
+                        <div class="cpe-pitch-more" id="cpePitchMore1">
+                            <div class="cpe-pitch-more-inner">
+                                <div class="cpe-pitch-divider"></div>
+                                <p class="cpe-pitch-label">What Students Develop</p>
+                                <ul class="cpe-pitch-bullets">
                                         <li>Programming &amp; Problem Solving</li>
                                         <li>Hardware Design &amp; Circuits</li>
                                         <li>Software Systems Development</li>
                                         <li>Embedded &amp; Digital Architecture</li>
                                     </ul>
-                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="cpe-pitch-link cpe-pitch-toggle" aria-expanded="false" aria-controls="cpePitchMore1"><span class="cpe-pitch-toggle-text">Explore details</span><span class="cpe-pitch-link-arrow" aria-hidden="true">&rarr;</span></button>
+                    </article>
+
+                    <article class="cpe-pitch-card">
+                        <span class="cpe-pitch-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c3 2 5 5 5 9l-2.5 2.5h-5L7 12c0-4 2-7 5-9z"/><circle cx="12" cy="10" r="1.6"/><path d="M9.5 14.5L7 19l4-1.5M14.5 14.5L17 19l-4-1.5"/></svg></span>
+                        <h3 class="cpe-pitch-card-title">Learn. Build. Innovate.</h3>
+                        <p class="cpe-pitch-card-copy">UE CpE emphasizes practical application through hands-on lab work, experimentation, and year-long design projects.</p>
+
+                        <div class="cpe-pitch-more" id="cpePitchMore2">
+                            <div class="cpe-pitch-more-inner">
+                                <div class="cpe-pitch-divider"></div>
+                                <p class="cpe-pitch-label">Program Goal</p>
+                                <p class="cpe-pitch-card-copy">Developing Computer Engineering graduates who are technically proficient, globally competitive, and innovative.</p>
+                            </div>
+                        </div>
+
+                        <button type="button" class="cpe-pitch-link cpe-pitch-toggle" aria-expanded="false" aria-controls="cpePitchMore2"><span class="cpe-pitch-toggle-text">Explore details</span><span class="cpe-pitch-link-arrow" aria-hidden="true">&rarr;</span></button>
+                    </article>
+
+                    <article class="cpe-pitch-card">
+                        <span class="cpe-pitch-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>
+                        <h3 class="cpe-pitch-card-title">Hands-On Experience</h3>
+                        <p class="cpe-pitch-card-copy">Translating theoretical principles into functional prototypes using specialized hardware/software laboratories.</p>
+
+                        <div class="cpe-pitch-more" id="cpePitchMore3">
+                            <div class="cpe-pitch-more-inner">
+                                <div class="cpe-pitch-divider"></div>
+                                <p class="cpe-pitch-label">UE CpE Experience</p>
+                                <p class="cpe-pitch-card-copy">Fostering active learning through hackathons, team projects, and real-world engineering challenges.</p>
+                            </div>
+                        </div>
+
+                        <button type="button" class="cpe-pitch-link cpe-pitch-toggle" aria-expanded="false" aria-controls="cpePitchMore3"><span class="cpe-pitch-toggle-text">Explore details</span><span class="cpe-pitch-link-arrow" aria-hidden="true">&rarr;</span></button>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- THE MANY SIDES OF COMPUTER ENGINEERING · sci-fi HUD skill tree (blue)
+             No drawer and no overlay: pick a node and its detail panel opens inline underneath.
+             Keep the section id: the navbar links point at it. -->
+        <section class="cpe-scifi-section" id="specialization" aria-labelledby="cpeScifiTitle">
+            <div class="cpe-scifi-wrap">
+
+                <header class="cpe-scifi-head">
+                    <h2 class="cpe-scifi-title" id="cpeScifiTitle">THE MANY SIDES OF <span class="cpe-scifi-title-accent">COMPUTER ENGINEERING</span></h2>
+                    <p class="cpe-scifi-lede">Computer Engineering connects electronics, software, communication, intelligence, and automation to power modern systems.</p>
+                </header>
+
+                <div class="cpe-scifi-console" id="cpeScifi">
+                    <div class="cpe-scifi-bar" aria-hidden="true">
+                        <span class="cpe-scifi-bar-l"><i class="cpe-scifi-led"></i>Specialization map</span>
+                        <span>10 nodes &middot; 3 branches</span>
+                    </div>
+
+                    <h3 class="cpe-scifi-sub">EXPLORE THE SPECIALIZATIONS</h3>
+                    <p class="cpe-scifi-hint">Hover or click a node to explore each core specialization in detail.</p>
+
+                    <!-- SKILL TREE -->
+                    <div class="cpe-scifi-tree">
+                        <svg class="cpe-scifi-links" aria-hidden="true" focusable="false"></svg>
+                        <div class="cpe-scifi-core" aria-hidden="true"><span class="cpe-scifi-core-hex"><span class="cpe-scifi-core-mark">CPE</span></span></div>
+
+                        <div class="cpe-scifi-branches">
+                            <div class="cpe-scifi-branch" data-branch="a">
+                                <h4 class="cpe-scifi-branch-head" id="cpeScifiBrA">Hardware &amp; Devices</h4>
+                                <ul class="cpe-scifi-nodes" aria-labelledby="cpeScifiBrA">
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="embedded" aria-pressed="false" aria-controls="cpeScifiSpec-embedded"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg><span class="cpe-scifi-node-label">Embedded Systems</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="iot" aria-pressed="false" aria-controls="cpeScifiSpec-iot"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="17" r="1.4"/><path d="M8.5 13.5a5 5 0 0 1 7 0"/><path d="M5.5 10.5a9 9 0 0 1 13 0"/><path d="M2.5 7.5a13 13 0 0 1 19 0"/></svg><span class="cpe-scifi-node-label">Internet of Things</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="hardware" aria-pressed="false" aria-controls="cpeScifiSpec-hardware"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16v10H4z"/><path d="M8 11h3v2H8zM14 10v4"/><path d="M7 7V4M12 7V4M17 7V4M7 20v-3M12 20v-3M17 20v-3"/></svg><span class="cpe-scifi-node-label">Computer Hardware</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="robotics" aria-pressed="false" aria-controls="cpeScifiSpec-robotics"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="6" cy="18" r="2"/><circle cx="12" cy="10" r="2"/><path d="M7.4 16.6l3.2-5.2M13.6 8.6l3.4-4.2M17 4.4l3 1.6M17 4.4l1.6 3"/></svg><span class="cpe-scifi-node-label">Robotics &amp; Automation</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                </ul>
+                            </div>
+                            <div class="cpe-scifi-branch" data-branch="b">
+                                <h4 class="cpe-scifi-branch-head" id="cpeScifiBrB">Networks &amp; Infrastructure</h4>
+                                <ul class="cpe-scifi-nodes" aria-labelledby="cpeScifiBrB">
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="networks" aria-pressed="false" aria-controls="cpeScifiSpec-networks"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M11 6.8L6 16.2M13 6.8l5 9.4M7 18h10"/></svg><span class="cpe-scifi-node-label">Computer Networks</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="cybersecurity" aria-pressed="false" aria-controls="cpeScifiSpec-cybersecurity"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M8.8 12l2.4 2.4 4.2-4.6"/></svg><span class="cpe-scifi-node-label">Cybersecurity</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="cloud" aria-pressed="false" aria-controls="cpeScifiSpec-cloud"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a4.2 4.2 0 0 1 .5 8.5z"/><path d="M12 12v6M9.5 15.5L12 18l2.5-2.5"/></svg><span class="cpe-scifi-node-label">Cloud &amp; Edge Computing</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                </ul>
+                            </div>
+                            <div class="cpe-scifi-branch" data-branch="c">
+                                <h4 class="cpe-scifi-branch-head" id="cpeScifiBrC">Software &amp; Intelligence</h4>
+                                <ul class="cpe-scifi-nodes" aria-labelledby="cpeScifiBrC">
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="software" aria-pressed="false" aria-controls="cpeScifiSpec-software"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 5l-3 14"/></svg><span class="cpe-scifi-node-label">Software Development</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="ai" aria-pressed="false" aria-controls="cpeScifiSpec-ai"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="6" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M6.6 7l3.6 3.6M6.6 17l3.6-3.6M13.8 10.6L17.4 7M13.8 13.4l3.6 3.6"/></svg><span class="cpe-scifi-node-label">Artificial Intelligence</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                    <li class="cpe-scifi-cell"><button type="button" class="cpe-scifi-node" data-spec="datascience" aria-pressed="false" aria-controls="cpeScifiSpec-datascience"><svg class="cpe-scifi-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20h16"/><rect x="5" y="12" width="3.2" height="8"/><rect x="10.4" y="7" width="3.2" height="13"/><rect x="15.8" y="10" width="3.2" height="10"/><path d="M5 6l5-2 4 2 5-3"/></svg><span class="cpe-scifi-node-label">Data Science</span><span class="cpe-scifi-node-pip" aria-hidden="true"></span></button></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flip-card-col stagger-bottom">
-                        <div class="cpe-flip-card" onclick="this.classList.toggle('flipped')">
-                            <div class="cpe-flip-card-inner">
-                                <div class="cpe-flip-card-front paper-card">
-                                    <span class="story-tag">Read more &rarr;</span>
-                                    <h3>Learn. Build. Innovate.</h3>
-                                    <p>UE CpE emphasizes practical application through hands-on lab work, experimentation, and year-long design projects.</p>
+                    <!-- DETAIL PANEL (inline, never overlaps anything) -->
+                    <div class="cpe-scifi-panel" aria-live="polite">
+                        <div class="cpe-scifi-specs">
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-embedded" data-spec="embedded">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">EMBEDDED SYSTEMS</h4>
+                                    <p class="cpe-scifi-spec-sub">Computers hidden inside everyday devices.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Embedded systems combine hardware processors and microcontrollers with custom software to run specialized real-time operations in automotive, medical, and consumer electronics. Engineers in this field write firmware that talks directly to sensors, motors, and displays, balancing tight memory and power budgets against strict timing requirements — a missed deadline in an airbag controller or an insulin pump isn't a bug report, it's a safety issue. You'll find embedded systems anywhere a device needs to think for itself without a full computer attached: a car's anti-lock brakes, a washing machine's control board, a pacemaker.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">C / C++</span></li>
+                                            <li><span class="cpe-scifi-chip">FreeRTOS</span></li>
+                                            <li><span class="cpe-scifi-chip">ARM Cortex-M</span></li>
+                                            <li><span class="cpe-scifi-chip">I²C · SPI · UART</span></li>
+                                            <li><span class="cpe-scifi-chip">CAN bus</span></li>
+                                            <li><span class="cpe-scifi-chip">Logic analyzer</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="embedded_engineer">Embedded Systems Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="hardware_engineer">Hardware Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="computer_engineer">Computer Engineer</button></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="cpe-flip-card-back paper-card">
-                                    <h3>Program Goal</h3>
-                                    <p>Developing Computer Engineering graduates who are technically proficient, globally competitive, and innovative.</p>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/AEF.gif" alt="Automotive ECU Firmware" decoding="async"><figcaption>Automotive ECU Firmware</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/MDC.gif" alt="Medical Device Control" decoding="async"><figcaption>Medical Device Control</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/SAB.gif" alt="Smart Appliance Board" decoding="async"><figcaption>Smart Appliance Board</figcaption></figure>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flip-card-col stagger-top">
-                        <div class="cpe-flip-card" onclick="this.classList.toggle('flipped')">
-                            <div class="cpe-flip-card-inner">
-                                <div class="cpe-flip-card-front paper-card">
-                                    <span class="story-tag">Read more &rarr;</span>
-                                    <h3>Hands-On Experience</h3>
-                                    <p>Translating theoretical principles into functional prototypes using specialized hardware/software laboratories.</p>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-iot" data-spec="iot">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">INTERNET OF THINGS (IoT)</h4>
+                                    <p class="cpe-scifi-spec-sub">Connecting physical objects to the digital world.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">IoT integrates embedded hardware, microcontrollers, wireless sensors, and cloud systems to collect and exchange real-time data across smart networks. Engineers here design the low-power radios and communication protocols (Wi-Fi, Bluetooth Low Energy, LoRa, MQTT) that let a thousand small devices report back to a central system without draining their batteries in a week. It's the field behind smart homes, connected agriculture sensors, and factory floors where every machine reports its own health before it breaks down.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">ESP32</span></li>
+                                            <li><span class="cpe-scifi-chip">Raspberry Pi</span></li>
+                                            <li><span class="cpe-scifi-chip">MQTT</span></li>
+                                            <li><span class="cpe-scifi-chip">Bluetooth LE</span></li>
+                                            <li><span class="cpe-scifi-chip">LoRa</span></li>
+                                            <li><span class="cpe-scifi-chip">Wi-Fi</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="iot_engineer">IoT Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="embedded_engineer">Embedded Systems Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="cloud_engineer">Cloud Engineer</button></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="cpe-flip-card-back paper-card">
-                                    <h3>UE CpE Experience</h3>
-                                    <p>Fostering active learning through hackathons, team projects, and real-world engineering challenges.</p>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/SHSN.gif" alt="Smart Home Sensor Network" decoding="async"><figcaption>Smart Home Sensor Network</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/IIM.gif" alt="Industrial IoT Monitoring" decoding="async"><figcaption>Industrial IoT Monitoring</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/WDS.gif" alt="Wearable Device Sync" decoding="async"><figcaption>Wearable Device Sync</figcaption></figure>
+                                    </div>
                                 </div>
-                            </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-hardware" data-spec="hardware">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">COMPUTER HARDWARE</h4>
+                                    <p class="cpe-scifi-spec-sub">Designing physical circuits, chips, and microprocessors.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Hardware engineering focuses on VLSI chip design, printed circuit board (PCB) layout, microarchitecture, logic gates, and the physical testing that confirms a design actually works once it's built. This is the discipline closest to the physics of computing itself — signal integrity, heat dissipation, and power delivery all become real constraints, not abstractions. Every processor, memory chip, and circuit board that every other specialization eventually runs on started here.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">Verilog / VHDL</span></li>
+                                            <li><span class="cpe-scifi-chip">KiCad / Altium</span></li>
+                                            <li><span class="cpe-scifi-chip">FPGA</span></li>
+                                            <li><span class="cpe-scifi-chip">SPICE</span></li>
+                                            <li><span class="cpe-scifi-chip">Oscilloscope</span></li>
+                                            <li><span class="cpe-scifi-chip">PCB layout</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="hardware_engineer">Hardware Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="computer_engineer">Computer Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="embedded_engineer">Embedded Systems Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/pdl.gif" alt="PCB Design Layout" decoding="async"><figcaption>PCB Design Layout</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/cfd.gif" alt="Chip Fabrication Process" decoding="async"><figcaption>Chip Fabrication Process</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/ectd.gif" alt="Circuit Testing &amp; Debug" decoding="async"><figcaption>Circuit Testing &amp; Debug</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-robotics" data-spec="robotics">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">ROBOTICS &amp; AUTOMATION</h4>
+                                    <p class="cpe-scifi-spec-sub">Merging mechanical design with autonomous code.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Robotics combines sensor integration, motor control, kinematics, and real-time computation to construct autonomous machines and industrial automation systems. Engineers here have to make hardware and software agree with each other in real time — a robotic arm doesn't get to wait for a slow network request before it decides where to move next. The field spans everything from a single robotic arm on an assembly line to fleets of autonomous mobile robots navigating a warehouse floor together.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">ROS 2</span></li>
+                                            <li><span class="cpe-scifi-chip">Arduino</span></li>
+                                            <li><span class="cpe-scifi-chip">Gazebo</span></li>
+                                            <li><span class="cpe-scifi-chip">LiDAR</span></li>
+                                            <li><span class="cpe-scifi-chip">PID control</span></li>
+                                            <li><span class="cpe-scifi-chip">Servo / stepper drivers</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="robotics_specialist">Robotics Specialist</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="embedded_engineer">Embedded Systems Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="ai_ml_engineer">AI / Machine Learning Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/ram.gif" alt="Robotic Arm in Motion" decoding="async"><figcaption>Robotic Arm in Motion</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/AN.gif" alt="Autonomous Navigation" decoding="async"><figcaption>Autonomous Navigation</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/IAL.gif" alt="Industrial Automation Line" decoding="async"><figcaption>Industrial Automation Line</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-networks" data-spec="networks">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">COMPUTER NETWORKS</h4>
+                                    <p class="cpe-scifi-spec-sub">The infrastructure behind global communication.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Computer networks focus on designing, deploying, and maintaining the secure data-transmission protocols, router configurations, and enterprise infrastructure that keep information moving. Engineers here plan how thousands of devices share bandwidth without collision, build redundant paths so a single failed cable doesn't take down a building, and tune systems to keep latency low even under heavy load. This is the invisible backbone behind everything from a university's Wi-Fi to a bank's transaction network.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">Cisco / MikroTik</span></li>
+                                            <li><span class="cpe-scifi-chip">Wireshark</span></li>
+                                            <li><span class="cpe-scifi-chip">VLAN · OSPF · BGP</span></li>
+                                            <li><span class="cpe-scifi-chip">Packet Tracer</span></li>
+                                            <li><span class="cpe-scifi-chip">iperf</span></li>
+                                            <li><span class="cpe-scifi-chip">Fiber &amp; cabling</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="network_engineer">Network Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="systems_engineer">Systems Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="cloud_engineer">Cloud Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/END.gif" alt="Enterprise Network Design" decoding="async"><figcaption>Enterprise Network Design</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/RSC.gif" alt="Router &amp; Switch Config" decoding="async"><figcaption>Router &amp; Switch Config</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/DCC.gif" alt="Data Center Cabling" decoding="async"><figcaption>Data Center Cabling</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-cybersecurity" data-spec="cybersecurity">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">CYBERSECURITY</h4>
+                                    <p class="cpe-scifi-spec-sub">Defending systems and networks from digital threats.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Cybersecurity protects hardware, software, and communication channels against unauthorized access, data breaches, and malicious attacks. The work spans finding weaknesses before attackers do (penetration testing), building the firewalls and intrusion-detection systems that stand guard around the clock, and responding when something does get through. It's a field that rewards paranoia in a healthy way — assuming every system will eventually be probed, and designing so that a single failure doesn't become a catastrophe.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">Kali Linux</span></li>
+                                            <li><span class="cpe-scifi-chip">Nmap</span></li>
+                                            <li><span class="cpe-scifi-chip">Wireshark</span></li>
+                                            <li><span class="cpe-scifi-chip">Snort / Suricata</span></li>
+                                            <li><span class="cpe-scifi-chip">Firewalls</span></li>
+                                            <li><span class="cpe-scifi-chip">Encryption / MFA</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="cybersecurity_engineer">Cybersecurity Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="network_engineer">Network Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="systems_engineer">Systems Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/PT.gif" alt="Penetration Testing" decoding="async"><figcaption>Penetration Testing</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/FWID.gif" alt="Firewall &amp; IDS Setup" decoding="async"><figcaption>Firewall &amp; IDS Setup</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/SOC.gif" alt="Security Operations Center" decoding="async"><figcaption>Security Operations Center</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-cloud" data-spec="cloud">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">CLOUD &amp; EDGE COMPUTING</h4>
+                                    <p class="cpe-scifi-spec-sub">Distributing computation across local and global nodes.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Cloud &amp; Edge Computing pairs high-capacity remote servers with low-latency local processors to deliver efficient, scalable computing resources anywhere they're needed. Engineers here decide what should run close to the user (edge) versus in a distant data center (cloud), design for failures that are inevitable at scale, and build the load-balancing and orchestration systems that keep services running when traffic spikes. It's the layer that makes it possible for millions of devices to rely on services they never have to think about.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">AWS · Azure · GCP</span></li>
+                                            <li><span class="cpe-scifi-chip">Docker</span></li>
+                                            <li><span class="cpe-scifi-chip">Kubernetes</span></li>
+                                            <li><span class="cpe-scifi-chip">Terraform</span></li>
+                                            <li><span class="cpe-scifi-chip">Load balancers</span></li>
+                                            <li><span class="cpe-scifi-chip">Edge gateways</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="cloud_engineer">Cloud Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="devops_engineer">DevOps Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="network_engineer">Network Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/csd.gif" alt="Cloud Server Dashboard" decoding="async"><figcaption>Cloud Server Dashboard</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/edp.gif" alt="Edge Device Deployment" decoding="async"><figcaption>Edge Device Deployment</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/lbv.gif" alt="Load Balancing Visualization" decoding="async"><figcaption>Load Balancing Visualization</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-software" data-spec="software">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">SOFTWARE DEVELOPMENT</h4>
+                                    <p class="cpe-scifi-spec-sub">Crafting applications, logic, and system tools.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Software development encompasses system software, firmware, algorithms, and application logic that bridge raw hardware capabilities with human interaction. Engineers here move across the full stack — databases, backend services, APIs, and the interfaces people actually touch — while keeping code maintainable as it grows past a few hundred lines into something a whole team has to work on together. In Computer Engineering specifically, this often means software that talks closely to hardware: drivers, operating systems, and the tools other engineers build on top of.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">Python</span></li>
+                                            <li><span class="cpe-scifi-chip">C++</span></li>
+                                            <li><span class="cpe-scifi-chip">JavaScript</span></li>
+                                            <li><span class="cpe-scifi-chip">Git</span></li>
+                                            <li><span class="cpe-scifi-chip">Docker</span></li>
+                                            <li><span class="cpe-scifi-chip">REST · SQL</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="software_engineer">Software Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="devops_engineer">DevOps Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="tech_support">Technical Support Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/FSWA.gif" alt="Full-Stack Web App" decoding="async"><figcaption>Full-Stack Web App</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/MAD.gif" alt="Mobile App Development" decoding="async"><figcaption>Mobile App Development</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/ABS.gif" alt="API &amp; Backend Services" decoding="async"><figcaption>API &amp; Backend Services</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-ai" data-spec="ai">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">ARTIFICIAL INTELLIGENCE</h4>
+                                    <p class="cpe-scifi-spec-sub">Empowering machines to learn and reason.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">AI in computer engineering focuses on machine learning, neural networks, computer vision, and the hardware accelerators built specifically to process intelligent algorithms fast. It's not just writing the models — it's understanding how they run on real silicon, why a network that trains fine on a workstation might be too slow or power-hungry to run on a phone, and how to compress or optimize it so it still works where it needs to. This field increasingly sits right at the hardware/software boundary that Computer Engineering is built around.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">PyTorch</span></li>
+                                            <li><span class="cpe-scifi-chip">TensorFlow</span></li>
+                                            <li><span class="cpe-scifi-chip">OpenCV</span></li>
+                                            <li><span class="cpe-scifi-chip">CUDA</span></li>
+                                            <li><span class="cpe-scifi-chip">Jupyter</span></li>
+                                            <li><span class="cpe-scifi-chip">ONNX / edge inference</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="ai_ml_engineer">AI / Machine Learning Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="data_scientist">Data Scientist</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="robotics_specialist">Robotics Specialist</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/CVD.gif" alt="Computer Vision Demo" decoding="async"><figcaption>Computer Vision Demo</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/NNT.gif" alt="Neural Network Training" decoding="async"><figcaption>Neural Network Training</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/NLP.gif" alt="Natural Language Processing" decoding="async"><figcaption>Natural Language Processing</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="cpe-scifi-spec" id="cpeScifiSpec-datascience" data-spec="datascience">
+                                <header class="cpe-scifi-spec-head">
+                                    <span class="cpe-scifi-tag"><i class="cpe-scifi-led"></i>Active node</span>
+                                    <h4 class="cpe-scifi-spec-title">DATA SCIENCE</h4>
+                                    <p class="cpe-scifi-spec-sub">Extracting insight from massive datasets.</p>
+                                </header>
+                                <div class="cpe-scifi-spec-body">
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Overview</p>
+                                        <p class="cpe-scifi-desc">Data Science leverages computational models, statistical analytics, and distributed computing frameworks to process and interpret massive streams of information. The work ranges from cleaning messy raw data into something usable, to building the pipelines that move it at scale, to the visualizations and predictive models that turn numbers into decisions other people can actually act on. In a computer engineering context, this often means caring as much about the infrastructure moving the data as the models analyzing it.</p>
+                                    </div>
+                                    <div class="cpe-scifi-col">
+                                        <p class="cpe-scifi-label">Toolchain</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><span class="cpe-scifi-chip">Python · pandas</span></li>
+                                            <li><span class="cpe-scifi-chip">SQL</span></li>
+                                            <li><span class="cpe-scifi-chip">Apache Spark</span></li>
+                                            <li><span class="cpe-scifi-chip">Tableau / Power BI</span></li>
+                                            <li><span class="cpe-scifi-chip">Jupyter</span></li>
+                                            <li><span class="cpe-scifi-chip">scikit-learn</span></li>
+                                        </ul>
+                                        <p class="cpe-scifi-label">Career paths</p>
+                                        <ul class="cpe-scifi-chips">
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="data_scientist">Data Scientist</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="ai_ml_engineer">AI / Machine Learning Engineer</button></li>
+                                            <li><button type="button" class="cpe-scifi-chip cpe-scifi-chip--job" data-job="software_engineer">Software Engineer</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cpe-scifi-feed">
+                                    <p class="cpe-scifi-label">Live examples</p>
+                                    <div class="cpe-scifi-media">
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/DVD.gif" alt="Data Visualization Dashboard" decoding="async"><figcaption>Data Visualization Dashboard</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/PMO.gif" alt="Predictive Model Output" decoding="async"><figcaption>Predictive Model Output</figcaption></figure>
+                                        <figure class="cpe-scifi-shot"><img data-src="Assets/gifs/BDP.gif" alt="Big Data Pipeline" decoding="async"><figcaption>Big Data Pipeline</figcaption></figure>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -288,82 +758,12 @@
             </div>
         </section>
 
-        <!-- DISCIPLINES SECTION ("THE MANY SIDES OF COMPUTER ENGINEERING") -->
-        <section class="disciplines-section" id="specialization">
-            <!-- TAP TARGET so the sidebar is reachable without hover -->
-            <button class="disciplines-toggle" id="disciplinesToggle" aria-label="Open specialization list" aria-expanded="false" aria-controls="disciplinesSidebar">
-                <span class="disciplines-toggle-icon" aria-hidden="true">&#9776;</span>
-                <span class="disciplines-toggle-label">SPECIALIZATIONS</span>
-            </button>
-
-            <div class="disciplines-sidebar paper-card" id="disciplinesSidebar">
-                <nav class="disciplines-nav">
-                    <button class="disc-link active" data-target="default">DEFAULT VIEW</button>
-                    <button class="disc-link" data-target="embedded">EMBEDDED SYSTEMS</button>
-                    <button class="disc-link" data-target="iot">INTERNET OF THINGS</button>
-                    <button class="disc-link" data-target="networks">COMPUTER NETWORKS</button>
-                    <button class="disc-link" data-target="cybersecurity">CYBERSECURITY</button>
-                    <button class="disc-link" data-target="software">SOFTWARE DEVELOPMENT</button>
-                    <button class="disc-link" data-target="ai">ARTIFICIAL INTELLIGENCE</button>
-                    <button class="disc-link" data-target="datascience">DATA SCIENCE</button>
-                    <button class="disc-link" data-target="robotics">ROBOTICS &amp; AUTOMATION</button>
-                    <button class="disc-link" data-target="hardware">COMPUTER HARDWARE</button>
-                    <button class="disc-link" data-target="cloud">CLOUD &amp; EDGE COMPUTING</button>
-                </nav>
-            </div>
-
-            <div class="white-container disciplines-container paper-container torn-top torn-bottom">
-                <div class="disciplines-content-area">
-                    <div id="disciplineDefault" class="discipline-view active">
-                        <h2 class="discipline-title torn-header">THE MANY SIDES OF <span class="cpe-blue">COMPUTER ENGINEERING</span></h2>
-                        <div class="discipline-text">
-                            <p>Computer Engineering connects electronics, software, communication, intelligence, and automation to power modern systems.</p>
-                        </div>
-                        
-                        <h2 class="discipline-subtitle">EXPLORE THE SPECIALIZATIONS</h2>
-                        <div class="discipline-text">
-                            <p>Hover or click on the side menu items to explore each core specialization in detail.</p>
-                            <br>
-                            <p class="explore-hint">[ SELECT A SPECIALIZATION &larr; ]</p>
-                        </div>
-                    </div>
-
-                    <div id="disciplineDynamic" class="discipline-view">
-                        <button id="backToOverviewBtn" class="back-btn">
-                            <span class="back-arrow">&larr;</span>
-                            <span class="back-label">Back to Overview</span>
-                        </button>
-                        <h2 class="discipline-title uppercase-title" id="dynTitle">EMBEDDED SYSTEMS</h2>
-                        <div class="discipline-text">
-                            <p><strong id="dynSubtitle">Computers hidden inside everyday devices.</strong></p>
-                            <br>
-                            <p id="dynDesc">Embedded systems are specialized processing units designed to perform targeted computational tasks inside larger equipment.</p>
-                        </div>
-
-                        <div class="specialization-gifs" id="specGifs">
-                            <div class="spec-gif-frame">
-                                <img id="specGif1" src="" alt="Specialization example 1">
-                                <span class="spec-gif-caption" id="specCaption1"></span>
-                            </div>
-                            <div class="spec-gif-frame">
-                                <img id="specGif2" src="" alt="Specialization example 2">
-                                <span class="spec-gif-caption" id="specCaption2"></span>
-                            </div>
-                            <div class="spec-gif-frame">
-                                <img id="specGif3" src="" alt="Specialization example 3">
-                                <span class="spec-gif-caption" id="specCaption3"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CAREERS & JOB OPPORTUNITIES SECTION -->
+        <!-- CAREERS & JOB OPPORTUNITIES SECTION · Stripe-style bento grid
+             Every job chip calls openJobModal(); the job data and modal script at the bottom of the page drive the popup. -->
         <section class="careers-section" id="careers">
             <div class="white-container paper-container torn-top torn-bottom">
-                
-                <!-- HEADER BANNER -->
+
+                <!-- HEADER BANNER (unchanged) -->
                 <div class="careers-header-banner">
                     <div class="banner-left">
                         <span class="sub-tag">UE COMPUTER ENGINEERING</span>
@@ -378,74 +778,286 @@
                     </div>
                 </div>
 
-                <!-- DIAGRAM LAYOUT WITH CLEAN BLACK JOB LINKS (NO ARROWS) -->
-                <div class="careers-diagram-wrapper">
-                    <!-- TOP ROW CARDS -->
-                    <div class="careers-card-grid top-grid">
-                        <div class="career-card paper-card">
-                            <h3>SOFTWARE &amp; SYSTEMS</h3>
-                            <p class="career-desc">Building the applications and platforms that run on every device.</p>
+                <!-- STRIPE-STYLE FEATURE GRID -->
+                <div class="cpe-stripe-grid">
 
-                            <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('software_engineer')">Software Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('devops_engineer')">DevOps Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('systems_engineer')">Systems Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('tech_support')">Technical Support Engineer</a></li>
+                    <!-- 1 · SOFTWARE & SYSTEMS : code editor -->
+                    <article class="cpe-stripe-card cpe-stripe-card--software" data-cpe-stripe>
+                        <header class="cpe-stripe-head">
+                            <h3 class="cpe-stripe-title">Software &amp; Systems</h3>
+                            <p class="cpe-stripe-sub">Building the applications and platforms that run on every device.</p>
+                        </header>
+
+                        <figure class="cpe-stripe-mockup cpe-stripe-ide" role="img"
+                                aria-label="Code editor showing a Python function that reads a temperature sensor, with a passing build status">
+                            <div class="cpe-stripe-ide-bar" aria-hidden="true">
+                                <span class="cpe-stripe-dot"></span><span class="cpe-stripe-dot"></span><span class="cpe-stripe-dot"></span>
+                                <span class="cpe-stripe-tab">sensor.py</span>
+                                <span class="cpe-stripe-status">Build passing</span>
+                            </div>
+                            <div class="cpe-stripe-code" aria-hidden="true">
+                                <span class="cpe-stripe-line"><span class="cpe-stripe-k">from</span> cpe <span class="cpe-stripe-k">import</span> Bus, Sensor</span>
+                                <span class="cpe-stripe-line">&nbsp;</span>
+                                <span class="cpe-stripe-line"><span class="cpe-stripe-k">def</span> <span class="cpe-stripe-f">read_temp</span>(bus):</span>
+                                <span class="cpe-stripe-line">    raw = bus.<span class="cpe-stripe-f">read</span>(Sensor.TEMP)</span>
+                                <span class="cpe-stripe-line">    <span class="cpe-stripe-k">return</span> raw * <span class="cpe-stripe-n">0.0625</span>  <span class="cpe-stripe-c"># °C</span></span>
+                                <span class="cpe-stripe-line">&nbsp;</span>
+                                <span class="cpe-stripe-line"><span class="cpe-stripe-k">while</span> bus.<span class="cpe-stripe-f">ready</span>():</span>
+                                <span class="cpe-stripe-line">    <span class="cpe-stripe-f">log</span>(<span class="cpe-stripe-f">read_temp</span>(bus))<span class="cpe-stripe-caret"></span></span>
+                            </div>
+                        </figure>
+
+                        <ul class="cpe-stripe-chips" aria-label="Roles in Software and Systems">
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('software_engineer')">Software Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('devops_engineer')">DevOps Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('systems_engineer')">Systems Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('tech_support')">Technical Support Engineer</button></li>
+                        </ul>
+                    </article>
+
+                    <!-- 2 · HARDWARE & EMBEDDED : microchip + glowing traces -->
+                    <article class="cpe-stripe-card cpe-stripe-card--hardware" data-cpe-stripe>
+                        <header class="cpe-stripe-head">
+                            <h3 class="cpe-stripe-title">Hardware &amp; Embedded</h3>
+                            <p class="cpe-stripe-sub">Designing the circuits and firmware inside smart devices.</p>
+                        </header>
+
+                        <figure class="cpe-stripe-mockup cpe-stripe-pcbwrap" role="img"
+                                aria-label="A microchip on a circuit board with glowing signal traces running out to its pins">
+                            <svg class="cpe-stripe-svg" viewBox="0 0 360 224" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <linearGradient id="cpe-stripe-chipfill" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#2a3d63"/>
+                                        <stop offset="1" stop-color="#0f1a30"/>
+                                    </linearGradient>
+                                    <linearGradient id="cpe-stripe-chipedge" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#7fb2ff"/>
+                                        <stop offset="1" stop-color="#2a4f99"/>
+                                    </linearGradient>
+                                    <filter id="cpe-stripe-glow-pcb" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feGaussianBlur stdDeviation="2.2" result="b"/>
+                                        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                </defs>
+
+                                <!-- base traces -->
+                                <g class="cpe-stripe-trace">
+                                    <path d="M138 92 H84 V52 H26"/>
+                                    <path d="M138 112 H26"/>
+                                    <path d="M138 132 H74 V176 H26"/>
+                                    <path d="M222 92 H276 V52 H334"/>
+                                    <path d="M222 112 H334"/>
+                                    <path d="M222 132 H286 V176 H334"/>
+                                    <path d="M160 78 V22"/>
+                                    <path d="M200 78 V38 H248 V22"/>
+                                    <path d="M160 146 V204"/>
+                                    <path d="M200 146 V190 H250 V204"/>
+                                </g>
+
+                                <!-- moving light along each trace -->
+                                <g filter="url(#cpe-stripe-glow-pcb)">
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M138 92 H84 V52 H26" style="animation-delay:-0.2s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M138 112 H26" style="animation-delay:-1.1s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M138 132 H74 V176 H26" style="animation-delay:-1.8s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M222 92 H276 V52 H334" style="animation-delay:-0.7s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M222 112 H334" style="animation-delay:-1.5s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M222 132 H286 V176 H334" style="animation-delay:-2.2s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M160 78 V22" style="animation-delay:-0.4s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M200 78 V38 H248 V22" style="animation-delay:-1.3s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M160 146 V204" style="animation-delay:-2s"/>
+                                    <path class="cpe-stripe-flow" pathLength="100" d="M200 146 V190 H250 V204" style="animation-delay:-0.9s"/>
+                                </g>
+
+                                <!-- solder pads at the trace ends -->
+                                <g class="cpe-stripe-pad">
+                                    <circle cx="26" cy="52" r="3.4"/><circle cx="26" cy="112" r="3.4"/><circle cx="26" cy="176" r="3.4"/>
+                                    <circle cx="334" cy="52" r="3.4"/><circle cx="334" cy="112" r="3.4"/><circle cx="334" cy="176" r="3.4"/>
+                                    <circle cx="160" cy="22" r="3.4"/><circle cx="248" cy="22" r="3.4"/>
+                                    <circle cx="160" cy="204" r="3.4"/><circle cx="250" cy="204" r="3.4"/>
+                                </g>
+
+                                <!-- chip pins -->
+                                <g class="cpe-stripe-pin">
+                                    <rect x="130" y="88" width="10" height="8" rx="1.5"/><rect x="130" y="108" width="10" height="8" rx="1.5"/><rect x="130" y="128" width="10" height="8" rx="1.5"/>
+                                    <rect x="220" y="88" width="10" height="8" rx="1.5"/><rect x="220" y="108" width="10" height="8" rx="1.5"/><rect x="220" y="128" width="10" height="8" rx="1.5"/>
+                                    <rect x="156" y="70" width="8" height="10" rx="1.5"/><rect x="196" y="70" width="8" height="10" rx="1.5"/>
+                                    <rect x="156" y="144" width="8" height="10" rx="1.5"/><rect x="196" y="144" width="8" height="10" rx="1.5"/>
+                                </g>
+
+                                <!-- the chip -->
+                                <rect class="cpe-stripe-chip-halo" x="136" y="76" width="88" height="72" rx="10"/>
+                                <rect x="136" y="76" width="88" height="72" rx="10" fill="url(#cpe-stripe-chipfill)" stroke="url(#cpe-stripe-chipedge)" stroke-width="1.4"/>
+                                <rect x="146" y="86" width="68" height="52" rx="6" fill="none" stroke="rgba(159,193,255,.22)" stroke-width="1"/>
+                                <circle cx="152" cy="92" r="2.2" fill="#9fc1ff" opacity=".8"/>
+                                <text class="cpe-stripe-svgtext" x="180" y="108" text-anchor="middle">CPE-X1</text>
+                                <text class="cpe-stripe-svgtext cpe-stripe-svgtext--dim" x="180" y="123" text-anchor="middle">1.2 GHz</text>
+                            </svg>
+                        </figure>
+
+                        <ul class="cpe-stripe-chips" aria-label="Roles in Hardware and Embedded">
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('computer_engineer')">Computer Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('hardware_engineer')">Hardware Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('iot_engineer')">IoT Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('embedded_engineer')">Embedded Systems Engineer</button></li>
+                        </ul>
+                    </article>
+
+                    <!-- 3 · AI DATA & ROBOTICS : prompt / response + neural net -->
+                    <article class="cpe-stripe-card cpe-stripe-card--ai" data-cpe-stripe>
+                        <header class="cpe-stripe-head">
+                            <h3 class="cpe-stripe-title">AI Data &amp; Robotics</h3>
+                            <p class="cpe-stripe-sub">Turning data into intelligent, autonomous systems.</p>
+                        </header>
+
+                        <figure class="cpe-stripe-mockup cpe-stripe-ai" role="img"
+                                aria-label="An AI prompt, Train Vision Model, answered with a status of 99.4 percent accuracy, beside a small neural network diagram">
+                            <div class="cpe-stripe-chat" aria-hidden="true">
+                                <div class="cpe-stripe-bubble cpe-stripe-bubble--user">
+                                    <span class="cpe-stripe-tag">Prompt</span>
+                                    <span class="cpe-stripe-bubble-text">Train Vision Model</span>
+                                </div>
+                                <div class="cpe-stripe-bubble cpe-stripe-bubble--ai">
+                                    <span class="cpe-stripe-tag cpe-stripe-tag--ok">Status</span>
+                                    <span class="cpe-stripe-bubble-text"><strong>99.4%</strong> Accuracy</span>
+                                    <span class="cpe-stripe-meter"><span class="cpe-stripe-meter-fill"></span></span>
+                                    <span class="cpe-stripe-meta">epoch 48 / 50 · loss 0.012</span>
+                                </div>
+                            </div>
+
+                            <svg class="cpe-stripe-nn" viewBox="0 0 150 224" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <filter id="cpe-stripe-glow-nn" x="-40%" y="-40%" width="180%" height="180%">
+                                        <feGaussianBlur stdDeviation="2" result="b"/>
+                                        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                </defs>
+                                <g class="cpe-stripe-edge">
+                                    <line x1="25" y1="62" x2="75" y2="38"/><line x1="25" y1="62" x2="75" y2="88"/><line x1="25" y1="62" x2="75" y2="138"/><line x1="25" y1="62" x2="75" y2="188"/>
+                                    <line x1="25" y1="112" x2="75" y2="38"/><line x1="25" y1="112" x2="75" y2="88"/><line x1="25" y1="112" x2="75" y2="138"/><line x1="25" y1="112" x2="75" y2="188"/>
+                                    <line x1="25" y1="162" x2="75" y2="38"/><line x1="25" y1="162" x2="75" y2="88"/><line x1="25" y1="162" x2="75" y2="138"/><line x1="25" y1="162" x2="75" y2="188"/>
+                                    <line x1="75" y1="38" x2="125" y2="88"/><line x1="75" y1="38" x2="125" y2="138"/>
+                                    <line x1="75" y1="88" x2="125" y2="88"/><line x1="75" y1="88" x2="125" y2="138"/>
+                                    <line x1="75" y1="138" x2="125" y2="88"/><line x1="75" y1="138" x2="125" y2="138"/>
+                                    <line x1="75" y1="188" x2="125" y2="88"/><line x1="75" y1="188" x2="125" y2="138"/>
+                                </g>
+                                <g filter="url(#cpe-stripe-glow-nn)">
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="25" y1="62" x2="75" y2="88" style="animation-delay:-0.3s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="25" y1="162" x2="75" y2="138" style="animation-delay:-1.4s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="25" y1="112" x2="75" y2="38" style="animation-delay:-2.1s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="75" y1="88" x2="125" y2="88" style="animation-delay:-0.8s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="75" y1="138" x2="125" y2="138" style="animation-delay:-1.9s"/>
+                                </g>
+                                <g class="cpe-stripe-node">
+                                    <circle cx="25" cy="62" r="6"/><circle cx="25" cy="112" r="6"/><circle cx="25" cy="162" r="6"/>
+                                    <circle cx="75" cy="38" r="6"/><circle cx="75" cy="88" r="6"/><circle cx="75" cy="138" r="6"/><circle cx="75" cy="188" r="6"/>
+                                    <circle class="cpe-stripe-node--out" cx="125" cy="88" r="7.5"/><circle class="cpe-stripe-node--out" cx="125" cy="138" r="7.5"/>
+                                </g>
+                            </svg>
+                        </figure>
+
+                        <ul class="cpe-stripe-chips" aria-label="Roles in AI, Data and Robotics">
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('ai_ml_engineer')">AI / Machine Learning Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('robotics_specialist')">Robotics Specialist</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('data_scientist')">Data Scientist</button></li>
+                        </ul>
+                    </article>
+
+                    <!-- 4 · NETWORKS & SECURITY : topology + live badges -->
+                    <article class="cpe-stripe-card cpe-stripe-card--network" data-cpe-stripe>
+                        <header class="cpe-stripe-head">
+                            <h3 class="cpe-stripe-title">Networks &amp; Security</h3>
+                            <p class="cpe-stripe-sub">Connecting and protecting the infrastructure behind it all.</p>
+                        </header>
+
+                        <figure class="cpe-stripe-mockup cpe-stripe-net" role="img"
+                                aria-label="A network diagram with a central protected hub linked to four nodes, marked Encrypted, 10 Gbps, Shield Active">
+                            <svg class="cpe-stripe-svg" viewBox="0 0 360 160" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <radialGradient id="cpe-stripe-hubfill" cx="50%" cy="40%" r="70%">
+                                        <stop offset="0" stop-color="#1f8f66"/>
+                                        <stop offset="1" stop-color="#0d3b2e"/>
+                                    </radialGradient>
+                                    <filter id="cpe-stripe-glow-net" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feGaussianBlur stdDeviation="2.2" result="b"/>
+                                        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                </defs>
+
+                                <g class="cpe-stripe-link">
+                                    <line x1="180" y1="78" x2="52" y2="36"/>
+                                    <line x1="180" y1="78" x2="52" y2="124"/>
+                                    <line x1="180" y1="78" x2="308" y2="36"/>
+                                    <line x1="180" y1="78" x2="308" y2="124"/>
+                                </g>
+                                <g filter="url(#cpe-stripe-glow-net)">
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="180" y1="78" x2="52" y2="36" style="animation-delay:-0.2s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="180" y1="78" x2="52" y2="124" style="animation-delay:-1.2s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="180" y1="78" x2="308" y2="36" style="animation-delay:-0.7s"/>
+                                    <line class="cpe-stripe-flow" pathLength="100" x1="180" y1="78" x2="308" y2="124" style="animation-delay:-1.9s"/>
+                                </g>
+
+                                <!-- outer nodes -->
+                                <g class="cpe-stripe-endpoint">
+                                    <rect x="34" y="22" width="36" height="28" rx="6"/><path d="M41 31 H63 M41 37 H63 M41 43 H55"/>
+                                    <rect x="34" y="110" width="36" height="28" rx="6"/><path d="M41 119 H63 M41 125 H58 M41 131 H52"/>
+                                    <rect x="290" y="22" width="36" height="28" rx="6"/><path d="M297 31 H319 M297 37 H319 M297 43 H311"/>
+                                    <rect x="290" y="110" width="36" height="28" rx="6"/><path d="M297 119 H319 M297 125 H314 M297 131 H308"/>
+                                </g>
+                                <text class="cpe-stripe-svgtext cpe-stripe-svgtext--dim" x="52" y="62" text-anchor="middle">API</text>
+                                <text class="cpe-stripe-svgtext cpe-stripe-svgtext--dim" x="52" y="150" text-anchor="middle">DB</text>
+                                <text class="cpe-stripe-svgtext cpe-stripe-svgtext--dim" x="308" y="62" text-anchor="middle">CLOUD</text>
+                                <text class="cpe-stripe-svgtext cpe-stripe-svgtext--dim" x="308" y="150" text-anchor="middle">EDGE</text>
+
+                                <!-- protected hub -->
+                                <circle class="cpe-stripe-hub-ring" cx="180" cy="78" r="30"/>
+                                <circle cx="180" cy="78" r="22" fill="url(#cpe-stripe-hubfill)" stroke="#2ee59d" stroke-width="1.4"/>
+                                <path d="M180 65 l11 4 v9 c0 8 -6 13 -11 15 c-5 -2 -11 -7 -11 -15 v-9 z" fill="none" stroke="#d6fff0" stroke-width="1.6" stroke-linejoin="round"/>
+                                <path d="M175 79 l4 4 l7 -8" fill="none" stroke="#d6fff0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                            <div class="cpe-stripe-badges" aria-hidden="true">
+                                <span class="cpe-stripe-badge"><i class="cpe-stripe-led"></i>Encrypted</span>
+                                <span class="cpe-stripe-badge">10 Gbps</span>
+                                <span class="cpe-stripe-badge">Shield Active</span>
+                            </div>
+                        </figure>
+
+                        <ul class="cpe-stripe-chips" aria-label="Roles in Networks and Security">
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('network_engineer')">Network Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('cloud_engineer')">Cloud Engineer</button></li>
+                            <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('cybersecurity_engineer')">Cybersecurity Engineer</button></li>
+                        </ul>
+                    </article>
+
+                    <!-- 5 · RESEARCH & INNOVATION : slim full-width card (keeps the R&D role reachable) -->
+                    <article class="cpe-stripe-card cpe-stripe-card--research cpe-stripe-card--wide" data-cpe-stripe>
+                        <div class="cpe-stripe-wide-copy">
+                            <header class="cpe-stripe-head">
+                                <h3 class="cpe-stripe-title">Research &amp; Innovation</h3>
+                                <p class="cpe-stripe-sub">Pushing the field forward through experimentation and discovery.</p>
+                            </header>
+                            <ul class="cpe-stripe-chips" aria-label="Roles in Research and Innovation">
+                                <li><button type="button" class="cpe-stripe-chip" onclick="openJobModal('rnd_engineer')">Research and Development Engineer</button></li>
                             </ul>
                         </div>
+                        <figure class="cpe-stripe-mockup cpe-stripe-lab" role="img" aria-label="A running experiment readout with a rising results graph">
+                            <div class="cpe-stripe-lab-top" aria-hidden="true">
+                                <span class="cpe-stripe-status">Experiment 042 running</span>
+                            </div>
+                            <svg class="cpe-stripe-spark" viewBox="0 0 320 70" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <linearGradient id="cpe-stripe-sparkfill" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0" stop-color="#5aa2ff" stop-opacity=".35"/>
+                                        <stop offset="1" stop-color="#5aa2ff" stop-opacity="0"/>
+                                    </linearGradient>
+                                </defs>
+                                <path class="cpe-stripe-spark-area" d="M0 62 L30 54 L62 58 L96 40 L130 46 L166 28 L200 34 L238 16 L276 22 L320 6 V70 H0 Z" fill="url(#cpe-stripe-sparkfill)"/>
+                                <path class="cpe-stripe-spark-line" pathLength="100" d="M0 62 L30 54 L62 58 L96 40 L130 46 L166 28 L200 34 L238 16 L276 22 L320 6"/>
+                            </svg>
+                        </figure>
+                    </article>
 
-                        <div class="career-card paper-card">
-                            <h3>HARDWARE AND EMBEDDED</h3>
-                            <p class="career-desc">Designing the circuits and firmware inside smart devices.</p>
-                            <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('computer_engineer')">Computer Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('hardware_engineer')">Hardware Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('iot_engineer')">IoT Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('embedded_engineer')">Embedded Systems Engineer</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- CENTER MONOTON TEXT -->
-                    <div class="career-center-badge">
-                        <span class="cpe-monoton-text">CPE</span>
-                    </div>
-
-                    <!-- MIDDLE ROW CARDS -->
-                    <div class="careers-card-grid middle-grid">
-                        <div class="career-card paper-card">
-                            <h3>AI DATA &amp; ROBOTICS</h3>
-                            <p class="career-desc">Turning data into intelligent, autonomous systems.</p>
-                            <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('ai_ml_engineer')">AI / Machine Learning Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('robotics_specialist')">Robotics Specialist</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('data_scientist')">Data Scientist</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="career-card paper-card">
-                            <h3>NETWORKS AND SECURITY</h3>
-                            <p class="career-desc">Connecting and protecting the infrastructure behind it all.</p>
-                            <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('network_engineer')">Network Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('cloud_engineer')">Cloud Engineer</a></li>
-                                <li><a href="javascript:void(0)" onclick="openJobModal('cybersecurity_engineer')">Cybersecurity Engineer</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- BOTTOM ROW CARD -->
-                    <div class="careers-card-grid bottom-grid">
-                        <div class="career-card paper-card center-card">
-                            <h3>RESEARCH AND INNOVATION</h3>
-                            <p class="career-desc">Pushing the field forward through experimentation and discovery.</p>
-                            <ul class="career-list">
-                                <li><a href="javascript:void(0)" onclick="openJobModal('rnd_engineer')">Research and Development Engineer</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-
             </div>
         </section>
 
@@ -493,7 +1105,7 @@
                                 <span class="s3">that help people.”</span>
                             </blockquote>
                             <div class="fac-byline">
-        
+
                                 <p class="fac-name">Engr. Errol John Antonio, PCpE</p>
                                 <p class="fac-role">Chairperson, Computer Engineering</p>
                             </div>
@@ -611,7 +1223,7 @@
                         <span class="sw-count" aria-live="polite">01 / 13</span>
                         <button type="button" class="sw-step sw-next" aria-label="Next officer">Next <span aria-hidden="true">&rarr;</span></button>
                     </div>
-                    <button type="button" class="sw-open">View profile <span aria-hidden="true">&nearr;</span></button>
+                    <button type="button" class="sw-open">View profile</button>
                 </footer>
                 <div class="sw-spot" role="dialog" aria-modal="false" aria-label="Officer profile" hidden></div>
             </div>
@@ -645,7 +1257,7 @@
                         <span class="sw-count" aria-live="polite">01 / 08</span>
                         <button type="button" class="sw-step sw-next" aria-label="Next story">Next <span aria-hidden="true">&rarr;</span></button>
                     </div>
-                    <button type="button" class="sw-open">Open story <span aria-hidden="true">&nearr;</span></button>
+                    <button type="button" class="sw-open">Open story</button>
                 </footer>
                 <div class="sw-spot" role="dialog" aria-modal="false" aria-label="Story" hidden></div>
             </div>
@@ -732,12 +1344,12 @@
                 <h2 id="modalJobTitle">Software Engineer</h2>
                 <div class="modal-divider"></div>
             </div>
-            
+
             <div class="modal-body">
                 <div class="modal-description-col">
                     <h3>Role Overview</h3>
                     <p id="modalJobDescription">Description goes here...</p>
-                    
+
                     <h4 class="skills-heading">Key Duties &amp; Daily Responsibilities:</h4>
                     <ul class="modal-skills-list" id="modalJobDuties">
                         <!-- Dynamic list -->
@@ -754,7 +1366,7 @@
                            href="#" target="_blank" rel="noopener noreferrer">
                             <div class="visuals-image-container">
                                 <img id="modalJobVisual" src="" alt="Job Visual GIF" onerror="this.src='Assets/cpetext.png'">
-                                <span class="visuals-play" aria-hidden="true">&#9654;</span>
+                                <span class="visuals-play" aria-hidden="true">&#9654;&#xFE0E;</span>
                                 <span class="visuals-cue">Watch on YouTube</span>
                             </div>
                         </a>
@@ -765,7 +1377,9 @@
         </div>
     </div>
 
-    <script src="script.js?v=20260925-1"></script>
+    <!-- StPageFlip (canvas page-flip engine). Must load BEFORE script.js. -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+    <script src="script.js?v=20261002-11"></script>
     <script>
         // SEPARATE DATA & GIF PREVIEWS FOR EACH INDIVIDUAL JOB
         const jobDetailsData = {
@@ -998,7 +1612,7 @@
             document.getElementById('modalJobTitle').innerText = data.title;
             document.getElementById('modalJobDescription').innerText = data.desc;
             document.getElementById('modalVisualTitle').innerText = data.title + " in Action";
-            
+
             document.getElementById('modalJobVisual').src = data.gif;
             document.getElementById('modalJobCaption').innerText = data.caption;
 

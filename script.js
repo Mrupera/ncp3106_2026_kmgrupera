@@ -1031,6 +1031,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   caption: "Society of Computer Engineering Students." }
             ]
         };
+    // One term for the whole officer roster; fills the Term row on every profile
+    const OFFICER_TERM = "2026–2027";
     const OFF = (k, alt) => "Assets/Officers/portraits/" + k + (alt ? "-2" : "") + ".jpg";
     // Photos are sorted into Assets/SCPE/Projects, /Events and /Orgpic
     const FOLDER = {
@@ -1188,7 +1190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <dl class="sw-sp-table">
                         <div><dt>Position</dt><dd>${esc(it.role)}</dd></div>
                         <div><dt>Organization</dt><dd>Society of Computer Engineering Students</dd></div>
-                        <div><dt>Term</dt><dd class="is-ph">[To confirm]</dd></div>
+                        <div><dt>Term</dt><dd>${esc(OFFICER_TERM)}</dd></div>
                     </dl>
                 </div>
                 <figure class="sw-sp-photo"><img src="${src(it)}" alt="${esc(it.name)}, ${esc(it.role)}"></figure>
@@ -1308,7 +1310,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ticks.forEach((t, i) => t.addEventListener("click", () => { show(i); restart(); }));
             // pause control (required for moving content)
             pauseBtn.type = "button"; pauseBtn.className = "sw-step sw-pause";
-            const setLabel = () => { pauseBtn.innerHTML = paused ? '<span aria-hidden="true">&#9654;</span> Play' : '<span aria-hidden="true">&#10074;&#10074;</span> Pause'; pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false"); };
+            const setLabel = () => { pauseBtn.innerHTML = paused ? '<span aria-hidden="true">&#9654;&#xFE0E;</span> Play' : '<span aria-hidden="true">&#10074;&#10074;</span> Pause'; pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false"); };
             setLabel();
             pauseBtn.addEventListener("click", () => { paused = !paused; setLabel(); restart(); });
             el.querySelector(".sw-controls").appendChild(pauseBtn);
@@ -1357,4 +1359,384 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
+});
+/* ==========================================
+   10. CPE STRIPE GRID  (append to the END of script.js)
+   Only touches elements carrying [data-cpe-stripe].
+   1. Adds .is-live while a card is on screen, so its animations
+      (pulsing LEDs, moving light, progress fill) run only when seen.
+   2. On a real mouse, writes cursor position to CSS variables for the
+      card glow and a slight tilt of the inner mockup.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = Array.from(document.querySelectorAll("[data-cpe-stripe]"));
+    if (cards.length === 0) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    /* ---- 1. run animations only while visible ---- */
+    if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => entry.target.classList.toggle("is-live", entry.isIntersecting));
+        }, { threshold: 0.25 });
+        cards.forEach((card) => io.observe(card));
+    } else {
+        cards.forEach((card) => card.classList.add("is-live"));
+    }
+
+    /* ---- 2. cursor glow + tilt (mouse only) ---- */
+    if (!finePointer) return;
+
+    cards.forEach((card) => {
+        const mockup = card.querySelector(".cpe-stripe-mockup");
+        let frame = null;
+        let ev = null;
+
+        function paint() {
+            frame = null;
+            const c = card.getBoundingClientRect();
+            card.style.setProperty("--cpe-stripe-mx", (((ev.clientX - c.left) / c.width) * 100).toFixed(1) + "%");
+            card.style.setProperty("--cpe-stripe-my", (((ev.clientY - c.top) / c.height) * 100).toFixed(1) + "%");
+
+            if (!mockup) return;
+            const m = mockup.getBoundingClientRect();
+            const px = (ev.clientX - m.left) / m.width;
+            const py = (ev.clientY - m.top) / m.height;
+            mockup.style.setProperty("--cpe-stripe-gx", (px * 100).toFixed(1) + "%");
+            mockup.style.setProperty("--cpe-stripe-gy", (py * 100).toFixed(1) + "%");
+
+            if (!reduceMotion) {
+                // clamp so the tilt stays subtle even when the cursor is far from the mockup
+                const cx = Math.max(0, Math.min(1, px));
+                const cy = Math.max(0, Math.min(1, py));
+                mockup.style.setProperty("--cpe-stripe-tx", ((cx - 0.5) * 6).toFixed(2));
+                mockup.style.setProperty("--cpe-stripe-ty", ((0.5 - cy) * 4).toFixed(2));
+            }
+        }
+
+        card.addEventListener("pointermove", (e) => {
+            if (e.pointerType !== "mouse") return;
+            ev = e;
+            if (frame === null) frame = requestAnimationFrame(paint);
+        });
+
+        card.addEventListener("pointerleave", () => {
+            if (frame !== null) { cancelAnimationFrame(frame); frame = null; }
+            if (!mockup) return;
+            mockup.style.setProperty("--cpe-stripe-tx", "0");
+            mockup.style.setProperty("--cpe-stripe-ty", "0");
+        });
+    });
+});
+
+/* ==========================================
+   11. CPE SCI-FI HUD SKILL TREE  (append to the END of script.js)
+   Active node, glowing connection lines and the inline detail panel.
+   Only touches #cpeScifi. Runs last, so it can also retire the hover strip that
+   section 3 adds for the old side drawer (the drawer no longer exists).
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const root = document.getElementById("cpeScifi");
+    if (!root) return;
+
+    // The old drawer is gone; drop the invisible hover strip section 3 appended.
+    document.querySelectorAll(".disciplines-trigger-zone").forEach((el) => el.remove());
+
+    const tree = root.querySelector(".cpe-scifi-tree");
+    const svg = root.querySelector(".cpe-scifi-links");
+    const core = root.querySelector(".cpe-scifi-core");
+    const panel = root.querySelector(".cpe-scifi-panel");
+    const branches = Array.from(root.querySelectorAll(".cpe-scifi-branch"));
+    const nodes = Array.from(root.querySelectorAll(".cpe-scifi-node"));
+    const specs = Array.from(root.querySelectorAll(".cpe-scifi-spec"));
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const isWide = () => window.matchMedia("(min-width: 901px)").matches;
+    const NS = "http://www.w3.org/2000/svg";
+
+    root.classList.add("is-enhanced");     // panels now stack in one cell (see CSS)
+
+    /* ---------- connection lines: core -> each branch head ---------- */
+    const links = branches.map(() => {
+        const path = document.createElementNS(NS, "path");
+        path.setAttribute("class", "cpe-scifi-link");
+        svg.appendChild(path);
+        return path;
+    });
+
+    function layout() {
+        // rails: where the last node sits, and how far the bright rail must fill
+        branches.forEach((branch) => {
+            const list = branch.querySelector(".cpe-scifi-nodes");
+            const cells = list.querySelectorAll(".cpe-scifi-cell");
+            const last = cells[cells.length - 1];
+            const active = list.querySelector(".cpe-scifi-cell.is-active");
+            list.style.setProperty("--cpe-scifi-end", last.offsetTop + last.offsetHeight / 2 + "px");
+            list.style.setProperty(
+                "--cpe-scifi-fill",
+                active ? active.offsetTop + active.offsetHeight / 2 + "px" : "-16px"
+            );
+        });
+
+        // curves (desktop only; on narrow screens the branches stack and the SVG is hidden)
+        if (!isWide()) return;
+        const t = tree.getBoundingClientRect();
+        const c = core.getBoundingClientRect();
+        const x1 = c.left + c.width / 2 - t.left;
+        const y1 = c.bottom - t.top - 6;
+        branches.forEach((branch, i) => {
+            const head = branch.querySelector(".cpe-scifi-branch-head").getBoundingClientRect();
+            const x2 = head.left + head.width / 2 - t.left;
+            const y2 = head.top - t.top;
+            const dy = (y2 - y1) * 0.55;
+            links[i].setAttribute(
+                "d",
+                `M${x1.toFixed(1)} ${y1.toFixed(1)} C${x1.toFixed(1)} ${(y1 + dy).toFixed(1)} ${x2.toFixed(1)} ${(y2 - dy).toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`
+            );
+        });
+    }
+
+    /* ---------- selecting a node ---------- */
+    let current = null;
+
+    function loadMedia(spec) {
+        // GIFs load the first time their panel opens (30 of them would be heavy up front)
+        spec.querySelectorAll("img[data-src]").forEach((img) => {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+        });
+    }
+
+    function select(key, options) {
+        if (key === current) return;
+        const node = nodes.find((n) => n.dataset.spec === key);
+        if (!node) return;
+        current = key;
+
+        nodes.forEach((n) => {
+            const on = n === node;
+            n.classList.toggle("is-active", on);
+            n.setAttribute("aria-pressed", on ? "true" : "false");
+            n.parentElement.classList.toggle("is-active", on);
+        });
+
+        specs.forEach((s) => {
+            const on = s.dataset.spec === key;
+            s.classList.toggle("is-active", on);
+            if (on) loadMedia(s);
+        });
+
+        const activeBranch = node.closest(".cpe-scifi-branch");
+        branches.forEach((b, i) => links[i].classList.toggle("is-on", b === activeBranch));
+
+        layout();
+
+        // phones: the panel sits below a tall tree, so bring it into view after a tap
+        if (options && options.scroll && !isWide()) {
+            panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+        }
+    }
+
+    nodes.forEach((node) => {
+        node.addEventListener("click", () => select(node.dataset.spec, { scroll: true }));
+
+        // mouse hover previews too, with a short delay so sweeping across nodes doesn't flicker
+        if (finePointer) {
+            let timer = null;
+            node.addEventListener("pointerenter", (e) => {
+                if (e.pointerType !== "mouse") return;
+                clearTimeout(timer);
+                timer = setTimeout(() => select(node.dataset.spec), 110);
+            });
+            node.addEventListener("pointerleave", () => clearTimeout(timer));
+        }
+    });
+
+    // arrow keys move focus between nodes; Enter / Space select (native button behaviour)
+    root.addEventListener("keydown", (e) => {
+        const i = nodes.indexOf(document.activeElement);
+        if (i < 0) return;
+        let j = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % nodes.length;
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + nodes.length) % nodes.length;
+        else if (e.key === "Home") j = 0;
+        else if (e.key === "End") j = nodes.length - 1;
+        if (j === null) return;
+        e.preventDefault();
+        nodes[j].focus();
+    });
+
+    // career-path chips open the existing job modal (defined in index.html)
+    root.addEventListener("click", (e) => {
+        const chip = e.target.closest("[data-job]");
+        if (chip && typeof window.openJobModal === "function") window.openJobModal(chip.dataset.job);
+    });
+
+    /* ---------- keep lines and rails correct as the layout changes ---------- */
+    if ("ResizeObserver" in window) new ResizeObserver(layout).observe(tree);
+    else window.addEventListener("resize", layout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+
+    select(nodes[0].dataset.spec);
+    layout();
+});
+
+/* ==========================================
+   12. CPE PITCH · OVERVIEW CARDS
+   - Cursor spotlight: each card writes the cursor position to --mouse-x / --mouse-y
+     and the CSS draws the soft cobalt aura from them.
+   - "Explore details" opens / closes the rest of the card in place (no navigation).
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const band = document.getElementById("overview");
+    if (!band) return;
+
+    const cards = Array.from(band.querySelectorAll(".cpe-pitch-card"));
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    /* ---------- cursor spotlight (mouse only) ---------- */
+    if (finePointer) {
+        cards.forEach((card) => {
+            let frame = null;
+            let ev = null;
+            card.addEventListener("pointermove", (e) => {
+                if (e.pointerType !== "mouse") return;
+                ev = e;
+                if (frame !== null) return;
+                frame = requestAnimationFrame(() => {
+                    frame = null;
+                    const r = card.getBoundingClientRect();
+                    card.style.setProperty("--mouse-x", ev.clientX - r.left + "px");
+                    card.style.setProperty("--mouse-y", ev.clientY - r.top + "px");
+                });
+            });
+        });
+    }
+
+    /* ---------- Explore details: open / close in place ---------- */
+    band.classList.add("is-enhanced");     // without JS the details simply stay visible
+
+    cards.forEach((card) => {
+        const btn = card.querySelector(".cpe-pitch-toggle");
+        const label = card.querySelector(".cpe-pitch-toggle-text");
+        const more = card.querySelector(".cpe-pitch-more");
+        if (!btn || !more) return;
+
+        more.setAttribute("aria-hidden", "true");
+
+        btn.addEventListener("click", () => {
+            const open = btn.getAttribute("aria-expanded") !== "true";
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+            more.setAttribute("aria-hidden", open ? "false" : "true");
+            card.classList.toggle("is-open", open);
+            label.textContent = open ? "Hide details" : "Explore details";
+        });
+    });
+});
+
+/* ==========================================
+   13. CPE BOOK  (append to the END of script.js)
+   Starts the StPageFlip engine on #book-container.
+   Needs the library script loaded BEFORE script.js (see index.html):
+   https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js
+   If the CDN is blocked, the pages fall back to a plain two-column layout.
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const book = document.getElementById("book-container");
+    if (!book) return;
+
+    const section = book.closest(".cpe-book-section");
+    const stage = document.getElementById("cpeBookStage");
+    const prevBtn = document.getElementById("cpeBookPrev");
+    const nextBtn = document.getElementById("cpeBookNext");
+    const counter = document.getElementById("cpeBookCount");
+    const pages = Array.from(book.querySelectorAll(".cpe-book-page"));
+    const total = pages.length;
+    const pad = (n) => String(n).padStart(2, "0");
+
+    // left / right paper shading is chosen by page parity (even index = left page)
+    pages.forEach((page, i) => page.classList.add(i % 2 === 0 ? "cpe-book-page--l" : "cpe-book-page--r"));
+
+    // library missing (CDN blocked / offline): show the pages as a simple static layout
+    if (!window.St || !window.St.PageFlip) {
+        section.classList.add("is-static");
+        return;
+    }
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const pageFlip = new window.St.PageFlip(book, {
+        width: 520,               // base page size (the ratio is what matters in "stretch" mode)
+        height: 700,
+        size: "stretch",
+        minWidth: 300,
+        maxWidth: 560,
+        minHeight: 400,
+        maxHeight: 760,
+
+        drawShadow: true,         // dynamic shading while a page curls
+        maxShadowOpacity: 0.5,
+        showCover: false,         // plain two-page spreads, no hard cover
+        flippingTime: reduceMotion ? 250 : 1000,
+
+        usePortrait: true,        // one page at a time on narrow screens
+        autoSize: true,
+        mobileScrollSupport: true,
+        swipeDistance: 30,
+        clickEventForward: true,
+        useMouseEvents: true,
+        startPage: 0
+    });
+
+    pageFlip.loadFromHTML(pages);
+
+    function isPortrait() {
+        return pageFlip.getOrientation() === "portrait";
+    }
+
+    function update() {
+        const i = pageFlip.getCurrentPageIndex();
+        const portrait = isPortrait();
+        stage.classList.toggle("is-portrait", portrait);
+
+        counter.textContent = portrait
+            ? `${pad(i + 1)} / ${pad(total)}`
+            : `${pad(i + 1)}\u2013${pad(Math.min(i + 2, total))} / ${pad(total)}`;
+
+        // narrow pages get a tighter layout (see .is-compact / .is-tiny in the CSS)
+        const pw = pageFlip.getBoundsRect().pageWidth;
+        stage.classList.toggle("is-compact", pw < 470);
+        stage.classList.toggle("is-tiny", pw < 340);
+
+        const atStart = i <= 0;
+        const atEnd = portrait ? i >= total - 1 : i + 2 >= total;
+        prevBtn.setAttribute("aria-disabled", atStart ? "true" : "false");
+        nextBtn.setAttribute("aria-disabled", atEnd ? "true" : "false");
+    }
+
+    pageFlip.on("flip", update);
+    pageFlip.on("changeOrientation", update);
+    pageFlip.on("init", update);
+    pageFlip.on("update", update);
+
+    prevBtn.addEventListener("click", () => pageFlip.flipPrev());
+    nextBtn.addEventListener("click", () => pageFlip.flipNext());
+
+    // arrow keys turn pages while the book has focus
+    stage.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { e.preventDefault(); pageFlip.flipNext(); }
+        else if (e.key === "ArrowLeft") { e.preventDefault(); pageFlip.flipPrev(); }
+    });
+
+    // keep the compact classes right when the window is resized
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(update, 250);
+    });
+
+    update();
+    setTimeout(update, 300);   // once more after the library has measured the container
 });
