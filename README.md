@@ -1,46 +1,27 @@
-# CPE Website
+# BioNote — Kriselda Mei G. Rupera
 
-This is a side project created to add more content and information to the Computer Engineering website of the University of the East.
+This is my personal BioNote website, created as part of the CPE Website project.
 
-## About the Project
+It contains a little bit about me, my interests, and some of the projects I have worked on throughout my Computer Engineering journey.
 
-The website provides information about the Computer Engineering program, including its overview, specializations, career opportunities, faculty, and other relevant information for students and prospective students.
+## About Me
 
-## Features
+I am a Computer Engineering student who is still exploring different areas of technology and figuring out what I enjoy most. I learn mostly through hands-on projects, experimenting, and trying to solve problems along the way.
 
-- Computer Engineering program information
-- Program overview and specializations
-- Career opportunities
-- Faculty information
-- Frequently Asked Questions (FAQ)
-- Website creators section
-- Individual BioNotes for the website creators
+## Projects
 
-## Website Creators
+Some of the projects featured on this website include projects involving:
 
-- Araja, Tracy Van Exel A.
-- Rupera, Kriselda Mei G.
+- Web Development
+- Arduino
+- Embedded Systems
+- Computer Engineering
 
 ## Technologies Used
 
 - HTML
 - CSS
-- JavaScript
-- GitHub Pages
 
-## Project Structure
+## Purpose
 
-```text
-CPEWeb/
-├── Assets/
-├── bionote/
-│   ├── assets/
-│   ├── index.html
-│   └── style.css
-├── index.html
-├── script.js
-├── style.css
-└── whatiscpe.html 
-```
-Live Demo:
-https://mrupera.github.io/ncp3106_2026_kmgrupera/
+This website is a personal space where I can document some of the things I have learned, the projects I have worked on, and my journey as a Computer Engineering student.
