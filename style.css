@@ -4236,6 +4236,20 @@ html, body {
 .uf-q[aria-expanded="true"] .uf-pm::after { display: none; }          /* + becomes − */
 .uf-a p { margin: 0 0 18px; max-width: 70ch; font-size: 15px; line-height: 1.65; color: var(--uf-dim); }
 
+.uf-creators { padding: 28px 0 24px; border-bottom: 1px solid var(--uf-rule); }
+.uf-creators-intro { margin: -4px 0 18px; color: var(--uf-dim); font-size: 14px; line-height: 1.6; }
+.uf-creator-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; }
+.uf-creator {
+    min-height: 58px; display: flex; align-items: center; gap: 14px; padding: 12px 0;
+    border-top: 1px solid var(--uf-rule); color: #fff; text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.uf-creator-index { font-family: Raleway, sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.14em; color: var(--uf-dim); }
+.uf-creator-name { font-family: Lora, serif; font-weight: 700; font-size: 16px; }
+.uf-creator-arrow { margin-left: auto; color: var(--uf-dim); transition: color 0.2s ease, transform 0.2s ease; }
+.uf-creator:hover, .uf-creator:focus-visible { color: var(--uf-cream); }
+.uf-creator:hover .uf-creator-arrow, .uf-creator:focus-visible .uf-creator-arrow { color: #fff; transform: translateX(4px); }
+.uf-creator--pending { cursor: default; }
 .uf-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding-top: 20px; font-size: 13px; color: var(--uf-dim); }
 .uf-bottom p { margin: 0; }
 .uf-top { font-family: Raleway, sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
@@ -4243,6 +4257,7 @@ html, body {
 @media (max-width: 900px) {
     .uf-in { width: 100%; padding: 40px 20px 24px; }
     .uf-cols { grid-template-columns: 1fr; row-gap: 32px; }
+    .uf-creator-list { grid-template-columns: 1fr; gap: 0; }
     .uf-name { font-size: 21px; }
     .uf-q { font-size: 15px; }
     .uf-q em { display: block; margin: 2px 0 0; }
