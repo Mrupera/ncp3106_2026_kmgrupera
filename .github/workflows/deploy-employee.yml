@@ -1,0 +1,99 @@
+name: Deploy employee website
+
+on:
+  push:
+    branches: [employee-system]
+    paths:
+      - 'employee-app/**'
+      - '.github/workflows/deploy-employee.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: employee-website-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/employee-system'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out this commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Check PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          php --version
+          find employee-app -type f -name '*.php' -print0 | xargs -0 -r -n1 php -l
+
+      - name: Upload source over HTTPS WebDAV
+        env:
+          WEBDAV_PASSWORD: ${{ secrets.ALWAYSDATA_WEBDAV_PASSWORD }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import base64, os, pathlib, sys, urllib.request, urllib.error, urllib.parse
+
+          password = os.environ.get('WEBDAV_PASSWORD', '')
+          if not password:
+              sys.exit('Missing ALWAYSDATA_WEBDAV_PASSWORD secret.')
+          base = 'https://webdav-rupera.alwaysdata.net/'
+          # This user MUST be rooted at /home/rupera/www/ in Alwaysdata.
+          auth = base64.b64encode(('rupera_deploy:' + password).encode()).decode()
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None
+          client = urllib.request.build_opener(NoRedirect)
+          def request(method, relative, data=None):
+              url = base + urllib.parse.quote(relative, safe='/')
+              req = urllib.request.Request(url, data=data, method=method,
+                  headers={'Authorization': 'Basic ' + auth})
+              try:
+                  with client.open(req, timeout=45) as response:
+                      status = response.status
+              except urllib.error.HTTPError as error:
+                  status = error.code
+              except (OSError, urllib.error.URLError):
+                  sys.exit('WebDAV connection failed. Check host availability and credentials.')
+              if status not in ((200, 201, 204, 405) if method == 'MKCOL' else (200, 201, 204)):
+                  sys.exit(f'WebDAV {method} failed with HTTP {status}.')
+
+          root = pathlib.Path('employee-app')
+          files = []
+          for path in sorted(root.rglob('*')):
+              if path.is_symlink():
+                  sys.exit('Symlinks are not allowed in the deployment source.')
+              if not path.is_file():
+                  continue
+              rel = path.relative_to(root)
+              if rel.name == '.gitignore':
+                  continue
+              allowed = (len(rel.parts) == 1 and (rel.name == '.htaccess' or path.suffix in ('.php', '.css', '.js')))
+              allowed |= (rel.parts[0] == 'assets' and path.suffix.lower() in ('.png', '.jpg', '.jpeg', '.webp', '.svg', '.gif', '.ico'))
+              if not allowed or rel.name == 'database.php':
+                  sys.exit('Unexpected file in employee-app. Keep private files outside the source folder.')
+              files.append((path, rel.as_posix()))
+          names = {rel for _, rel in files}
+          if not {'login.php', 'index.php', 'config.php', 'deployment.php', '.htaccess'} <= names:
+              sys.exit('Required application files are missing; upload cancelled.')
+          directories = sorted({str(pathlib.PurePosixPath(rel).parent) for _, rel in files}, key=lambda p: (p.count('/'), p))
+          created = set()
+          for directory in directories:
+              if directory == '.':
+                  continue
+              current = ''
+              for part in pathlib.PurePosixPath(directory).parts:
+                  current += part + '/'
+                  if current not in created:
+                      request('MKCOL', current)
+                      created.add(current)
+          for path, relative in files:
+              request('PUT', relative, path.read_bytes())
+          print(f'Uploaded {len(files)} source files. Database and private photo storage were not uploaded.')
+          PY
