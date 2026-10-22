@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteRule (^|/)\. - [F,L]
+Options -Indexes
+<FilesMatch "(^\.|\.(sql|bak|zip|log|ini|env|py)$)">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^(config|security|auth|access|layout|dashboard_ui|account_panel|photo_helpers|employee_form|deployment)\.php$">
+    Require all denied
+</FilesMatch>
