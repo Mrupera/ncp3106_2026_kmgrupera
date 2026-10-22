@@ -1,6 +1,6 @@
 # University Employment System
 
-A PHP and MySQL/MariaDB school project for managing employee records, account requests, employment status, and salaries.
+A PHP and MySQL school project for managing employee records, account requests, employment status, and salaries.
 
 **Live website:** [Open the University Employment System](https://rupera.alwaysdata.net/login.php)
 
